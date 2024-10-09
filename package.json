@@ -1,5 +1,5 @@
 {
-  "dependencies": {
-    "bulma": "^1.0.2"
+  "devDependencies": {
+    "tailwindcss": "^3.4.13"
   }
 }
