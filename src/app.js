@@ -3,7 +3,7 @@ const morgan = require('morgan');
 const config = require('./config');
 
 
-const usuario = require ('./controllers/tarjetas.js')
+const tarjetas = require ('./controllers/tarjetas.js')
 const app = express();
 
 //Middleware
@@ -15,5 +15,5 @@ app.use(express.urlencoded({ extended: true}));
 app.set('port', config.app.port)
 
 //rutas
-app.use('/api/usuario',usuario)
+app.use('/api/tarjeta',tarjeta)
 module.exports = app;
