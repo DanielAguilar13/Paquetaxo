@@ -6,6 +6,7 @@ const controlador = require('./controller-tarjetas');
 const router = express.Router();
 router.get('/', todos); 
 router.get('/:id', uno);
+router.post('/', agregar);
 router.put('/', eliminar);
 
 async function todos (req, res) {
@@ -28,12 +29,37 @@ async function uno (req, res) {
     
 };
 
-async function eliminar (req, res) {
+async function eliminar (req, res, next) {
     try{
-        const items = await controlador.uno(req.body);
+        const items = await controlador.eliminar(req.body);
         respuesta.success(req, res, 'Tarjeta eliminada', 200);
     }catch(err){
-        respuesta.error(req, res, err, 500)
+        next(err);
+    }
+    
+};
+
+async function agregar (req, res, next) {
+    try{
+        const items = await controlador.agregar(req.body);
+        if(req.body.id == 0){
+            mensaje = 'Tarjeta guardada con exito';
+        }else{
+            mensaje = 'Tarjeta actualizada con exito';
+        }
+        respuesta.success(req, res, mensaje, 201);
+    }catch(err){
+        next(err);
+    }
+    
+};
+
+async function eliminar (req, res, next) {
+    try{
+        const items = await controlador.eliminar(req.body);
+        respuesta.success(req, res, 'Tarjeta eliminada exitosamente', 200);
+    }catch(err){
+        next(err);
     }
     
 };

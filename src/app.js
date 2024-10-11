@@ -4,6 +4,8 @@ const config = require('./config');
 
 
 const tarjetas = require ('./controllers/tarjetas.js')
+const error = require('./DB/errors.js');
+
 const app = express();
 
 //Middleware
@@ -15,5 +17,7 @@ app.use(express.urlencoded({ extended: true}));
 app.set('port', config.app.port)
 
 //rutas
-app.use('/api/tarjeta',tarjeta)
+app.use('/api/tarjetas',tarjetas)
+app.use(error);
+
 module.exports = app;
