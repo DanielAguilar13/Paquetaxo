@@ -1,7 +1,7 @@
 const express = require('express');
 
-const respuesta = require('../DB/response');
-const controlador = require('./controller-tarjetas');
+const respuesta = require('../../DB/response');
+const controlador = require('./index.js');
 
 const router = express.Router();
 router.get('/', todos); 

@@ -3,7 +3,7 @@ const morgan = require('morgan');
 const config = require('./config');
 
 
-const tarjetas = require ('./controllers/tarjetas.js')
+const tarjetas = require ('./controllers/tarjetas/tarjetas.js')
 const error = require('./DB/errors.js');
 
 const app = express();
