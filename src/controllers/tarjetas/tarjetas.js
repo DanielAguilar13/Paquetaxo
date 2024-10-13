@@ -29,15 +29,6 @@ async function uno (req, res) {
     
 };
 
-async function eliminar (req, res, next) {
-    try{
-        const items = await controlador.eliminar(req.body);
-        respuesta.success(req, res, 'Tarjeta eliminada', 200);
-    }catch(err){
-        next(err);
-    }
-    
-};
 
 async function agregar (req, res, next) {
     try{
