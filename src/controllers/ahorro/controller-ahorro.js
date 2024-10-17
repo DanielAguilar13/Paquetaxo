@@ -1,6 +1,6 @@
 const db = require('../../DB/db2');
 
-const TABLA = 'ingresos';
+const TABLA = 'ahorro';
 
 
 module.exports = function (dbInyectada){
