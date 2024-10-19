@@ -1,0 +1,77 @@
+[33mcommit 7fce7f85218ae3d46dae69f58e9ff1a1b005bd11[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/rama-daniel[m[33m, [m[1;31morigin/main[m[33m, [m[1;32mrama-daniel[m[33m)[m
+Author: Daniel <da130502@gmail.com>
+Date:   Wed Oct 16 20:02:40 2024 -0600
+
+    CRUD Ahorro terminado
+
+[33mcommit ca906ecc28cba9aa9eeb8e00b6bb606df3b97ae0[m
+Author: Daniel <da130502@gmail.com>
+Date:   Sun Oct 13 14:57:05 2024 -0600
+
+    CRUD Recordatorio fianlizado
+
+[33mcommit 41fe9b3dbbda4df04d4a56aa0f1a81577de983cf[m
+Author: Daniel <da130502@gmail.com>
+Date:   Fri Oct 11 19:56:36 2024 -0600
+
+    Esqueleto de los demas CRUD
+
+[33mcommit f973eefdbfcdcde5cf6170c5c6a1a5f72c4d4c7b[m
+Author: Daniel <da130502@gmail.com>
+Date:   Fri Oct 11 19:47:33 2024 -0600
+
+    CRUD Tarjetas finalizado
+
+[33mcommit 3212d983bbb43d7673919a591d1bce07766e9704[m
+Author: Daniel <da130502@gmail.com>
+Date:   Thu Oct 10 23:03:20 2024 -0600
+
+    Avance CRUD tarjetas implementacion total
+
+[33mcommit b2fec285c9cbf46921a64c1908871bd3c61684c7[m
+Author: Daniel <da130502@gmail.com>
+Date:   Thu Oct 10 20:06:31 2024 -0600
+
+    Avances CRUD tarjetas1
+
+[33mcommit d9a75eb2835aa4be4e7f9967f4c61df078acfaa4[m
+Author: Daniel <da130502@gmail.com>
+Date:   Wed Oct 9 22:58:55 2024 -0600
+
+    Avances CRUD tarjetas
+
+[33mcommit a9a28826bd089a2803c94665b69ed9b2eb7fabae[m
+Author: Daniel <da130502@gmail.com>
+Date:   Wed Oct 9 20:24:13 2024 -0600
+
+    Conexion bd
+
+[33mcommit 412badb96e739d3b675f6452ab9378d71c2c6495[m
+Author: Daniel <da130502@gmail.com>
+Date:   Tue Oct 8 22:03:20 2024 -0600
+
+    Arqui
+
+[33mcommit ffc831e7aa24156ee46f44a8f5747bb36d619417[m
+Author: Daniel <da130502@gmail.com>
+Date:   Tue Oct 8 20:58:27 2024 -0600
+
+    Arquitectura
+
+[33mcommit 71936947ad01f609778498f810c8da8aff7079e4[m[33m ([m[1;31morigin/rama-osiris[m[33m)[m
+Author: Osiris <osiris.tafolla4510@alumnos.udg.mx>
+Date:   Mon Oct 7 20:23:49 2024 -0600
+
+    licencias2
+
+[33mcommit 2e9a822d1f1454ba1771c840f30eaea05b9d3d7a[m
+Author: Daniel <da130502@gmail.com>
+Date:   Mon Oct 7 19:29:23 2024 -0600
+
+    inicio del index
+
+[33mcommit e25c3fee1f2460ae7f862448bff0e322a54941ed[m[33m ([m[1;32mrama-yovana[m[33m, [m[1;32mrama-osiris[m[33m, [m[1;32mrama-miguel[m[33m, [m[1;32mrama-carlos[m[33m)[m
+Author: Daniel <da130502@gmail.com>
+Date:   Mon Oct 7 19:15:47 2024 -0600
+
+    Inicio del proyecto 1
