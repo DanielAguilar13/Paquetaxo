@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/src/styles/estilos.css">
+    <title>GGP - Tarjetas</title> 
+</head>
+
+<body>
+    <!-- Barra Lateral -->
+    <div id="sidebar" class="sidebar">
+        <a href="javascript:void(0)" class="close-btn" onclick="closeSidebar()">×</a>
+        <a href="#Inicio">Inicio</a>
+        <a href="#Perfil">Perfil</a>
+        <a href="#Tarjetas">Tarjetas</a>
+        <a href="#Movimientos">Movimientos</a>
+        <a href="#Ahorro">Ahorro</a>
+        <a href="#Recordatorios">Recordatorios</a>
+    </div>
+
+    <!-- Encabezado -->
+    <div class="header">
+        <!-- Imagen del logo como botón para abrir la barra lateral -->
+        <img src="/src/img/logo.png" alt="Logo GGP">
+        <h1>Gestor de Gastos Personales</h1>
+        <nav class="nav">
+            <h3>Usuario</h3>
+            <img src="/src/img/user-png-icon-16.jpg" alt="User" onclick="openSidebar()" class="open-btn">       
+        </nav>
+    </div>
+    <script src="/src/js/sidebar.js"></script>
+
+    <div class="container">
+        <!-- Barra de título y botón -->
+        <div class="title-bar">
+            <h2>Tarjetas</h2>
+            <button class="btn-add">Agregar Tarjeta</button>
+        </div>
+
+        <!-- Tabla de tarjetas -->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Nombre</th>
+                    <th>Ultimos 4 digitos</th>
+                    <th>Fecha de expiracion</th>
+                    <th>Tipo de tarjeta</th>
+                    <th>Saldo</th>
+                    <th>Fecha de corte</th>
+                    <th>Deuda</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Tarjeta 1</td>
+                    <td>****1234</td>
+                    <td>01/11/2024</td>
+                    <td>Débito</td>
+                    <td>$1826</td>
+                    <td>-----</td>
+                    <td>-----</td>
+                    <td class="actions">
+                        <button class="btn btn-edit">✏️</button>
+                        <button class="btn btn-delete">🗑️</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Tarjeta 2</td>
+                    <td>****1234</td>
+                    <td>01/11/2024</td>
+                    <td>Crédito</td>
+                    <td>$2800</td>
+                    <td>02/12/2024</td>
+                    <td>$1826</td>
+                    <td class="actions">
+                        <button class="btn btn-edit">✏️</button>
+                        <button class="btn btn-delete">🗑️</button>
+                    </td>
+                </tr>
+                <!-- Añadir más filas de recordatorios según sea necesario -->
+            </tbody>
+        </table>
+        <!-- Paginación -->
+        <div class="pagination">
+            <button>&laquo;</button>
+            <button class="active">1</button>
+            <button>2</button>
+            <button>3</button>
+            <button>&raquo;</button>
+        </div>
+    </div>
+</body>
+</html>
