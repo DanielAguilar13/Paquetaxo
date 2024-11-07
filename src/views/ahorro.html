@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/src/styles/ahorro.css">
+    <title>GGP - Ahorro</title>
+</head>
+<body>
+    <!-- Barra Lateral -->
+    <div id="sidebar" class="sidebar">
+    <a href="javascript:void(0)" class="close-btn" onclick="closeSidebar()">×</a>
+    <a href="#Inicio">Inicio</a>
+    <a href="#Perfil">Perfil</a>
+    <a href="#Tarjetas">Tarjetas</a>
+    <a href="#Movimientos">Movimientos</a>
+    <a href="#Ahorro">Ahorro</a>
+    <a href="#Recordatorios">Recordatorios</a>
+    </div>
+
+    <!-- Encabezado -->
+    <header class="header">
+        <!-- Logo como botón para abrir la barra lateral -->
+        <img src="/src/img/logo.png" alt="Logo GGP" class="logo">
+        <h1>Gestor de Gastos Personales</h1>
+        <nav class="nav">
+            <h3>Usuario</h3>
+            <img src="/src/img/icono1.png" alt="User" class="open-btn" onclick="openSidebar()">       
+        </nav>
+    </header>
+    <script src="/src/js/sidebar.js"></script>
+
+    <!-- Card de Ahorros -->
+    <div class="container">
+        <div class="card">
+            <h2>Ahorros</h2>
+            <div class="user-icon">
+                <img src="/src/img/cara_verde.png" alt="User Icon" class="user-avatar">
+            </div>
+
+            <div class="balance-info">
+                <div class="balance-label">Balance</div>
+                <div class="balance-amount">$573.45</div>
+                <div class="balance-status">Disponible</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
