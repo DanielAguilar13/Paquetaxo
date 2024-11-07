@@ -3,8 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/src/styles/estilos.css">
+    <link rel="stylesheet" href="../styles/homepage.css">
     <title>GGP - Pagina principal</title> 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+
 </head>
 
 <body>
@@ -30,5 +36,40 @@
         </nav>
     </div>
     <script src="/src/js/sidebar.js"></script>
+
+    <!-- Contenedores en columnas -->
+    <div class="main-container">
+        <!-- Contenedor Izquierdo -->
+        <div class="container">
+            <h2>Reporte de Gastos</h2>
+            <div class="chart-container">
+                <canvas id="expenseChart" width="400" height="400"></canvas>
+            </div>
+            <div id="expenseList" style="margin: 10px; font-size: 14px;"></div>    
+        </div>
+
+        <!-- Contenedor Derecho -->
+        <div class="container">
+            <h2>Visualización de estado de cuenta</h2>
+            <div class="chart-container">
+                <canvas id="accountStatusChart" width="400" height="400"></canvas>
+            </div>
+            <div id="accountStatusList" style="margin: 10px; font-size: 14px;"></div>  
+            <div class="balance-container">
+                <h1>Ahorros</h1>
+                <div class="balance-user-icon">
+                    <img src="..//img/verde.png" alt="User Icon">
+                </div>
+                <div class="balance-info">
+                    <div class="balance-label">Balance</div>
+                    <div class="balance-amount">$573.45</div>
+                    <div class="balance-status">Disponible</div>
+                </div> 
+                <button class="btn-add" onclick="generatePDF()">Descargar Reporte PDF</button>
+            </div>
+        </div>
+    </div>
+<script src="..//js/Grafica.js"></script>
+
 </body>
 </html>
