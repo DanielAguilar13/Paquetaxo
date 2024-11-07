@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/src/styles/añadir.css">
+    <title>GGP - Tarjetas</title>
+</head>
+<body>
+    <form action="" method="POST" id="form-movimientos" class="form">
+        <h2 class="form_tittle">Tarjeta</h2>
+        <div class="form_container">
+            <div class="form_group">
+                <input type="text" id="nombre" class="form_input" placeholder=" " required>
+                <label for="nombre" class="form_label">Nombre de la tarjeta</label>
+                <span class="form_line"></span>
+            </div>
+            <div class="form_group">
+                <input type="number" id="digitos" class="form_input" placeholder=" " required>
+                <label for="digitos" class="form_label">Últimos 4 dígitos</label>
+                <span class="form_line"></span>
+            </div>
+            <div class="form_group">
+                <input type="date" id="fechaExpiracion" class="form_input" placeholder=" " required>
+                <label for="fechaExpiracion" class="form_label">Fecha de expiración</label>
+                <span class="form_line"></span>
+            </div>
+            <div class="form_group">
+                <select id="tipoTarjeta" class="form_input" required onchange="toggleCreditoFields()">
+                    <option value="" disabled selected>Elegir tipo de tarjeta</option>
+                    <option value="Débito">Débito</option>
+                    <option value="Crédito">Crédito</option>
+                </select>
+                <label for="tipoTarjeta" class="form_label">Tipo de tarjeta</label>
+                <span class="form_line"></span>
+            </div>
+            <div class="form_group">
+                <input type="number" id="saldo" min="0.01" step="any" class="form_input" placeholder=" " required>
+                <label for="saldo" class="form_label">Saldo</label>
+                <span class="form_line"></span>
+            </div>
+            <div class="form_group" id="fechaCorteContainer" style="display: none;">
+                <input type="date" id="fechaCorte" class="form_input" placeholder=" ">
+                <label for="fechaCorte" class="form_label">Fecha de corte</label>
+                <span class="form_line"></span>
+            </div>
+            <div class="form_group" id="deudaContainer" style="display: none;">
+                <input type="number" id="deuda" min="0.01" step="any" class="form_input" placeholder=" ">
+                <label for="deuda" class="form_label">Deuda</label>
+                <span class="form_line"></span>
+            </div>
+            <div class="button_container">
+                <input type="submit" class="form_submit" value="Guardar">
+                <input type="button" class="form_delete" value="Cancelar" onclick="goBackToHome()">
+            </div>
+        </div>
+    </form>
+
+    <script>
+        function toggleCreditoFields() {
+            const tipoTarjeta = document.getElementById("tipoTarjeta").value;
+            const fechaCorteContainer = document.getElementById("fechaCorteContainer");
+            const deudaContainer = document.getElementById("deudaContainer");
+            
+            if (tipoTarjeta === "Crédito") {
+                fechaCorteContainer.style.display = "block";
+                deudaContainer.style.display = "block";
+            } else {
+                fechaCorteContainer.style.display = "none";
+                deudaContainer.style.display = "none";
+            }
+        }
+
+        function goBackToHome() {
+            window.location.href = "home.html"; // Cambia a la ruta de la página de inicio
+        }
+    </script>
+</body>
+</html>

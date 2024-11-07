@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/src/styles/añadir.css">
+    <title>GGP - Recordatorios</title>
+</head>
+<body>
+    <form action="" method="POST" id="form-recordatorios" class="form">
+        <h2 class="form_tittle">Recordatorio</h2>
+        <div class="form_container">
+            <div class="form_group">
+                <input type="text" id="name" class="form_input" placeholder=" ">
+                <label for="nombre" class="form_label">Recordatorio</label>
+                <span class="form_line"></span>
+            </div>
+            <div class="form_group">
+                <input type="text" id="tipo" class="form_input" placeholder=" ">
+                <label for="tipo" class="form_label">Tipo</label>
+                <span class="form_line"></span>
+            </div>
+            <div class="form_group">
+                <input type="date" id="dia" class="form_input" placeholder=" ">
+                <label for="tipo" class="form_label">Fecha</label>
+                <span class="form_line"></span>
+            </div>
+            <div class="button_container">
+                <input type="submit" class="form_submit" value="Guardar">
+                <input type="button" class="form_delete" value="Cancelar" onclick="goBackToHome()">
+            </div>
+        </div>
+    </form>
+</body>
+</html>
