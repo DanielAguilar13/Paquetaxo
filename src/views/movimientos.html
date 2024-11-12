@@ -3,31 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/src/styles/estilos.css">
+    <link rel="stylesheet" href="/src/styles/movimientos.css">
+    <script src="https://kit.fontawesome.com/58dc328e94.js" crossorigin="anonymous"></script>
     <title>GGP - Movimientos</title> 
 </head>
 
 <body>
-   <!-- Barra Lateral -->
-   <div id="sidebar" class="sidebar">
-    <a href="javascript:void(0)" class="close-btn" onclick="closeSidebar()">×</a>
-    <a href="#Inicio">Inicio</a>
-    <a href="#Perfil">Perfil</a>
-    <a href="#Tarjetas">Tarjetas</a>
-    <a href="#Movimientos">Movimientos</a>
-    <a href="#Ahorro">Ahorro</a>
-    <a href="#Recordatorios">Recordatorios</a>
-</div>
+    <!-- Barra Lateral -->
+    <div id="sidebar" class="sidebar">
+        <a href="javascript:void(0)" class="close-btn" onclick="closeSidebar()">×</a>
+        <a href="#Inicio"><i class="fas fa-home"></i> Inicio</a>
+        <a href="#Perfil"><i class="fas fa-user"></i> Perfil</a>
+        <a href="#Tarjetas"><i class="fas fa-credit-card"></i> Tarjetas</a>
+        <a href="#Movimientos"><i class="fas fa-exchange-alt"></i> Movimientos</a>
+        <a href="#Ahorro"><i class="fas fa-piggy-bank"></i> Ahorro</a>
+        <a href="#Recordatorios"><i class="fas fa-bell"></i> Recordatorios</a>
+    </div>
 
 <!-- Encabezado -->
 <div class="header">
     <!-- Imagen del logo como botón para abrir la barra lateral -->
     <img src="/src/img/logo.png" alt="Logo GGP">
     <h1>Gestor de Gastos Personales</h1>
-    <nav class="nav">
-        <h3>Usuario</h3>
-        <img src="/src/img/icono1.png" alt="User" onclick="openSidebar()" class="open-btn">       
-    </nav>
+    <img src="/src/img/icono1.png" alt="User" onclick="openSidebar()" class="open-btn">       
 </div>
 <script src="/src/js/sidebar.js"></script>
 
@@ -37,23 +35,20 @@
             <h2>Movimientos</h2>
             <button id="openModal" class="btn-add">Agregar Movimiento</button>
         </div>
-
         <!-- Tabla de recordatorios -->
         <table class="table">
             <thead>
                 <tr>
-                    <th>No.</th>
                     <th>Concepto</th>
                     <th>Cantidad</th>
                     <th>Categoria</th>
                     <th>Tipo de pago</th>
                     <th>Metodo de pago</th>
-                    <th>Acción</th>
+                    <th>Opción</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>1</td>
                     <td>Pago de servicios</td>
                     <td>$68</td>
                     <td>Ingreso</td>
@@ -65,7 +60,6 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>1</td>
                     <td>Pago de servicios</td>
                     <td>$68</td>
                     <td>Ingreso</td>
@@ -77,7 +71,6 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>1</td>
                     <td>Pago de servicios</td>
                     <td>$68</td>
                     <td>Ingreso</td>
@@ -89,7 +82,6 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>1</td>
                     <td>Pago de servicios</td>
                     <td>$68</td>
                     <td>Ingreso</td>
