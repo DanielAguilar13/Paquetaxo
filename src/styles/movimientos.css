@@ -98,6 +98,15 @@ body {
   border-radius: 0.3125rem;
 }
 
+.sidebar-name {
+  font-size: 1.5rem; /* Tamaño de fuente */
+  color: var(--color-white); /* Color de texto */
+  padding: 1rem 2rem; /* Espaciado */
+  font-weight: bold;
+  border-bottom: 1px solid var(--color-secondary); /* Línea inferior */
+  margin-bottom: 1rem;
+}
+
 .close-btn {
   position: absolute;
   top: 1.25rem;
@@ -318,5 +327,9 @@ body {
 
   .sidebar.sidebar-open a {
     display: block; /* Asegura que los enlaces sean visibles solo cuando se abre */
+  }
+
+  .sidebar-name {
+    font-size: 1.3rem; /* Tamaño de fuente */
   }
 }
