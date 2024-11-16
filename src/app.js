@@ -18,10 +18,8 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true}));
 
-
 //configuracion
 app.set('port', config.app.port);
-
 
 // Ruta para servir el archivo HTML principal
 app.get('/', (req, res) => {
@@ -32,26 +30,25 @@ app.get('/', (req, res) => {
 app.post('/submit', (req, res) => {
     const { concepto, id_categoria, fecha } = req.body;
 
-    // Verifica que los datos están llegando correctamente
-    console.log(`Concepto: ${concepto}, Categoría: ${id_categoria}, Fecha: ${fecha}`);
+    // Verificar si los datos llegan
+    console.log('Datos recibidos:', req.body);
 
-    // Imprimir el objeto controlador para verificar la función
-    console.log(controlador);  // Esto te ayudará a ver si la función 'agregar' existe
+    if (!concepto || !id_categoria || !fecha) {
+        return res.status(400).send('Faltan datos');
+    }
 
-    // Crear un objeto 'data' con los datos a insertar
     const data = { concepto, id_categoria, fecha };
+    console.log('Datos que se enviarán al controlador:', data);
 
-    // Llamar al controlador con el objeto 'data'
-    controlador.agregar(data)  // Asegúrate de que agregar reciba un objeto 'data'
+    controlador.agregar(data)
         .then(() => res.send('Recordatorio agregado correctamente'))
         .catch((error) => {
-            console.error(error);
-            res.status(500).send('Error al agregar recordatorio');
+            console.error('Error al agregar el recordatorio:', error);
+            res.status(500).send('Error al guardar en la base de datos');
         });
 });
-
 //rutas
-app.use('/api/tarjetas',require('./controllers/tarjetas/tarjetas.js'));
+app.use('/api/tarjeta',require('./controllers/tarjeta/tarjeta.js'));
 app.use('/api/recordatorios', require('./controllers/recordatorios/recordatorios.js'));
 app.use(error);
 
