@@ -1,0 +1,323 @@
+:root {
+    /* Paleta de colores */
+    --color-background: #6B46C1;
+    --color-primary: #3a2e5e;
+    --color-secondary: #7d5fc9;
+    --color-highlight: #B68DFA;
+    --color-accent: #e7c6ff;
+
+    /* Colores neutrales */
+    --color-white: #ffffff;
+    --color-dark: #1b1b2f;
+    --color-violet: #d1c4e9;
+    --color-gray: #f0eef8;
+
+    /* Colores adicionales para botones */
+    --color-btn-delete: #f80000;
+    --color-btn-submit: #3a2e5e;
+    --color-btn-delete-hover: #fa6b6b;
+    --color-btn-submit-hover: #5f37ce;
+}
+
+/* Estilos globales */
+body {
+    font-family: Tahoma, sans-serif;
+    background: linear-gradient(to right, var(--color-background), var(--color-highlight));
+    margin: 0;
+    padding: 0;
+    color: var(--color-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    transition: background-color 0.3s ease;
+    animation: fadeInBody 1s ease-in-out; /* Animación de aparición de la página */
+}
+
+/* Animación global de fadeIn para el body */
+@keyframes fadeInBody {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Estilos del formulario */
+form {
+    background: linear-gradient(to right, var(--color-gray), var(--color-white));
+    width: 100%;
+    max-width: 500px;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin: 15px;
+    transition: all 0.3s ease;
+    animation: fadeInForm 1s ease-in-out; /* Animación de aparición del formulario */
+}
+
+/* Animación de fadeIn para el formulario */
+@keyframes fadeInForm {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Título del formulario */
+.form_tittle {
+    font-size: 30px;
+    font-weight: bold;
+    color: var(--color-dark);
+    margin-bottom: 15px;
+    transition: font-size 0.3s ease;
+    animation: fadeInTitle 1s ease-in-out; /* Animación del título */
+}
+
+/* Animación para el título */
+@keyframes fadeInTitle {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Contenedor del formulario */
+.form_container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Animación fadeIn */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Grupo de campos */
+.form_group {
+    position: relative;
+    text-align: left;
+}
+
+.form_input {
+    width: 95%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid var(--color-violet);
+    border-radius: 8px;
+    outline: none;
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    animation: fadeInInput 1s ease-in-out; /* Animación para el campo de entrada */
+}
+
+/* Animación para el campo de entrada */
+@keyframes fadeInInput {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.form_input:focus {
+    outline: none;
+    box-shadow: 0 0 10px var(--color-highlight);
+    border-color: var(--color-primary);
+}
+
+.form_label {
+    display: block;
+    font-size: 14px;
+    color: var(--color-dark);
+    margin-bottom: 4px;
+    transition: color 0.3s ease;
+}
+
+/* Línea de enfoque animada */
+.form_line {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--color-background);
+    transition: width 0.3s ease;
+}
+
+.form_input:focus + .form_label {
+    color: var(--color-background);
+}
+
+.form_input:focus + .form_label + .form_line {
+    width: 100%;
+}
+
+/* Botones de Enviar y Cancelar */
+.button_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+    transition: transform 0.2s ease;
+    animation: fadeInButtons 1s ease-in-out; /* Animación para los botones */
+}
+
+/* Animación para los botones */
+@keyframes fadeInButtons {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.form_submit, .form_delete {
+    width: 70%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    color: var(--color-white);
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s ease;
+    margin: 0;
+    animation: scaleUpButton 0.5s ease-in-out; /* Animación para botones */
+}
+
+/* Animación de escala para los botones */
+@keyframes scaleUpButton {
+    from {
+        transform: scale(0.95);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+.form_submit {
+    background-color: var(--color-btn-submit);
+}
+
+.form_submit:hover {
+    background-color: var(--color-btn-submit-hover);
+    transform: scale(1.05);
+}
+
+.form_delete {
+    background-color: var(--color-btn-delete);
+}
+
+.form_delete:hover {
+    background-color: var(--color-btn-delete-hover);
+    transform: scale(1.05);
+}
+
+/* Diseño responsive */
+/* Mobile */
+@media (max-width: 480px) {
+    form {
+        padding: 15px;
+    }
+
+    .form_tittle {
+        font-size: 26px;
+        margin-bottom: 10px;
+    }
+
+    .form_input {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .form_submit, .form_delete {
+        font-size: 14px;
+        padding: 10px;
+        width: 100%;
+    }
+
+    .button_container {
+        flex-direction: column;
+        gap: 12px;
+    }
+}
+
+/* Tablet */
+@media (min-width: 481px) and (max-width: 768px) {
+    form {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .form_tittle {
+        font-size: 28px;
+        margin-bottom: 15px;
+    }
+
+    .form_input {
+        font-size: 15px;
+        padding: 12px;
+    }
+
+    .form_submit, .form_delete {
+        font-size: 15px;
+        padding: 12px;
+    }
+
+    .button_container {
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 15px;
+    }
+}
+
+/* Desktop */
+@media (min-width: 769px) {
+    form {
+        width: 45%;
+        max-width: 500px;
+    }
+
+    .form_tittle {
+        font-size: 32px;
+    }
+
+    .form_input {
+        font-size: 16px;
+        padding: 14px;
+    }
+
+    .form_submit, .form_delete {
+        font-size: 16px;
+        padding: 14px;
+    }
+
+    .button_container {
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 20px;
+    }
+}
