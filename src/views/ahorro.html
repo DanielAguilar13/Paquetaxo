@@ -3,32 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/src/styles/ahorro.css">
+    <link rel="stylesheet" href="..//styles/homepage.css">
+    <link rel="stylesheet" href="..//styles/ahorro.css">
+    <script src="https://kit.fontawesome.com/58dc328e94.js" crossorigin="anonymous"></script>
     <title>GGP - Ahorro</title>
 </head>
 <body>
     <!-- Barra Lateral -->
     <div id="sidebar" class="sidebar">
-    <a href="javascript:void(0)" class="close-btn" onclick="closeSidebar()">×</a>
-    <a href="#Inicio">Inicio</a>
-    <a href="#Perfil">Perfil</a>
-    <a href="#Tarjetas">Tarjetas</a>
-    <a href="#Movimientos">Movimientos</a>
-    <a href="#Ahorro">Ahorro</a>
-    <a href="#Recordatorios">Recordatorios</a>
+        <a href="javascript:void(0)" class="close-btn" onclick="closeSidebar()">×</a>
+        <div class="sidebar-name">Nombre del Usuario</div>
+        <a href="./homepage.html"><i class="fas fa-home"></i> Inicio</a>
+        <a href="#Perfil"><i class="fas fa-user"></i> Perfil</a>
+        <a href="./tarjetas.html"><i class="fas fa-credit-card"></i> Tarjetas</a>
+        <a href="./movimientos.html"><i class="fas fa-exchange-alt"></i> Movimientos</a>
+        <a href="./ahorro.html"><i class="fas fa-piggy-bank"></i> Ahorro</a>
+        <a href="./recordatorios.html"><i class="fas fa-bell"></i> Recordatorios</a>
     </div>
 
-    <!-- Encabezado -->
-    <header class="header">
-        <!-- Logo como botón para abrir la barra lateral -->
-        <img src="/src/img/logo.png" alt="Logo GGP" class="logo">
-        <h1>Gestor de Gastos Personales</h1>
-        <nav class="nav">
-            <h3>Usuario</h3>
-            <img src="/src/img/icono1.png" alt="User" class="open-btn" onclick="openSidebar()">       
-        </nav>
-    </header>
-    <script src="/src/js/sidebar.js"></script>
+<!-- Encabezado -->
+<div class="header">
+    <!-- Imagen del logo como botón para abrir la barra lateral -->
+    <img src="/src/img/logo.png" alt="Logo GGP">
+    <h1>Gestor de Gastos Personales</h1>
+    <img src="/src/img/icono1.png" alt="User" onclick="openSidebar()" class="open-btn">       
+</div>
+<script src="/src/js/sidebar.js"></script>
 
     <!-- Card de Ahorros -->
     <div class="container">
@@ -44,6 +44,13 @@
                 <div class="balance-status">Disponible</div>
             </div>
         </div>
+         <!-- Botón Añadir -->
+         <div class="button-add">
+             <a href="/src/views/ahorro-añadir.html">
+            <button type="button" onclick="añadirAhorro()">Añadir</button>
+            </a>
+        </div>
     </div>
+
 </body>
 </html>

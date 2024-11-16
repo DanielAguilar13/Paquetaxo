@@ -1,3 +1,4 @@
+// Datos de gastos
 const gastos = [
     { fecha: '2023-11-01', descripcion: 'Despensa de la semana', categoria: 'Alimentación', monto: 200 },
     { fecha: '2023-11-02', descripcion: 'Taxi al trabajo', categoria: 'Transporte', monto: 150 },
@@ -6,6 +7,7 @@ const gastos = [
     { fecha: '2023-11-05', descripcion: 'Compras varias', categoria: 'Otros', monto: 250 }
 ];
 
+// Configuración de la gráfica
 const data = {
     labels: gastos.map(gasto => gasto.categoria),
     datasets: [{
@@ -17,7 +19,7 @@ const data = {
 };
 
 const config = {
-    type: 'pie',
+    type: 'bar',
     data: data,
     options: {
         responsive: true,
@@ -28,7 +30,7 @@ const config = {
                     font: {
                         size: 12
                     },
-                    color: '#333'
+                    color: '#000000'
                 }
             },
             tooltip: {
@@ -38,7 +40,7 @@ const config = {
     }
 };
 
-// Renderiza la gráfica y los datos de ejemplo
+// Renderización de la gráfica y lista de gastos en el HTML
 window.onload = function() {
     const ctx = document.getElementById('expenseChart').getContext('2d');
     new Chart(ctx, config);
@@ -51,32 +53,40 @@ window.onload = function() {
     });
 };
 
-// Función para generar el PDF
+// Función para generar el PDF con tabla
 function generatePDF() {
     const chartElement = document.getElementById('expenseChart');
     
-    // Escala más alta para mejor resolución en PDF
-    html2canvas(chartElement, { scale: 3 }).then(canvas => {
+    html2canvas(chartElement, { scale: 2 }).then(canvas => {
+        const { jsPDF } = window.jspdf;
         const pdf = new jsPDF();
         
-        // Ajuste del tamaño de la gráfica en el PDF
+        // Reducir el tamaño de la gráfica en el PDF
         const imgData = canvas.toDataURL('image/png');
-        const imgWidth = 180; // Ajusta este valor para que se vea proporcionada
-        const imgHeight = canvas.height * imgWidth / canvas.width; // Mantener proporción
+        const imgWidth = 80;
+        const imgHeight = canvas.height * imgWidth / canvas.width;
 
-        pdf.addImage(imgData, 'PNG', 3, 2, imgWidth, imgHeight);
+        pdf.addImage(imgData, 'PNG', 10, 5, imgWidth, imgHeight);
 
-        // Estilos para los textos de movimientos de gastos
+        // Establecer el título en el PDF
         pdf.setFontSize(16);
-        pdf.text("Movimientos de Gastos:", 15, imgHeight + 40);
-        
-        pdf.setFontSize(12);
-        let yOffset = imgHeight + 50;
+        pdf.text("Movimientos de Gastos:", 15, imgHeight + 20);
 
-        // Espaciado y alineación para los detalles de los movimientos
-        gastos.forEach(gasto => {
-            pdf.text(`${gasto.fecha} - ${gasto.descripcion} - ${gasto.categoria}: $${gasto.monto}`, 15, yOffset);
-            yOffset += 10; // Ajusta el espaciado entre líneas
+        // Generar la tabla de gastos en el PDF
+        pdf.autoTable({
+            startY: imgHeight + 30,
+            head: [['Fecha', 'Descripción', 'Categoría', 'Monto']],
+            body: gastos.map(gasto => [gasto.fecha, gasto.descripcion, gasto.categoria, `$${gasto.monto}`]),
+            theme: 'grid',
+            
+            // Cambiar el color del encabezado
+            headStyles: { 
+                fillColor: [63, 81, 181], // Color de fondo del encabezado (azul)
+                textColor: [255, 255, 255] // Color del texto en el encabezado (blanco)
+            },
+            
+            // Otros estilos opcionales para la tabla
+            styles: { fontSize: 12, cellPadding: 3 }
         });
 
         // Descargar el PDF
