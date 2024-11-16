@@ -87,6 +87,8 @@ function eliminar(tabla, data){
 module.exports = {
     todos,
     uno,
+    insertar,
+    actualizar,
     agregar,
     eliminar,
 }
