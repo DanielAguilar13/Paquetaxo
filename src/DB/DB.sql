@@ -1,61 +1,299 @@
-CREATE TABLE usuario (  --Crear Tabla usuario
-usu_id INTEGER PRIMARY KEY, -- Definimos la columna usu_id la clave primaria como entero
- usu_nombre VARCHAR(80), -- Definimos la columna usu_nombre como una cadena de caracteres  
-imagen_id_fk INTEGER, -- Definimos la columna imagen_id_fk de tipo entero como una clave foranea que hace referencia a la tabla de imagenes 
-);
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 14-11-2024 a las 04:13:51
+-- Versión del servidor: 10.4.28-MariaDB
+-- Versión de PHP: 8.2.4
 
-CREATE TABLE imagen ( --Crear Tabla imagen
-    imagen_id INTEGER PRIMARY KEY, -- Definimos la columna imagen_id y la clave primaria como entero
-    imagen_img  VARCHAR(255) -- Definimos la columna imagen_img como una cadena de caracteres  
-);                           -- Esta columna almacenará la representación de la imagen 
-
-CREATE TABLE movimientos ( -- Crear Tabla movimientos
-    mov_id INTEGER PRIMARY KEY, -- Definimos la columna mov_id y la clave primaria como entero
-    mov_concepto VARCHAR(100), -- Definimos la columna mov_concepto como una cadena de caracteres 
-    mov_cantidad INTEGER, -- Definimos la columna mov_cantidad de tipo entero
-    mov_categoria_id_fk INTEGER, -- Definimos la columna de tipo entero que referencia la tabla categorias 
-    mov_tipo_de_pago_id_fk INTEGER, -- Definimos la columna de tipo entero que referencia la tabla tipo de pago
-    mov_tarjeta_pago INTEGER, -- Definimos la columna de tipo entero que referencia la tabla tarjetas.  
-    FOREIGN KEY (mov_categoria_id_fk) REFERENCES categorias(cat_id), -- Aquí se define la llave foránea que establece relación con la tabla categorias 
-    FOREIGN KEY (mov_tipo_de_pago_id_fk) REFERENCES tipo_de_pago(tipo_pago_id), -- Aquí se define la llave foránea que establece la relación con la tabla  tipo de pago
-    FOREIGN KEY (mov_tarjeta_pago) REFERENCES tarjetas(tarjeta_id) -- Aquí se define la llave foránea que establece relación con la tabla tarjetas 
-);
-
-CREATE TABLE categorias ( -- Crear Tabla categorias
-    categoria_id INTEGER PRIMARY KEY, --Definimos la columna de tipo entero y la llave primaria  
-    categoria_nombre VARCHAR(30) -- Definimos la columna como una cadena de caracteres donde almacenará el nombre de la categoría
-);
-
-CREATE TABLE tipo_de_pago ( -- Crear Tabla tipo de pago 
-    tipo_pago_id INTEGER PRIMARY KEY, --Definimos la columna de tipo entero y la llave primaria
-    tipo_pago_nombre VARCHAR(80) -- Esta columna almacenará el nombre del tipo de pago("Efectivo", "Tarjeta de Credito / .... Debito")
-);
-
-CREATE TABLE ahorro ( -- Crear Tabla ingresos
-    ahorro_id INTEGER PRIMARY KEY, -- Definimos la columna de tipo entero y la llave primaria
-    ahorro_cantidad INTEGER, -- Definimos la columna de tipo entero en la que almacenará la cantidad de ahorro asociada con cada ingreso
-    ahorro_concepto INTEGER, -- Definimos la columna de tipo entero en la que almacenará un concepto relacionado con el ahorro 
-    ahorro_tarjeta_id_fk INTEGER, -- Definimos la columna como un entero y se usara como llave foranea para hacer referancia a la tabla tarjeta
-    FOREIGN KEY (ahorro_tarjeta_id_fk) REFERENCES tarjeta(tarjeta_id) -- Aquí definimos la llave foranea que establece una relación con la tabla tarjeta 
-);
-
-CREATE TABLE tarjeta ( -- Crear Tabla tarjeta
-    tarjeta_id INTEGER PRIMARY KEY, --Definimos la columna de tipo entero que será la llave primaria
-    tarjeta_nombre VARCHAR(80), -- Definimos la columna como una cadena de caracteres donde almacenará el nombre de la tarjeta
-    tarjeta_ultimos_digitos VARCHAR(4), -- Definimos la columna como una cadena de caracteres que almacenara los últimos 4 digitos de numero de la tarjeta
-    tarjeta_limite_credito FLOAT, -- Definimos esta columna de tipo flotante donde almacenara el límite de credito total de la tarjeta
-    tarjeta_saldo FLOAT, -- Definimos esta columna de tipo flotante dondel almacenara el saldo actual de la tarjeta 
-    tarjeta_fecha_vencimiento DATE -- Definimos la columna de tipo fecha donde almacenará la fecha de vencimiento de la tarjeta 
-    
-);
-
-CREATE TABLE recordatorios ( -- Crear Tabla recordatorios
-    recor_id INTEGER PRIMARY KEY, --Definimos la columna de tipo entero y la llave primaria
-    recor_concepto VARCHAR(200), -- Definimos la columna como una cadena de caracteres donde almacenara el concepto o descripcion del recordatorio
-    recor_fecha DATE -- Esta columna almacenara la fecha en el que el recordatorio estará programado
-);
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
 
 
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de datos: `gasti`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ahorro`
+--
+
+CREATE TABLE `ahorro` (
+  `id` int(11) NOT NULL,
+  `cantidad` int(11) DEFAULT NULL,
+  `concepto` int(11) DEFAULT NULL,
+  `id_tarjeta` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `categorias`
+--
+
+CREATE TABLE `categorias` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(30) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `categorias`
+--
+
+INSERT INTO `categorias` (`id`, `nombre`) VALUES
+(1, 'Alimentación'),
+(2, 'Transporte'),
+(3, 'Entretenimiento'),
+(4, 'Educación'),
+(5, 'Salud'),
+(6, 'Vestir'),
+(7, 'Vivienda'),
+(8, 'Servicios');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `imagen`
+--
+
+CREATE TABLE `imagen` (
+  `id` int(11) NOT NULL,
+  `img` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `movimientos`
+--
+
+CREATE TABLE `movimientos` (
+  `id` int(11) NOT NULL,
+  `concepto` varchar(100) DEFAULT NULL,
+  `cantidad` int(11) DEFAULT NULL,
+  `id_categoria` int(11) DEFAULT NULL,
+  `id_tipo` int(11) DEFAULT NULL,
+  `id_tarjeta` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `movimientos`
+--
+
+INSERT INTO `movimientos` (`id`, `concepto`, `cantidad`, `id_categoria`, `id_tipo`, `id_tarjeta`) VALUES
+(1, 'Comida', 100, 1, 1, 1),
+(2, 'Gasolina', 50, 2, 1, 2),
+(3, 'Cine', 200, 3, 2, 3),
+(4, 'Curso', 500, 4, 2, 4),
+(5, 'Comida', 100, 1, 1, 1),
+(6, 'Gasolina', 50, 2, 1, 2),
+(7, 'Cine', 200, 3, 2, 3),
+(8, 'Curso', 500, 4, 2, 4);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `recordatorios`
+--
+
+CREATE TABLE `recordatorios` (
+  `id` int(11) NOT NULL,
+  `concepto` varchar(200) DEFAULT NULL,
+  `id_categoria` int(11) DEFAULT NULL,
+  `fecha` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `recordatorios`
+--
+
+INSERT INTO `recordatorios` (`id`, `concepto`, `id_categoria`, `fecha`) VALUES
+(1, 'Pago de la renta', 1, '2024-12-15'),
+(2, 'Pago de la luz', 2, '2024-12-20'),
+(3, 'Pago de la tarjeta', 3, '2024-12-25');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tarjeta`
+--
+
+CREATE TABLE `tarjeta` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(80) DEFAULT NULL,
+  `ultimos_digitos` varchar(4) DEFAULT NULL,
+  `limite_credito` float DEFAULT NULL,
+  `saldo` float DEFAULT NULL,
+  `fecha_vencimiento` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `tarjeta`
+--
+
+INSERT INTO `tarjeta` (`id`, `nombre`, `ultimos_digitos`, `limite_credito`, `saldo`, `fecha_vencimiento`) VALUES
+(1, 'BBVA', '1234', 1000, 500, '0000-00-00'),
+(2, 'Banamex', '5678', 2000, 1500, '0000-00-00'),
+(3, 'Banorte', '9012', 3000, 2500, '0000-00-00'),
+(4, 'HSBC', '3456', NULL, NULL, '0000-00-00'),
+(5, 'BBVA', '1234', 1000, 500, '0000-00-00'),
+(6, 'Banamex', '5678', 2000, 1500, '0000-00-00'),
+(7, 'Banorte', '9012', 3000, 2500, '0000-00-00'),
+(8, 'HSBC', '3456', NULL, NULL, '0000-00-00');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tipo_de_pago`
+--
+
+CREATE TABLE `tipo_de_pago` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(80) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `tipo_de_pago`
+--
+
+INSERT INTO `tipo_de_pago` (`id`, `nombre`) VALUES
+(1, 'Efectivo/Debito'),
+(2, 'Tarjeta de Credito');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuario`
+--
+
+CREATE TABLE `usuario` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(80) DEFAULT NULL,
+  `id_imagen` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `ahorro`
+--
+ALTER TABLE `ahorro`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_tarjeta` (`id_tarjeta`);
+
+--
+-- Indices de la tabla `categorias`
+--
+ALTER TABLE `categorias`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `imagen`
+--
+ALTER TABLE `imagen`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `movimientos`
+--
+ALTER TABLE `movimientos`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_categoria` (`id_categoria`),
+  ADD KEY `id_tipo` (`id_tipo`),
+  ADD KEY `id_tarjeta` (`id_tarjeta`);
+
+--
+-- Indices de la tabla `recordatorios`
+--
+ALTER TABLE `recordatorios`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_categoria` (`id_categoria`);
+
+--
+-- Indices de la tabla `tarjeta`
+--
+ALTER TABLE `tarjeta`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `tipo_de_pago`
+--
+ALTER TABLE `tipo_de_pago`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `ahorro`
+--
+ALTER TABLE `ahorro`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `movimientos`
+--
+ALTER TABLE `movimientos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT de la tabla `recordatorios`
+--
+ALTER TABLE `recordatorios`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `tarjeta`
+--
+ALTER TABLE `tarjeta`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `ahorro`
+--
+ALTER TABLE `ahorro`
+  ADD CONSTRAINT `ahorro_ibfk_1` FOREIGN KEY (`id_tarjeta`) REFERENCES `tarjeta` (`id`);
+
+--
+-- Filtros para la tabla `movimientos`
+--
+ALTER TABLE `movimientos`
+  ADD CONSTRAINT `movimientos_ibfk_1` FOREIGN KEY (`id_categoria`) REFERENCES `categorias` (`id`),
+  ADD CONSTRAINT `movimientos_ibfk_2` FOREIGN KEY (`id_tipo`) REFERENCES `tipo_de_pago` (`id`),
+  ADD CONSTRAINT `movimientos_ibfk_3` FOREIGN KEY (`id_tarjeta`) REFERENCES `tarjeta` (`id`);
+
+--
+-- Filtros para la tabla `recordatorios`
+--
+ALTER TABLE `recordatorios`
+  ADD CONSTRAINT `recordatorios_ibfk_1` FOREIGN KEY (`id_categoria`) REFERENCES `categorias` (`id`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
 
 

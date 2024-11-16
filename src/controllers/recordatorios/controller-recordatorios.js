@@ -18,8 +18,18 @@ module.exports = function (dbInyectada){
         return db.uno(TABLA,id);
     }
     
-    function agregar (body){
-        return db.agregar(TABLA, body);
+    function agregar(data) {
+        console.log('Datos recibidos en la función agregar:', data);
+    
+        return db.insertar('recordatorios', data)
+            .then((result) => {
+                console.log('Inserción exitosa en la base de datos:', result);
+                return result;
+            })
+            .catch((error) => {
+                console.error('Error en la función agregar:', error);
+                throw error;
+            });
     }
     
     function eliminar (body){
