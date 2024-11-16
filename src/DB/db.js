@@ -1,87 +1,99 @@
-const mysql = require('mysql');
-const config = require('../config');
+const mysql = require("mysql");
+const config = require("../config");
 
 const dbconfig = {
     host: config.mysql.host,
     user: config.mysql.user,
     password: config.mysql.password,
-    database: config.mysql.database
-}
+    database: config.mysql.database,
+};
 
 let conexion;
+let reconexiones = 0;
+const maxReconexiones = 10;
 
-function conMysql(){
+function conMysql() {
+    if (reconexiones >= maxReconexiones) {
+        console.error("Demasiados intentos de reconexión. Abortando...");
+        return;
+    }
+
     conexion = mysql.createConnection(dbconfig);
 
-    conexion.connect((err) => {
+    conexion.connect(err => {
         if (err) {
-            console.error('[db err]}', err);
-            setTimeout(conMysql,200);
-        }
-        else{
-            console.log('conectado a la base de datos');
+            console.error("[db err]", err);
+            reconexiones++;
+            setTimeout(conMysql, 200);
+        } else {
+            reconexiones = 0;
+            console.log("Conectado a la base de datos");
         }
     });
 
-    conexion.on('error', err => {
-        console.error('[db err]', err);
-        if(err.code === 'PROTOCOL_CONNECTION_LOST'){
+    conexion.on("error", err => {
+        console.error("[db err]", err);
+        if (err.code === "PROTOCOL_CONNECTION_LOST") {
             conMysql();
-        }else{
+        } else {
             throw err;
         }
-    })
+    });
 }
 
 conMysql();
 
-function todos(tabla){
-    return new Promise( (resolve, reject) => {
-        conexion.query(`SELECT * FROM ${tabla}`, (error, result) => {
+function todos(tabla) {
+    return new Promise((resolve, reject) => {
+        conexion.query(`SELECT * FROM ??`, [tabla], (error, result) => {
             return error ? reject(error) : resolve(result);
-        })
-    });   
+        });
+    });
 }
 
-function uno(tabla,id){
-    return new Promise( (resolve, reject) => {
-        conexion.query(`SELECT * FROM ${tabla} WHERE id=${id}`, (error, result) => {
+function uno(tabla, id) {
+    return new Promise((resolve, reject) => {
+        conexion.query(`SELECT * FROM ?? WHERE id = ?`, [tabla, id], (error, result) => {
             return error ? reject(error) : resolve(result);
-        })
-    });   
-
+        });
+    });
 }
 
-function insertar(tabla, data){
-    return new Promise( (resolve, reject) => {
-        conexion.query(`INSERT INTO ${tabla} SET ?`, data, (error, result) => {
+function insertar(tabla, data) {
+    return new Promise((resolve, reject) => {
+        conexion.query(`INSERT INTO ?? SET ?`, [tabla, data], (error, result) => {
             return error ? reject(error) : resolve(result);
-        })
-    });   
+        });
+    });
 }
 
-function actualizar(tabla, data){
-    return new Promise( (resolve, reject) => {
-        conexion.query(`UPDATE ${tabla} SET ? WHERE id = ?`, [data, data.id], (error, result) => {
+function actualizar(tabla, data) {
+    return new Promise((resolve, reject) => {
+        const id = data.id;
+        delete data.id;
+        conexion.query(`UPDATE ?? SET ? WHERE id = ?`, [tabla, data, id], (error, result) => {
             return error ? reject(error) : resolve(result);
-        })
-    });   
+        });
+    });
 }
 
-function agregar(tabla, data){
-    if(data && data.id == 0){
+function agregar(tabla, data) {
+    if (!data || data.id === undefined || data.id === 0) {
         return insertar(tabla, data);
-    }else{
+    } else {
         return actualizar(tabla, data);
     }
 }
 
-function eliminar(tabla, data){
-    return new Promise( (resolve, reject) => {
-        conexion.query(`DELETE FROM ${tabla} WHERE id = ?`, data.id, (error, result) => {
+function eliminar(tabla, data) {
+    if (!data || !data.id) {
+        return Promise.reject(new Error("Falta el ID para eliminar."));
+    }
+    return new Promise((resolve, reject) => {
+        conexion.query(`DELETE FROM ?? WHERE id = ?`, [tabla, data.id], (error, result) => {
             return error ? reject(error) : resolve(result);
-        })
-    });   
+        });
+    });
 }
 
 module.exports = {
@@ -89,4 +101,4 @@ module.exports = {
     uno,
     agregar,
     eliminar,
-}
+};
