@@ -31,7 +31,8 @@ CREATE TABLE `ahorro` (
   `id` int(11) NOT NULL,
   `cantidad` int(11) DEFAULT NULL,
   `concepto` int(11) DEFAULT NULL,
-  `id_tarjeta` int(11) DEFAULT NULL
+  `limite_gasto` int(11) DEFAULT NULL,
+  `fecha` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -82,7 +83,8 @@ CREATE TABLE `movimientos` (
   `cantidad` int(11) DEFAULT NULL,
   `id_categoria` int(11) DEFAULT NULL,
   `id_tipo` int(11) DEFAULT NULL,
-  `id_tarjeta` int(11) DEFAULT NULL
+  `id_tarjeta` int(11) DEFAULT NULL,
+  `fecha` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -132,6 +134,7 @@ CREATE TABLE `tarjeta` (
   `nombre` varchar(80) DEFAULT NULL,
   `ultimos_digitos` varchar(4) DEFAULT NULL,
   `limite_credito` float DEFAULT NULL,
+  `fecha_corte` date DEFAULT NULL,
   `saldo` float DEFAULT NULL,
   `fecha_vencimiento` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -189,8 +192,7 @@ CREATE TABLE `usuario` (
 -- Indices de la tabla `ahorro`
 --
 ALTER TABLE `ahorro`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `id_tarjeta` (`id_tarjeta`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `categorias`
@@ -252,29 +254,23 @@ ALTER TABLE `ahorro`
 -- AUTO_INCREMENT de la tabla `movimientos`
 --
 ALTER TABLE `movimientos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `recordatorios`
 --
 ALTER TABLE `recordatorios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `tarjeta`
 --
 ALTER TABLE `tarjeta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT ;
 
 --
 -- Restricciones para tablas volcadas
 --
-
---
--- Filtros para la tabla `ahorro`
---
-ALTER TABLE `ahorro`
-  ADD CONSTRAINT `ahorro_ibfk_1` FOREIGN KEY (`id_tarjeta`) REFERENCES `tarjeta` (`id`);
 
 --
 -- Filtros para la tabla `movimientos`
