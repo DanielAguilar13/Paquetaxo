@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/src/styles/movimientos.css">
-    <script src="https://kit.fontawesome.com/58dc328e94.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./styles/movimientos.css">
     <title>GGP - Movimientos</title> 
 </head>
 
@@ -24,11 +23,11 @@
     <!-- Encabezado -->
     <div class="header">
     <!-- Imagen del logo como botón para abrir la barra lateral -->
-        <img src="/src/img/logo.png" alt="Logo GGP">
+        <img src="./img/logo.png" alt="Logo GGP">
         <h1>Gestor de Gastos Personales</h1>
-        <img src="/src/img/icono1.png" alt="User" onclick="openSidebar()" class="open-btn">       
+        <img src="./img/icono1.png" alt="User" onclick="openSidebar()" class="open-btn">       
     </div>
-    <script src="/src/js/sidebar.js"></script>
+    <script src="../js/sidebar.js"></script>
 
     <div class="container">
         <!-- Barra de título y botón -->
@@ -45,6 +44,7 @@
                     <th>Categoria</th>
                     <th>Tipo de pago</th>
                     <th>Metodo de pago</th>
+                    <th>Fecha</th>
                     <th>Opción</th>
                 </tr>
             </thead>
@@ -55,6 +55,7 @@
                     <td>Ingreso</td>
                     <td>Débito</td>
                     <td>Tarjeta 1</td>
+                    <td>31/12/2024</td>
                     <td class="actions">
                         <button class="btn btn-edit">✏️</button>
                         <button class="btn btn-delete">🗑️</button>
@@ -66,6 +67,7 @@
                     <td>Ingreso</td>
                     <td>Débito</td>
                     <td>Tarjeta 1</td>
+                    <td>31/12/2024</td>
                     <td class="actions">
                         <button class="btn btn-edit">✏️</button>
                         <button class="btn btn-delete">🗑️</button>
@@ -77,6 +79,7 @@
                     <td>Ingreso</td>
                     <td>Débito</td>
                     <td>Tarjeta 1</td>
+                    <td>22/10/2025</td>
                     <td class="actions">
                         <button class="btn btn-edit">✏️</button>
                         <button class="btn btn-delete">🗑️</button>
@@ -88,6 +91,7 @@
                     <td>Ingreso</td>
                     <td>Débito</td>
                     <td>Tarjeta 1</td>
+                    <td>22/11/2024</td>
                     <td class="actions">
                         <button class="btn btn-edit">✏️</button>
                         <button class="btn btn-delete">🗑️</button>
@@ -117,6 +121,6 @@
             </div>
         </div>
     </div>
-    <script src="/src/js/modal-eliminar.js"></script>
+    <script src="../js/modal-eliminar.js"></script>
 </body>
 </html>

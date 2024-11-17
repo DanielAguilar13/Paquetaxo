@@ -44,18 +44,15 @@ body {
     }
 }
 
-/* Estilos del formulario */
+/* Ajustes básicos para el formulario */
 form {
-    background: linear-gradient(to right, var(--color-gray), var(--color-white));
-    width: 100%;
-    max-width: 500px;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    margin: 15px;
-    transition: all 0.3s ease;
-    animation: fadeInForm 1s ease-in-out; /* Animación de aparición del formulario */
+    position: relative; /* Para que el ícono absoluto se alinee dentro del formulario */
+    max-width: 500px; /* Ancho máximo del formulario */
+    margin: auto; /* Centrar horizontalmente */
+    padding: 40px 20px; /* Espaciado interno */
+    background: var(--color-gray); /* Fondo simple */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra ligera */
 }
 
 /* Animación de fadeIn para el formulario */
@@ -235,6 +232,7 @@ form {
     background-color: var(--color-btn-delete-hover);
     transform: scale(1.05);
 }
+
 
 /* Diseño responsive */
 /* Mobile */
