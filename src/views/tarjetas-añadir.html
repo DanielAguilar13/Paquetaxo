@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/src/styles/añadir.css">
+    <link rel="stylesheet" href="./styles/añadir.css">
     <title>GGP - Tarjetas</title>
 </head>
 <body>
@@ -11,18 +11,18 @@
         <h2 class="form_tittle">Tarjeta</h2>
         <div class="form_container">
             <div class="form_group">
-                <input type="text" id="nombre" class="form_input" placeholder=" " required>
+                <input type="text" id="nombre" name="nombre" class="form_input" placeholder=" " required>
                 <label for="nombre" class="form_label">Nombre de la tarjeta</label>
                 <span class="form_line"></span>
             </div>
             <div class="form_group">
-                <input type="number" id="digitos" class="form_input" placeholder=" " required>
+                <input type="number" id="ultimos_digitos" name="ultimos_digitos" class="form_input" placeholder=" " required>
                 <label for="digitos" class="form_label">Últimos 4 dígitos</label>
                 <span class="form_line"></span>
             </div>
             <div class="form_group">
-                <input type="date" id="fechaExpiracion" class="form_input" placeholder=" " required>
-                <label for="fechaExpiracion" class="form_label">Fecha de expiración</label>
+                <input type="date" id="fecha_vencimiento" name="fecha_vencimiento" class="form_input" placeholder=" " required>
+                <label for="fecha_vencimiento" class="form_label">Fecha de expiración</label>
                 <span class="form_line"></span>
             </div>
             <div class="form_group">
@@ -35,13 +35,13 @@
                 <span class="form_line"></span>
             </div>
             <div class="form_group">
-                <input type="number" id="saldo" min="0.01" step="any" class="form_input" placeholder=" " required>
+                <input type="number" id="saldo" name="saldo" min="0.01" step="any" class="form_input" placeholder=" " required>
                 <label for="saldo" class="form_label">Saldo</label>
                 <span class="form_line"></span>
             </div>
             <div class="form_group" id="fechaCorteContainer" style="display: none;">
-                <input type="date" id="fechaCorte" class="form_input" placeholder=" ">
-                <label for="fechaCorte" class="form_label">Fecha de corte</label>
+                <input type="date" id="fecha_corte" class="form_input" placeholder=" ">
+                <label for="fecha_corte" class="form_label">Fecha de corte</label>
                 <span class="form_line"></span>
             </div>
             <div class="form_group" id="deudaContainer" style="display: none;">

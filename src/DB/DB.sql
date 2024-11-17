@@ -31,7 +31,7 @@ CREATE TABLE `ahorro` (
   `id` int(11) NOT NULL,
   `cantidad` int(11) DEFAULT NULL,
   `concepto` int(11) DEFAULT NULL,
-  `id_tarjeta` int(11) DEFAULT NULL
+  `limite_gasto` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -132,6 +132,7 @@ CREATE TABLE `tarjeta` (
   `nombre` varchar(80) DEFAULT NULL,
   `ultimos_digitos` varchar(4) DEFAULT NULL,
   `limite_credito` float DEFAULT NULL,
+  'fecha_corte' date DEFAULT NULL,
   `saldo` float DEFAULT NULL,
   `fecha_vencimiento` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

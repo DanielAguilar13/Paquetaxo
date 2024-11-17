@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/src/styles/añadir.css">
+    <link rel="stylesheet" href="./styles/añadir.css">
     <title>GGP - Movimientos</title>
 </head>
 <body>
@@ -11,50 +11,50 @@
         <h2 class="form_tittle">Movimiento</h2>
         <div class="form_container">
             <div class="form_group">
-                <input type="text" id="concepto" class="form_input" placeholder=" ">
+                <input type="text" id="concepto" name="concepto" class="form_input" placeholder=" ">
                 <label for="nombre" class="form_label">Concepto</label>
                 <span class="form_line"></span>
             </div>
             <div class="form_group">
-                <input type="number" id="cantidad" min="0.01" step="any" class="form_input" placeholder=" ">
+                <input type="number" id="cantidad" name="cantidad" min="0.01" step="any" class="form_input" placeholder=" ">
                 <label for="tipo" class="form_label">Cantidad</label>
                 <span class="form_line"></span>
             </div>
             <div class="form_group">
-                <select id="categoria" class="form_input" required onchange="">
+                <select id="id_categoria" name="id_categoria" class="form_input" required onchange="">
                     <option value="" disabled selected>Elegir categoria</option>
                     <option value="Ingreso">Ingreso</option>
                     <option value="Egreso">Egreso</option>
                 </select>
-                <label for="categoria" class="form_label">Categoria</label>
+                <label for="id_categoria" class="form_label">Categoria</label>
                 <span class="form_line"></span>
             </div>
             <div class="form_group">
-                <select id="tipo_pago" class="form_input" required onchange="">
+                <select id="id_tipo" name="id_tipo" class="form_input" required onchange="">
                     <option value="" disabled selected>Elegir tipo de pago</option>
                     <option value="Debito">Débito</option>
                     <option value="Credito">Crédito</option>
                     <option value="Efectivo">Efectivo</option>
                 </select>
-                <label for="tipo_pago" class="form_label">Tipo de Pago</label>
+                <label for="id_tipo" class="form_label">Tipo de Pago</label>
                 <span class="form_line"></span>
             </div>
             <div class="form_group" id="metodo_pago_debito" style="display: none;">
-                <select id="metodo_pago" class="form_input">
+                <select id="id_tarjeta" name="id_tarjeta" class="form_input">
                     <option value="" disabled selected>Seleccionar método</option>
                     <option value="TarjetaDebito1">Tarjeta1</option>
                     <option value="TarjetaDebito2">Tarjeta2</option>
                 </select>
-                <label for="metodo_pago" class="form_label">Método de Pago</label>
+                <label for="id_tarjeta" name="id_tarjeta" class="form_label">Método de Pago</label>
                 <span class="form_line"></span>
             </div>
             <div class="form_group" id="metodo_pago_credito" style="display: none;">
-                <select id="metodo_pago" class="form_input">
+                <select id="id_tarjeta" name="id_tarjeta" class="form_input">
                     <option value="" disabled selected>Seleccionar método</option>
                     <option value="TarjetaCredito1">Tarjeta3</option>
                     <option value="TarjetaCredito2">Tarjeta4</option>
                 </select>
-                <label for="metodo_pago" class="form_label">Método de Pago</label>
+                <label for="id_tarjeta" name="id_tarjeta" class="form_label">Método de Pago</label>
                 <span class="form_line"></span>
             </div>
             <div class="button_container">
