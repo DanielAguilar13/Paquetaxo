@@ -1,5 +1,5 @@
 // Seleccionamos el formulario y el elemento donde se mostrarán los mensajes de advertencia
-const form = document.getElementById('form');
+const form = document.getElementById('form-recordatorios');
 const warningsElement = document.getElementById('warnings');
 
 // Función para validar el formulario
@@ -8,9 +8,9 @@ form.addEventListener('submit', (event) => {
     event.preventDefault();
 
     // Obtenemos los valores de los campos
-    const recordatorio = document.getElementById('name').value.trim();
-    const tipo = document.getElementById('tipo').value.trim();
-    const fecha = document.getElementById('dia').value.trim();
+    const recordatorio = document.getElementById('concepto').value.trim();
+    const tipo = document.getElementById('id_categoria').value.trim();
+    const fecha = document.getElementById('fecha').value.trim();
 
     // Inicializamos la variable de advertencias
     let warnings = '';
