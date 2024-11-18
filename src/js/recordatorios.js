@@ -1,18 +1,43 @@
-// Seleccionamos el formulario y el elemento donde se mostrarán los mensajes de advertencia
+// Selección del formulario y el modal
 const form = document.getElementById('form-recordatorios');
-const warningsElement = document.getElementById('warnings');
+const modal = document.createElement('div'); // Creamos dinámicamente el modal
+modal.className = 'modal'; // Clase CSS del modal
+document.body.appendChild(modal); // Agregamos el modal al body
 
-// Función para validar el formulario
+// Función para crear y mostrar el contenido del modal
+function mostrarModal(mensaje) {
+    modal.innerHTML = `
+        <div class="modal-content">
+            <span class="close-button" onclick="cerrarModal()">&times;</span>
+            <p>${mensaje}</p>
+        </div>
+    `;
+    modal.style.display = 'block'; // Mostramos el modal
+}
+
+// Función para cerrar el modal
+function cerrarModal() {
+    modal.style.display = 'none';
+}
+
+// Cerrar el modal al hacer clic fuera de su contenido
+window.onclick = function (event) {
+    if (event.target === modal) {
+        cerrarModal();
+    }
+};
+
+// Validación del formulario
 form.addEventListener('submit', (event) => {
-    // Prevenimos el envío del formulario
+    // Prevenir envío del formulario
     event.preventDefault();
 
-    // Obtenemos los valores de los campos
+    // Obtener valores de los campos
     const recordatorio = document.getElementById('concepto').value.trim();
     const tipo = document.getElementById('id_categoria').value.trim();
     const fecha = document.getElementById('fecha').value.trim();
 
-    // Inicializamos la variable de advertencias
+    // Inicializar mensajes de advertencia
     let warnings = '';
     let error = false;
 
@@ -40,15 +65,12 @@ form.addEventListener('submit', (event) => {
         error = true;
     }
 
-    // Si hay errores, mostramos las advertencias
+    // Si hay errores, mostrar advertencias en el modal
     if (error) {
-        warningsElement.innerHTML = warnings;
-        warningsElement.style.color = 'red'; // Color rojo para advertencias
+        mostrarModal(warnings);
     } else {
-        warningsElement.innerHTML = 'Formulario enviado correctamente.';
-        warningsElement.style.color = 'green'; // Color verde para éxito
-
-        // Opcional: Puedes agregar lógica para enviar el formulario por AJAX o similar
-        setTimeout(() => form.submit(), 1000); // Envía el formulario tras un breve retraso
+        mostrarModal('Formulario enviado correctamente.');
+        setTimeout(() => form.submit(), 1500); // Opcional: enviar el formulario tras un breve retraso
     }
 });
+
