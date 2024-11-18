@@ -27,35 +27,35 @@ app.set('port', config.app.port);
 
 // Ruta para servir el archivo HTML principal
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views/index.html'));
+    res.sendFile(path.join(__dirname, 'views','index.html'));
 });
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views/homepage.html'));
+    res.sendFile(path.join(__dirname, 'views','homepage.html'));
 });
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views/login.html'));
+    res.sendFile(path.join(__dirname, 'views','login.html'));
 });
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views/recordatorios.html'));
+    res.sendFile(path.join(__dirname, 'views','recordatorios.html'));
 });
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views/tarjetas-añadir.html'));
+    res.sendFile(path.join(__dirname, 'views','tarjetas-añadir.html'));
 });
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views/ahorro.html'));
+    res.sendFile(path.join(__dirname, 'views','ahorro.html'));
 });
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views/ahorro-añadir.html'));
+    res.sendFile(path.join(__dirname, 'views','ahorro-añadir.html'));
 });
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views/movimientos-añadir.html'));
+    res.sendFile(path.join(__dirname, 'views','movimientos-añadir.html'));
 });
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'recordatorios-añadir.html'));
 });
 
 // Ruta para procesar el formulario
-app.post('/usurio/submit', (req, res) => {
+app.post('/usuario/submit', (req, res) => {
     const {nombre, id_imagen} = req.body;
         // Verificar si los datos llegan
         console.log('Datos recibidos:', req.body);
@@ -67,7 +67,7 @@ app.post('/usurio/submit', (req, res) => {
         const data = { nombre, id_imagen };
         console.log('Datos que se enviarán al controlador:', data);
     
-        tarjeta.agregar(data)
+        usuario.agregar(data)
     });
 
 app.post('/tarjeta/submit', (req, res) => {
@@ -134,7 +134,7 @@ app.post('/recordatorios/submit', (req, res) => {
     recordatorio.agregar(data)
 });
 //rutas
-app.use('/api/usurio',require('./controllers/usuario/usuario.js'));
+app.use('/api/usuario',require('./controllers/usuario/usuario.js'));
 app.use('/api/tarjeta',require('./controllers/tarjeta/tarjeta.js'));
 app.use('/api/ahorro',require('./controllers/ahorro/ahorro.js'));
 app.use('/api/movimientos',require('./controllers/movimientos/movimientos.js'));
