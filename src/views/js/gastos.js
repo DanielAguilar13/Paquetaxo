@@ -68,5 +68,5 @@ function cancelarYRedirigir() {
   formulario.reset(); // Limpia todos los campos del formulario
 
   // Redirigir a otra página
-  window.location.href = "../views/ahorro.html"; 
+  window.location.href = "ahorro.html"; 
 };
