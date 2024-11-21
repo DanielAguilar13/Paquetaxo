@@ -35,6 +35,11 @@ CREATE TABLE `ahorro` (
   `fecha` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+
+INSERT INTO `ahorro` (`id`, `cantidad`, `concepto`, `limite_gasto`, `fecha`) VALUES
+(1, 1000, 1, 500, '2024-12-14'),
+(2, 2000, 2, 1000, '2024-11-30'),
+(3, 3000, 3, 1500, '2024-11-29');
 -- --------------------------------------------------------
 
 --
@@ -91,15 +96,15 @@ CREATE TABLE `movimientos` (
 -- Volcado de datos para la tabla `movimientos`
 --
 
-INSERT INTO `movimientos` (`id`, `concepto`, `cantidad`, `id_categoria`, `id_tipo`, `id_tarjeta`) VALUES
-(1, 'Comida', 100, 1, 1, 1),
-(2, 'Gasolina', 50, 2, 1, 2),
-(3, 'Cine', 200, 3, 2, 3),
-(4, 'Curso', 500, 4, 2, 4),
-(5, 'Comida', 100, 1, 1, 1),
-(6, 'Gasolina', 50, 2, 1, 2),
-(7, 'Cine', 200, 3, 2, 3),
-(8, 'Curso', 500, 4, 2, 4);
+INSERT INTO `movimientos` (`id`, `concepto`, `cantidad`, `id_categoria`, `id_tipo`, `id_tarjeta`, `fecha`) VALUES
+(1, 'Comida', 100, 1, 1, 1, '2024-12-16'),
+(2, 'Gasolina', 50, 2, 1, 2, '2024-12-16'),
+(3, 'Cine', 200, 3, 2, 3, '2024-12-16'),
+(4, 'Curso', 500, 4, 2, 4, '2024-12-16'),
+(5, 'Comida', 100, 1, 1, 1, '2024-12-16'),
+(6, 'Gasolina', 50, 2, 1, 2, '2024-12-16'),
+(7, 'Cine', 200, 3, 2, 3, '2024-12-16'),
+(8, 'Curso', 500, 4, 2, 4, '2024-12-16');
 
 -- --------------------------------------------------------
 
@@ -144,14 +149,14 @@ CREATE TABLE `tarjeta` (
 --
 
 INSERT INTO `tarjeta` (`id`, `nombre`, `ultimos_digitos`, `limite_credito`, `saldo`, `fecha_vencimiento`) VALUES
-(1, 'BBVA', '1234', 1000, 500, '0000-00-00'),
-(2, 'Banamex', '5678', 2000, 1500, '0000-00-00'),
-(3, 'Banorte', '9012', 3000, 2500, '0000-00-00'),
-(4, 'HSBC', '3456', NULL, NULL, '0000-00-00'),
-(5, 'BBVA', '1234', 1000, 500, '0000-00-00'),
-(6, 'Banamex', '5678', 2000, 1500, '0000-00-00'),
-(7, 'Banorte', '9012', 3000, 2500, '0000-00-00'),
-(8, 'HSBC', '3456', NULL, NULL, '0000-00-00');
+(1, 'BBVA', '1234', 1000, 500, '2025-12-01'),
+(2, 'Banamex', '5678', 2000, 1500, '2025-12-01'),
+(3, 'Banorte', '9012', 3000, 2500, '2027-12-01'),
+(4, 'HSBC', '3456', NULL, NULL, '2026-12-01'),
+(5, 'BBVA', '1234', 1000, 500, '2025-11-01'),
+(6, 'Banamex', '5678', 2000, 1500, '2025-04-01'),
+(7, 'Banorte', '9012', 3000, 2500, '2026-06-01'),
+(8, 'HSBC', '3456', NULL, NULL, '2026-12-01');
 
 -- --------------------------------------------------------
 
