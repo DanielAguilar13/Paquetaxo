@@ -8,12 +8,27 @@
 </head>
 <body>
     <form id="form-recordatorios" class="form">
-        <h2 class="form_tittle">Gestor de Límite de Gastos</h2>
+        <h2 class="form_tittle">Gestor de Ingresos</h2>
         <div class="form_container">
             <!-- Campo para establecer límite de gastos -->
             <div class="form_group">
+                <input type="number" id="cantidad" name="cantidad" class="form_input" placeholder=" ">
+                <label for="cantidad" class="form_label">Ingresar la cantidad</label>
+                <span class="form_line"></span>
+            </div>
+            <div class="form_group">
+                <input type="text" id="concepto" name="concepto" class="form_input" placeholder=" ">
+                <label for="nombre" class="form_label">Concepto</label>
+                <span class="form_line"></span>
+            </div>
+            <div class="form_group">
                 <input type="number" id="limite_gasto" name="limite_gasto" class="form_input" placeholder=" ">
                 <label for="limite_gasto" class="form_label">Establecer Límite de Gastos</label>
+                <span class="form_line"></span>
+            </div>
+            <div class="form_group">
+                <input type="date" id="fecha" name="fecha" class="form_input" placeholder=" ">
+                <label for="fecha" class="form_label">Fecha</label>
                 <span class="form_line"></span>
             </div>
             <!-- Botones de acción -->
@@ -28,6 +43,13 @@
     </form>
 
     <!-- Importar el script -->
-    <script src="/src/js/gastos.js"></script>
+<script src="./js/gastos.js"></script>
+<div id="modal-alerta" class="modal">
+    <div class="modal-content">
+        <span class="close-button" onclick="cerrarModal()">&times;</span>
+        <p id="modal-mensaje"></p>
+    </div>
+</div>
+
 </body>
 </html>

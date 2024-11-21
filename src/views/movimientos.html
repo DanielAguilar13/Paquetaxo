@@ -26,15 +26,16 @@
     <!-- Imagen del logo como botón para abrir la barra lateral -->
         <img src="./img/logo.png" alt="Logo GGP">
         <h1>Gestor de Gastos Personales</h1>
-        <img src="./img/icono1.png" alt="User" onclick="openSidebar()" class="open-btn">       
+        <img src="./img/icono1.png" alt="User" onclick="openSidebar()" class="open-btn">              
     </div>
+    <script src="../js/sidebar.js"></script>
     <script src="../js/sidebar.js"></script>
 
     <div class="container">
         <!-- Barra de título y botón -->
         <div class="title-bar">
             <h2>Movimientos</h2>
-            <button class="btn-add">Agregar Movimiento</button>
+            <a class="btn-add" href="./movimientos-añadir.html">Agregar Movimeinto</a>
         </div>
         <!-- Tabla de recordatorios -->
         <table class="table">
@@ -45,6 +46,7 @@
                     <th>Categoria</th>
                     <th>Tipo de pago</th>
                     <th>Metodo de pago</th>
+                    <th>Fecha</th>
                     <th>Opción</th>
                 </tr>
             </thead>
@@ -55,9 +57,10 @@
                     <td>Ingreso</td>
                     <td>Débito</td>
                     <td>Tarjeta 1</td>
+                    <td>31/12/2024</td>
                     <td class="actions">
-                        <button class="btn btn-edit">✏️</button>
-                        <button class="btn btn-delete">🗑️</button>
+                        <button class="btn btn-edit">✏</button>
+                        <button class="btn btn-delete">🗑</button>
                     </td>
                 </tr>
                 <tr>
@@ -66,9 +69,10 @@
                     <td>Ingreso</td>
                     <td>Débito</td>
                     <td>Tarjeta 1</td>
+                    <td>31/12/2024</td>
                     <td class="actions">
-                        <button class="btn btn-edit">✏️</button>
-                        <button class="btn btn-delete">🗑️</button>
+                        <button class="btn btn-edit">✏</button>
+                        <button class="btn btn-delete">🗑</button>
                     </td>
                 </tr>
                 <tr>
@@ -77,9 +81,10 @@
                     <td>Ingreso</td>
                     <td>Débito</td>
                     <td>Tarjeta 1</td>
+                    <td>22/10/2025</td>
                     <td class="actions">
-                        <button class="btn btn-edit">✏️</button>
-                        <button class="btn btn-delete">🗑️</button>
+                        <button class="btn btn-edit">✏</button>
+                        <button class="btn btn-delete">🗑</button>
                     </td>
                 </tr>
                 <tr>
@@ -88,9 +93,10 @@
                     <td>Ingreso</td>
                     <td>Débito</td>
                     <td>Tarjeta 1</td>
+                    <td>22/11/2024</td>
                     <td class="actions">
-                        <button class="btn btn-edit">✏️</button>
-                        <button class="btn btn-delete">🗑️</button>
+                        <button class="btn btn-edit">✏</button>
+                        <button class="btn btn-delete">🗑</button>
                     </td>
                 </tr>
                 <!-- Añadir más filas de recordatorios según sea necesario -->
@@ -117,6 +123,7 @@
             </div>
         </div>
     </div>
+    <script src="../js/modal-eliminar.js"></script>
     <script src="../js/modal-eliminar.js"></script>
 </body>
 </html>

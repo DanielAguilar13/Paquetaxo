@@ -1,4 +1,4 @@
-const db = require('../../DB/db2');
+const db = require('../../DB/db');
 
 const TABLA = 'movimientos';
 
@@ -7,7 +7,7 @@ module.exports = function (dbInyectada){
     let db = dbInyectada;
 
     if(!db){
-        db = require('../../DB/db2');
+        db = require('../../DB/db');
     }
 
     function todos (){

@@ -1,42 +1,72 @@
-// Función para redirigir cuando se presiona "Cancelar"
-function cancelarYRedirigir() {
-  window.location.href = "/src/views/ahorro.html"; // Cambia "index.html" por la ruta de la página a la que quieras redirigir
-}
+function verificarGasto() {
+  // Obtener los valores de los campos
+  const cantidad = document.getElementById('cantidad').value.trim();
+  const concepto = document.getElementById('concepto').value.trim();
+  const limiteGasto = document.getElementById('limite_gasto').value.trim();
+  const fecha = document.getElementById('fecha').value.trim();
 
-// Validación del límite de gastos
-function establecerLimite() {
-  const limiteInput = document.getElementById('limite-gasto');
-  const alerta = document.getElementById('alerta');
-
-  // Validar si el campo está vacío
-  if (!limiteInput.value.trim()) {
-      mostrarAlerta("Por favor, ingresa un límite de gasto válido.", "alert-error");
+  // Validar campo "Cantidad"
+  if (cantidad === '' || isNaN(cantidad) || parseFloat(cantidad) <= 0) {
+      mostrarAlerta("Por favor, ingresa una cantidad válida (número mayor a 0).", "alert-error");
       return;
   }
 
-  // Convertir el valor a número y validar que sea mayor a 0
-  limiteGasto = parseFloat(limiteInput.value);
-
-  if (isNaN(limiteGasto) || limiteGasto <= 0) {
-      mostrarAlerta("El límite debe ser un número mayor a 0.", "alert-error");
-  } else {
-      mostrarAlerta("Límite de gasto guardado: $" + limiteGasto.toFixed(2), "alert-success");
-      limiteInput.disabled = true; // Deshabilitar el campo después de configurar
+  // Validar campo "Concepto"
+  if (concepto === '') {
+      mostrarAlerta("El campo concepto no puede estar vacío.", "alert-error");
+      return;
   }
+
+  // Validar campo "Límite de Gasto"
+  if (limiteGasto === '' || isNaN(limiteGasto) || parseFloat(limiteGasto) <= 0) {
+      mostrarAlerta("Por favor, ingresa un límite de gasto válido (número mayor a 0).", "alert-error");
+      return;
+  }
+
+  // Validar campo "Fecha"
+  if (fecha === '') {
+      mostrarAlerta("Por favor, selecciona una fecha válida.", "alert-error");
+      return;
+  }
+
+  // Si todas las validaciones pasan
+  mostrarAlerta("Gasto registrado correctamente.", "alert-success");
 }
 
-// Mostrar alertas en la página
 function mostrarAlerta(mensaje, tipo) {
-  const alerta = document.getElementById('alerta');
-  alerta.textContent = mensaje;
-  alerta.className = "alert " + tipo;
-  alerta.style.display = "block";
+  const modal = document.getElementById('modal-alerta');
+  const mensajeModal = document.getElementById('modal-mensaje');
 
-  // Ocultar automáticamente después de 3 segundos
-  setTimeout(() => {
-      alerta.style.display = "none";
-  }, 3000);
+  // Establecer el mensaje y estilos según el tipo
+  mensajeModal.textContent = mensaje;
+  if (tipo === "alert-error") {
+      mensajeModal.style.color = "#721c24";
+  } else if (tipo === "alert-success") {
+      mensajeModal.style.color = "#155724";
+  }
+
+  // Mostrar el modal
+  modal.style.display = "block";
 }
 
-// Evento para validar el límite al salir del campo de entrada
-document.getElementById('limite-gasto').addEventListener('blur', establecerLimite);
+// Función para cerrar el modal
+function cerrarModal() {
+  const modal = document.getElementById('modal-alerta');
+  modal.style.display = "none";
+}
+
+// Cerrar el modal al hacer clic fuera del contenido
+window.onclick = function(event) {
+  const modal = document.getElementById('modal-alerta');
+  if (event.target === modal) {
+      modal.style.display = "none";
+  }
+};
+function cancelarYRedirigir() {
+  // Reiniciar el formulario
+  const formulario = document.getElementById('form-recordatorios');
+  formulario.reset(); // Limpia todos los campos del formulario
+
+  // Redirigir a otra página
+  window.location.href = "ahorro.html"; 
+};

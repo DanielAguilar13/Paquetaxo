@@ -1,4 +1,6 @@
 // Datos de gastos
+const controlador = require('../../controllers/movimientos/index.js')
+
 const gastos = [
     { fecha: '2023-11-01', descripcion: 'Despensa de la semana', categoria: 'Alimentación', monto: 200 },
     { fecha: '2023-11-02', descripcion: 'Taxi al trabajo', categoria: 'Transporte', monto: 150 },
