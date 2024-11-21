@@ -8,6 +8,7 @@ const tarjeta = require('./controllers/tarjeta/index.js');
 const ahorro = require('./controllers/ahorro/index.js');
 const movimiento = require('./controllers/movimientos/index.js');
 const recordatorio = require('./controllers/recordatorios/index.js');
+const categoria = require('./DB/db.js');
 const error = require('./DB/errors.js');
 
 const app = express();
@@ -98,6 +99,16 @@ app.get('/recordatorios', async (req, res) => {
     }
 });
 
+app.get('/categorias', async (req, res) => {
+    try{
+        const categoriasMostrar = await categoria.categoria();
+        res.status(200).json(categoriasMostrar);
+    }catch (error){
+        console.error('Error al obtener las categorias:', error);
+        res.status(500).json({message: 'Error al obtener las categorias'});
+    }
+});
+
 // Ruta para procesar el formulario
 app.post('/usuario/submit', (req, res) => {
     const {nombre, id_imagen} = req.body;
@@ -115,16 +126,16 @@ app.post('/usuario/submit', (req, res) => {
     });
 
 app.post('/tarjeta/submit', (req, res) => {
-    const { nombre, ultimos_digitos, limite_credito, fecha_corte, saldo, fecha_vencimiento } = req.body;
+    const { nombre, ultimos_digitos, limite_credito, dia_corte, saldo, mes_vencimiento, anio_vencimiento} = req.body;
 
     // Verificar si los datos llegan
     console.log('Datos recibidos:', req.body);
 
-    if (!nombre || !ultimos_digitos || !limite_credito || !fecha_corte || !saldo || !fecha_vencimiento) {
+    if (!nombre || !ultimos_digitos || !limite_credito || !dia_corte || !saldo || !mes_vencimiento, anio_vencimiento) {
         return res.status(400).send('Faltan datos');
     }
 
-    const data = { nombre, ultimos_digitos, limite_credito, fecha_corte, saldo, fecha_vencimiento };
+    const data = { nombre, ultimos_digitos, limite_credito, dia_corte, saldo, mes_vencimiento, anio_vencimiento };
     console.log('Datos que se enviarán al controlador:', data);
 
     tarjeta.agregar(data)

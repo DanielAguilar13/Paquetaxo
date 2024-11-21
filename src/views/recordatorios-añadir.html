@@ -19,8 +19,11 @@
 
             <!-- Campo para el tipo -->
             <div class="form_group">
-                <input type="text" id="id_categoria" name="id_categoria" class="form_input" placeholder=" ">
-                <label for="id_categoria" class="form_label">Tipo</label>
+                <select id="id_categoria" name="id_categoria">
+                    <option value="" selected disabled></option>
+                    <!-- Opciones se cargarán dinámicamente -->
+                </select>
+                <label for="id_categoria" class="form_label">Categoria</label>
                 <span class="form_line"></span>
             </div>
 
@@ -33,7 +36,7 @@
 
             <!-- Contenedor de botones -->
             <div class="button_container">
-                <input type="submit" class="form_submit" value="Guardar" onclick="">
+                <input type="submit" class="form_submit" value="Guardar" onclick="goBackToHome()">
                 <p class="warnings" id="warnings"></p>
                 <input type="button" class="form_delete" value="Cancelar" onclick="goBackToHome()">
             </div>
@@ -41,6 +44,19 @@
     </form>
 
     <script>
+        // Llenar el select con datos de la API
+        fetch('/categorias')
+        .then(response => response.json())
+        .then(data => {
+            const select = document.getElementById('id_categoria');
+            data.forEach(categoria => {
+                const option = document.createElement('option');
+                option.value = categoria.id; // ID de la categoría
+                option.textContent = categoria.nombre; // Nombre de la categoría
+                select.appendChild(option);
+            });
+        })
+        .catch(error => console.error('Error al cargar las categorías:', error));
         function goBackToHome() {
             window.location.href = "recordatorios.html";
         }

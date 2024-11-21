@@ -87,7 +87,7 @@ function eliminar(tabla, data){
 
 async function categoria(){
     return new Promise ( (resolve, reject) => {
-        conexion.query(`SELECT * FROM categoria`, (error, result) => {
+        conexion.query(`SELECT * FROM categorias`, (error, result) => {
             return error ? reject(error) : resolve(result);
         })
     });

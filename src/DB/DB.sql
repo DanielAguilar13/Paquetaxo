@@ -139,24 +139,25 @@ CREATE TABLE `tarjeta` (
   `nombre` varchar(80) DEFAULT NULL,
   `ultimos_digitos` varchar(4) DEFAULT NULL,
   `limite_credito` float DEFAULT NULL,
-  `fecha_corte` date DEFAULT NULL,
+  `dia_corte` int(2) DEFAULT NULL,
   `saldo` float DEFAULT NULL,
-  `fecha_vencimiento` date DEFAULT NULL
+  `mes_vencimiento` int(2) DEFAULT NULL,
+  `anio_vencimiento` int(2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `tarjeta`
 --
 
-INSERT INTO `tarjeta` (`id`, `nombre`, `ultimos_digitos`, `limite_credito`, `saldo`, `fecha_vencimiento`) VALUES
-(1, 'BBVA', '1234', 1000, 500, '2025-12-01'),
-(2, 'Banamex', '5678', 2000, 1500, '2025-12-01'),
-(3, 'Banorte', '9012', 3000, 2500, '2027-12-01'),
-(4, 'HSBC', '3456', NULL, NULL, '2026-12-01'),
-(5, 'BBVA', '1234', 1000, 500, '2025-11-01'),
-(6, 'Banamex', '5678', 2000, 1500, '2025-04-01'),
-(7, 'Banorte', '9012', 3000, 2500, '2026-06-01'),
-(8, 'HSBC', '3456', NULL, NULL, '2026-12-01');
+INSERT INTO `tarjeta` (`id`, `nombre`, `ultimos_digitos`, `limite_credito`, `dia_corte`, `saldo`, `mes_vencimiento`, `anio_vencimiento`) VALUES
+(1, 'BBVA', '1234', 1000, 12, 500, 12, 25),
+(2, 'Banamex', '5678', 2000, 1, 1500, 7, 25),
+(3, 'Banorte', '9012', 3000, 10, 2500, 12, 26),
+(4, 'HSBC', '3456', NULL, NULL, 5000, 12, 28),
+(5, 'BBVA', '1234', 1000, 28, 500, 11, 25),
+(6, 'Banamex', '5678', 2000, 20, 1500, 10, 26),
+(7, 'Banorte', '9012', 3000, 10, 2500, 10, 25),
+(8, 'HSBC', '3456', NULL, NULL, 1000, 12, 26);
 
 -- --------------------------------------------------------
 
