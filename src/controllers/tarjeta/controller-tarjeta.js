@@ -10,11 +10,11 @@ module.exports = function (dbInyectada){
         db = require('../../DB/db');
     }
 
-    function todos (){
+    async function todos (){
         return db.todos(TABLA);
     }
     
-    function uno (id){
+    async function uno (id){
         return db.uno(TABLA,id);
     }
     
@@ -22,7 +22,7 @@ module.exports = function (dbInyectada){
         return db.agregar(TABLA, body);
     }
     
-    function eliminar (body){
+    async function eliminar (body){
         return db.eliminar(TABLA, body);
     }
 
