@@ -54,9 +54,6 @@ form.addEventListener('submit', (event) => {
     if (tipo === '') {
         warnings += 'Por favor, ingresa el tipo.<br>';
         error = true;
-    } else if (tipo.length < 6) {
-        warnings += 'El tipo debe tener al menos 6 letras.<br>';
-        error = true;
     }
 
     // Validación del campo "Fecha"
