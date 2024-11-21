@@ -35,6 +35,11 @@ CREATE TABLE `ahorro` (
   `fecha` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+
+INSERT INTO `ahorro` (`id`, `cantidad`, `concepto`, `limite_gasto`, `fecha`) VALUES
+(1, 1000, 1, 500, '2024-12-14'),
+(2, 2000, 2, 1000, '2024-11-30'),
+(3, 3000, 3, 1500, '2024-11-29');
 -- --------------------------------------------------------
 
 --
@@ -91,15 +96,15 @@ CREATE TABLE `movimientos` (
 -- Volcado de datos para la tabla `movimientos`
 --
 
-INSERT INTO `movimientos` (`id`, `concepto`, `cantidad`, `id_categoria`, `id_tipo`, `id_tarjeta`) VALUES
-(1, 'Comida', 100, 1, 1, 1),
-(2, 'Gasolina', 50, 2, 1, 2),
-(3, 'Cine', 200, 3, 2, 3),
-(4, 'Curso', 500, 4, 2, 4),
-(5, 'Comida', 100, 1, 1, 1),
-(6, 'Gasolina', 50, 2, 1, 2),
-(7, 'Cine', 200, 3, 2, 3),
-(8, 'Curso', 500, 4, 2, 4);
+INSERT INTO `movimientos` (`id`, `concepto`, `cantidad`, `id_categoria`, `id_tipo`, `id_tarjeta`, `fecha`) VALUES
+(1, 'Comida', 100, 1, 1, 1, '2024-12-16'),
+(2, 'Gasolina', 50, 2, 1, 2, '2024-12-16'),
+(3, 'Cine', 200, 3, 2, 3, '2024-12-16'),
+(4, 'Curso', 500, 4, 2, 4, '2024-12-16'),
+(5, 'Comida', 100, 1, 1, 1, '2024-12-16'),
+(6, 'Gasolina', 50, 2, 1, 2, '2024-12-16'),
+(7, 'Cine', 200, 3, 2, 3, '2024-12-16'),
+(8, 'Curso', 500, 4, 2, 4, '2024-12-16');
 
 -- --------------------------------------------------------
 
@@ -134,24 +139,25 @@ CREATE TABLE `tarjeta` (
   `nombre` varchar(80) DEFAULT NULL,
   `ultimos_digitos` varchar(4) DEFAULT NULL,
   `limite_credito` float DEFAULT NULL,
-  `fecha_corte` date DEFAULT NULL,
+  `dia_corte` int(2) DEFAULT NULL,
   `saldo` float DEFAULT NULL,
-  `fecha_vencimiento` date DEFAULT NULL
+  `mes_vencimiento` int(2) DEFAULT NULL,
+  `anio_vencimiento` int(2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `tarjeta`
 --
 
-INSERT INTO `tarjeta` (`id`, `nombre`, `ultimos_digitos`, `limite_credito`, `saldo`, `fecha_vencimiento`) VALUES
-(1, 'BBVA', '1234', 1000, 500, '0000-00-00'),
-(2, 'Banamex', '5678', 2000, 1500, '0000-00-00'),
-(3, 'Banorte', '9012', 3000, 2500, '0000-00-00'),
-(4, 'HSBC', '3456', NULL, NULL, '0000-00-00'),
-(5, 'BBVA', '1234', 1000, 500, '0000-00-00'),
-(6, 'Banamex', '5678', 2000, 1500, '0000-00-00'),
-(7, 'Banorte', '9012', 3000, 2500, '0000-00-00'),
-(8, 'HSBC', '3456', NULL, NULL, '0000-00-00');
+INSERT INTO `tarjeta` (`id`, `nombre`, `ultimos_digitos`, `limite_credito`, `dia_corte`, `saldo`, `mes_vencimiento`, `anio_vencimiento`) VALUES
+(1, 'BBVA', '1234', 1000, 12, 500, 12, 25),
+(2, 'Banamex', '5678', 2000, 1, 1500, 7, 25),
+(3, 'Banorte', '9012', 3000, 10, 2500, 12, 26),
+(4, 'HSBC', '3456', NULL, NULL, 5000, 12, 28),
+(5, 'BBVA', '1234', 1000, 28, 500, 11, 25),
+(6, 'Banamex', '5678', 2000, 20, 1500, 10, 26),
+(7, 'Banorte', '9012', 3000, 10, 2500, 10, 25),
+(8, 'HSBC', '3456', NULL, NULL, 1000, 12, 26);
 
 -- --------------------------------------------------------
 
