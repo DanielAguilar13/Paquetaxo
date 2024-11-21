@@ -35,7 +35,7 @@ function conMysql(){
 
 conMysql();
 
-function todos(tabla){
+async function todos(tabla){
     return new Promise( (resolve, reject) => {
         conexion.query(`SELECT * FROM ${tabla}`, (error, result) => {
             return error ? reject(error) : resolve(result);

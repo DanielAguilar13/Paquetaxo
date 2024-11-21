@@ -1,152 +1,179 @@
 /* Estilos globales */
 body {
-    font-family: Tahoma, sans-serif;
-    background:#6B46C1;
-    margin: 0;
-    padding: 0;
-    color: #333;
+  font-family: Tahoma, sans-serif;
+  background: #6b46c1;
+  margin: 0;
+  padding: 0;
+  color: #333;
 }
-  
+
 .container {
-    width: 100%;
-    max-width: 500px; /* Máximo tamaño */
-    padding: 20px;
-    background: #ffffff;
-    border-radius: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: 10px auto 0; /* Centra el contenedor con margen superior de 100px */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+  width: 100%;
+  max-width: 500px; /* Máximo tamaño */
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 10px auto 0; /* Centra el contenedor con margen superior de 100px */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
-  
-  /* Header */
+
+/* Header */
 .header {
-    background:#2b2c61;
-    padding: 20px;
-    display: flex;
-    align-items: center;
-    color: #fff;
-    margin-bottom: 50px; /* Añade margen inferior de 20px */
+  background: #2b2c61;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  color: #fff;
+  margin-bottom: 50px; /* Añade margen inferior de 20px */
 }
-  
+
 .header img {
-    width: 50px;
-    margin-right: 10px;
+  width: 50px;
+  margin-right: 10px;
 }
-  
+
 .header h1 {
-    margin: 0;
-    font-size: 1.5em;
+  margin: 0;
+  font-size: 1.5em;
 }
-  
+
 .nav {
-    margin-left: auto;
-    display: flex;
-    gap: 15px;
+  margin-left: auto;
+  display: flex;
+  gap: 15px;
 }
-  
+
 .nav a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
 }
-  
+
 .nav img {
-    width: 50px;
-    margin-right: 10px;
+  width: 50px;
+  margin-right: 10px;
 }
-  
-  /* Estilo inicial para ocultar el botón */
+
+/* Estilo inicial para ocultar el botón */
 .open-btn {
-    cursor: pointer; /* Muestra el cursor como un puntero para indicar clic */
+  cursor: pointer; /* Muestra el cursor como un puntero para indicar clic */
 }
-  
-  /* Muestra el botón cuando se pasa el ratón por encima del contenedor */
+
+/* Muestra el botón cuando se pasa el ratón por encima del contenedor */
 .nav:hover .open-btn {
-    opacity: 3; /* Muestra la imagen */
+  opacity: 3; /* Muestra la imagen */
 }
-  
-  /* Barra Lateral */
+
+/* Barra Lateral */
 .sidebar {
-    height: 100%; /* Ocupa toda la altura de la pantalla */
-    width: 0; /* Inicia oculta */
-    position: fixed;
-    top: 0;
-    right: 0; /* Se abre desde el lado derecho */
-    background-color: rgba(31, 29, 31, 0.9); /* Fondo con opacidad */
-    overflow-x: hidden;
-    transition: 0.6s; /* Transición para abrir/cerrar suavemente */
-    padding-top: 60px; /* Espacio en la parte superior */
-    backdrop-filter: blur(8px); /* Efecto difuminado */
-    z-index: 1000;
+  height: 100%; /* Ocupa toda la altura de la pantalla */
+  width: 0; /* Inicia oculta */
+  position: fixed;
+  top: 0;
+  right: 0; /* Se abre desde el lado derecho */
+  background-color: rgba(31, 29, 31, 0.9); /* Fondo con opacidad */
+  overflow-x: hidden;
+  transition: 0.6s; /* Transición para abrir/cerrar suavemente */
+  padding-top: 60px; /* Espacio en la parte superior */
+  backdrop-filter: blur(8px); /* Efecto difuminado */
+  z-index: 1000;
 }
-  
-  /* Enlaces dentro de la barra lateral */
+
+/* Enlaces dentro de la barra lateral */
 .sidebar a {
-    padding: 10px 15px;
-    text-decoration: none;
-    font-size: 18px;
-    color: #ffffff; /* Color del texto */
-    display: block;
-    transition: 0.3s; /* Transición en el color al pasar por encima */
+  padding: 10px 15px;
+  text-decoration: none;
+  font-size: 18px;
+  color: #ffffff; /* Color del texto */
+  display: block;
+  transition: 0.3s; /* Transición en el color al pasar por encima */
 }
-  
+
 .sidebar a:hover {
-    color: #8a67c9; /* Cambia a morado claro al hacer hover */
+  color: #8a67c9; /* Cambia a morado claro al hacer hover */
 }
-  
-  /* Botón para cerrar el sidebar */
+
+/* Botón para cerrar el sidebar */
 .close-btn {
-    position: absolute;
-    top: 20px;
-    right: 25px;
-    font-size: 36px;
-    color: #ffffff;
-    cursor: pointer;
-    text-decoration: none;
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  font-size: 36px;
+  color: #ffffff;
+  cursor: pointer;
+  text-decoration: none;
 }
-  
-  /* Clases para abrir y cerrar el sidebar */
+
+/* Clases para abrir y cerrar el sidebar */
 .sidebar-open {
-    width: 250px; /* Ancho del sidebar cuando está abierto */
+  width: 250px; /* Ancho del sidebar cuando está abierto */
 }
-  /* Título y botón */
+/* Título y botón */
 .title-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 20px 0;
-    color: #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0;
+  color: #333;
 }
-  
+
 .h2 {
-    margin: 0;
-    text-align: center;
-    font-size: 1.2em;
+  margin: 0;
+  text-align: center;
+  font-size: 1.2em;
 }
 
 /* Información de Balance */
 .balance-info {
-    text-align: center;
-    margin-top: 20px;
+  text-align: center;
+  margin-top: 20px;
 }
 
 .balance-label {
-    font-size: 1.2em;
-    color: #6B46C1;
+  font-size: 1.2em;
+  color: #6b46c1;
 }
 
 .balance-amount {
-    font-size: 2em;
-    font-weight: 700;
-    color: #2b2c61;
+  font-size: 2em;
+  font-weight: 700;
+  color: #2b2c61;
 }
 
 .balance-status {
-    margin-top: 5px;
-    color: #2b2c61;
-    font-size: 1.1em;
+  margin-top: 5px;
+  color: #2b2c61;
+  font-size: 1.1em;
+}
+/*Estilos para el boton Añadir*/
+.button {
+  background-color: #4caf50; /* Color verde */
+  border: none;
+  border-radius: 25px; /* Bordes redondeados */
+  color: white; /* Texto blanco */
+  padding: 10px 20px; /* Espaciado */
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease; /* Animación suave */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.button:hover {
+  background-color: #45a049; /* Color más oscuro al pasar el mouse */
+  transform: scale(1.05); /* Efecto de agrandamiento */
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.button:active {
+  background-color: #3e8e41; /* Color más oscuro al hacer clic */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transform: scale(0.98); /* Efecto de reducción */
 }
