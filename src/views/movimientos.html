@@ -25,7 +25,6 @@
     <div class="header">
     <!-- Imagen del logo como botón para abrir la barra lateral -->
         <img src="./img/logo.png" alt="Logo GGP">
-        <img src="./img/logo.png" alt="Logo GGP">
         <h1>Gestor de Gastos Personales</h1>
         <img src="./img/icono1.png" alt="User" onclick="openSidebar()" class="open-btn">              
     </div>
@@ -37,7 +36,7 @@
         <!-- Barra de título y botón -->
         <div class="title-bar">
             <h2>Movimientos</h2>
-            <a class="btn-add" href="./movimientos-añadir.html">Agregar Movimeinto</a>
+            <a class="btn-add" href="./movimientos-añadir.html">Agregar Movimeinto</a>
         </div>
         <!-- Tabla de recordatorios -->
         <table class="table">
@@ -53,61 +52,42 @@
                     <th>Opción</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>Pago de servicios</td>
-                    <td>$68</td>
-                    <td>Ingreso</td>
-                    <td>Débito</td>
-                    <td>Tarjeta 1</td>
-                    <td>31/12/2024</td>
-                    <td>31/12/2024</td>
-                    <td class="actions">
-                        <button class="btn btn-edit">✏</button>
-                        <button class="btn btn-delete">🗑</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Pago de servicios</td>
-                    <td>$68</td>
-                    <td>Ingreso</td>
-                    <td>Débito</td>
-                    <td>Tarjeta 1</td>
-                    <td>31/12/2024</td>
-                    <td>31/12/2024</td>
-                    <td class="actions">
-                        <button class="btn btn-edit">✏</button>
-                        <button class="btn btn-delete">🗑</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Pago de servicios</td>
-                    <td>$68</td>
-                    <td>Ingreso</td>
-                    <td>Débito</td>
-                    <td>Tarjeta 1</td>
-                    <td>22/10/2025</td>
-                    <td>22/10/2025</td>
-                    <td class="actions">
-                        <button class="btn btn-edit">✏</button>
-                        <button class="btn btn-delete">🗑</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Pago de servicios</td>
-                    <td>$68</td>
-                    <td>Ingreso</td>
-                    <td>Débito</td>
-                    <td>Tarjeta 1</td>
-                    <td>22/11/2024</td>
-                    <td>22/11/2024</td>
-                    <td class="actions">
-                        <button class="btn btn-edit">✏</button>
-                        <button class="btn btn-delete">🗑</button>
-                    </td>
-                </tr>
-                <!-- Añadir más filas de recordatorios según sea necesario -->
+            <tbody id="tabla-datos">
+                <!-- Los datos se cargarán aquí -->
             </tbody>
+        </table>
+        <script>
+            fetch('/movimientos')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error al obtener los datos: ' + response.statusText);
+                }
+                return response.json();
+            })
+            .then(data => {
+                const tabla = document.getElementById('tabla-datos');
+                tabla.innerHTML = ''; // Limpiar la tabla antes de agregar datos
+
+                // Iterar sobre los datos y generar las filas
+                data.forEach(item => {
+                    const fila = document.createElement('tr');
+                    fila.innerHTML = `
+                        <td>${item.concepto}</td>
+                        <td>${item.cantidad}</td>
+                        <td>${item.id_categoria}</td>
+                        <td>${item.id_tipo}</td>
+                        <td>${item.id_tarjeta}</td>
+                        <td>${item.fecha}</td>
+                        <td class="actions">
+                            <button class="btn btn-edit" onclick="editarRecordatorio(${item.id})">✏️</button>
+                            <button class="btn btn-delete" onclick="eliminarRecordatorio(${item.id})">🗑️</button>
+                        </td>
+                    `;
+                    tabla.appendChild(fila);
+                });
+            })
+            .catch(error => console.error('Error al obtener los datos:', error));// URL de la API
+        </script>
         </table>
         <!-- Paginación -->
         <div class="pagination">

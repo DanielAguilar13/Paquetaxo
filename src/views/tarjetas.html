@@ -51,36 +51,44 @@
                     <th>Opción</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>Tarjeta 1</td>
-                    <td>****1234</td>
-                    <td>01/11/2024</td>
-                    <td>Débito</td>
-                    <td>$1826</td>
-                    <td>-----</td>
-                    <td>-----</td>
-                    <td class="actions">
-                        <button class="btn btn-edit">✏️</button>
-                        <button class="btn btn-delete">🗑️</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Tarjeta 2</td>
-                    <td>****1234</td>
-                    <td>01/11/2024</td>
-                    <td>Crédito</td>
-                    <td>$2800</td>
-                    <td>02/12/2024</td>
-                    <td>$1826</td>
-                    <td class="actions">
-                        <button class="btn btn-edit">✏️</button>
-                        <button class="btn btn-delete">🗑️</button>
-                    </td>
-                </tr>
-                <!-- Añadir más filas de recordatorios según sea necesario -->
+            <tbody id="tabla-datos">
+                <!-- Los datos se cargarán aquí -->
             </tbody>
         </table>
+        <script>
+            fetch('/tarjetas')
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Error al obtener los datos: ' + response.statusText);
+    }
+    return response.json();
+  })
+  .then(data => {
+    const tabla = document.getElementById('tabla-datos');
+    tabla.innerHTML = ''; // Limpiar la tabla antes de agregar datos
+
+    // Iterar sobre los datos y generar las filas
+    data.forEach(item => {
+      const fila = document.createElement('tr');
+      fila.innerHTML = `
+        <td>${item.nombre}</td>
+        <td>${item.ultimos_digitos}</td>
+        <td>${item.fecha_expiracion}</td>
+        <td>${item.tipo_tarjeta}</td>
+        <td>${item.saldo}</td>
+        <td>${item.fecha_corte}</td>
+        <td>${item.deuda}</td>
+        <td class="actions">
+          <button class="btn btn-edit" onclick="editarRecordatorio(${item.id})">✏️</button>
+          <button class="btn btn-delete" onclick="eliminarRecordatorio(${item.id})">🗑️</button>
+        </td>
+      `;
+      tabla.appendChild(fila);
+    });
+  })
+  .catch(error => console.error('Error al obtener los datos:', error));
+
+        </script>
 
         <!-- Paginación -->
         <div class="pagination">
