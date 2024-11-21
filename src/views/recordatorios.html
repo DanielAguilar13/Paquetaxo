@@ -38,64 +38,48 @@
         </div>
 
         <!-- Tabla de recordatorios -->
-        <table class="table">
+        <table>
             <thead>
                 <tr>
-                    <th>Recordatorio</th>
-                    <th>Tipo</th>
+                    <th>Concepto</th>
+                    <th>Categoría</th>
                     <th>Fecha</th>
-                    <th>Opción</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>Recordatorio 1</td>
-                    <td>Pago</td>
-                    <td>01/11/2024</td>
-                    <td class="actions">
-                        <button class="btn btn-edit">✏️</button>
-                        <button class="btn btn-delete">🗑️</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Recordatorio 2</td>
-                    <td>Evento</td>
-                    <td>02/11/2024</td>
-                    <td class="actions">
-                        <button class="btn btn-edit">✏️</button>
-                        <button class="btn btn-delete">🗑️</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Recordatorio 2</td>
-                    <td>Evento</td>
-                    <td>02/11/2024</td>
-                    <td class="actions">
-                        <button class="btn btn-edit">✏️</button>
-                        <button class="btn btn-delete">🗑️</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Recordatorio 2</td>
-                    <td>Evento</td>
-                    <td>02/11/2024</td>
-                    <td class="actions">
-                        <button class="btn btn-edit">✏️</button>
-                        <button class="btn btn-delete">🗑️</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Recordatorio 2</td>
-                    <td>Evento</td>
-                    <td>02/11/2024</td>
-                    <td class="actions">
-                        <button class="btn btn-edit">✏️</button>
-                        <button class="btn btn-delete">🗑️</button>
-                    </td>
-                </tr>
-                <!-- Añadir más filas de recordatorios según sea necesario -->
+            <tbody id="tabla-datos">
+                <!-- Los datos se cargarán aquí -->
             </tbody>
         </table>
+        <script>
+            fetch('/recordatorios')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error al obtener los datos: ' + response.statusText);
+                }
+                return response.json();
+            })
+            .then(data => {
+                const tabla = document.getElementById('tabla-datos');
+                tabla.innerHTML = ''; // Limpiar la tabla antes de agregar datos
+
+                // Iterar sobre los datos y generar las filas
+                data.forEach(item => {
+                    const fila = document.createElement('tr');
+                    fila.innerHTML = `
+                        <td>${item.concepto}</td>
+                        <td>${item.id_categoria}</td>
+                        <td>${item.fecha}</td>
+                        <td class="actions">
+                            <button class="btn btn-edit" onclick="editarRecordatorio(${item.id})">✏️</button>
+                            <button class="btn btn-delete" onclick="eliminarRecordatorio(${item.id})">🗑️</button>
+                        </td>
+                    `;
+                    tabla.appendChild(fila);
+                });
+            })
+            .catch(error => console.error('Error al obtener los datos:', error));// URL de la API
+        </script>
         <!-- Paginación -->
         <div class="pagination">
             <button>&laquo;</button>
@@ -104,7 +88,7 @@
             <button>3</button>
             <button>&raquo;</button>
         </div>
-    </div>
+    </div>s
     <!-- Modal de confirmación -->
     <div id="deleteModal" class="modal">
         <div class="modal-content">
