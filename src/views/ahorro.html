@@ -10,7 +10,7 @@
 </head>
 <body>
     <!-- Barra Lateral -->
-    <div id="sidebar" class="sidebar">
+    <nav id="sidebar" class="sidebar">
         <a href="javascript:void(0)" class="close-btn" onclick="closeSidebar()">×</a>
         <div class="sidebar-name">Nombre del Usuario</div>
         <a href="./homepage.html"><i class="fas fa-home"></i> Inicio</a>
@@ -19,23 +19,19 @@
         <a href="./movimientos.html"><i class="fas fa-exchange-alt"></i> Movimientos</a>
         <a href="./ahorro.html"><i class="fas fa-piggy-bank"></i> Ahorro</a>
         <a href="./recordatorios.html"><i class="fas fa-bell"></i> Recordatorios</a>
-    </div>
+    </nav>
 
-<!-- Encabezado -->
-<div class="header">
-    <!-- Imagen del logo como botón para abrir la barra lateral -->
-    <img src="./img/logo.png" alt="Logo GGP">
-<<<<<<< HEAD
-    <h1>Gestor de Gastos Personales</h1>       
-=======
-    <h1>Gestor de Gastos Personales</h1>     
->>>>>>> main
-    <img src="./img/icono1.png" alt="User" onclick="openSidebar()" class="open-btn">       
-</div>
-<script src="../js/sidebar.js"></script>
+    <!-- Encabezado -->
+    <header class="header">
+        <img src="./img/logo.png" alt="Logo GGP">
+        <h1>Gestor de Gastos Personales</h1>       
+        <img src="./img/icono1.png" alt="User" onclick="openSidebar()" class="open-btn">       
+    </header>
+
+    <script src="../js/sidebar.js"></script>
 
     <!-- Card de Ahorros -->
-    <div class="container">
+    <main class="container">
         <div class="card">
             <h2>Ahorros</h2>
             <div class="user-icon">
@@ -48,20 +44,11 @@
                 <div class="balance-status">Disponible</div>
             </div>
         </div>
-         <!-- Botón Añadir -->
-         <div class="button-add">
-<<<<<<< HEAD
-            <a href="./ahorro-añadir.html">
-           <button class="btn-add" type="button" onclick="añadirAhorro()">Ingreso</button>
-           </a>
-       </div>
-=======
-             <a href="./ahorro-añadir.html">
-            <button type="button" onclick="añadirAhorro()">Añadir</button>
-            </a>
-        </div>
->>>>>>> main
-    </div>
 
+        <!-- Botón Añadir -->
+        <div class="button-add">
+            <a href="./ahorro-añadir.html" class="btn-add">Ingreso</a>
+        </div>
+    </main>
 </body>
 </html>
