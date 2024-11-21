@@ -54,7 +54,7 @@ form.addEventListener('submit', (event) => {
     if (tipo === '') {
         warnings += 'Por favor, ingresa el tipo.<br>';
         error = true;
-    } 
+    }
 
     // Validación del campo "Fecha"
     if (fecha === '') {
