@@ -152,6 +152,10 @@ body {
   font-size: 1.2em;
 }
 
+.title-bar a{
+  text-decoration: none;
+}
+
 .btn-add {
   padding: 10px 20px;
   background-color: var(--color-primary);

@@ -27,35 +27,79 @@ app.set('port', config.app.port);
 
 // Ruta para servir el archivo HTML principal
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views/index.html'));
+    res.sendFile(path.join(__dirname, 'views','index.html'));
 });
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views/homepage.html'));
+    res.sendFile(path.join(__dirname, 'views','homepage.html'));
 });
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views/login.html'));
+    res.sendFile(path.join(__dirname, 'views','login.html'));
 });
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views/recordatorios.html'));
+    res.sendFile(path.join(__dirname, 'views','tarjetas.html'));
 });
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views/tarjetas-añadir.html'));
+    res.sendFile(path.join(__dirname, 'views','recordatorios.html'));
 });
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views/ahorro.html'));
+    res.sendFile(path.join(__dirname, 'views','tarjetas-añadir.html'));
 });
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views/ahorro-añadir.html'));
+    res.sendFile(path.join(__dirname, 'views','ahorro.html'));
 });
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views/movimientos-añadir.html'));
+    res.sendFile(path.join(__dirname, 'views','ahorro-añadir.html'));
+});
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views','movimientos-añadir.html'));
 });
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'recordatorios-añadir.html'));
 });
 
+//Rutas para mostrar la infomacion
+app.get('/tarjetas', async (req, res) => {
+    try{
+        const tarjetasMostar = await tarjeta.todos();
+        res.status(200).json(tarjetasMostar);
+    }catch (error){
+        console.error('Error al obtener las tarjetas:', error);
+        res.status(500).json({message: 'Error al obtener las tarjetas'});
+    }
+});
+
+app.get('/movimientos', async (req, res) => {
+    try{
+        const movimientosMostar = await movimiento.todos();
+        res.status(200).json(movimientosMostar);
+    }catch (error){
+        console.error('Error al obtener los movimientos:', error);
+        res.status(500).json({message: 'Error al obtener los movimientos'});
+    }
+});
+
+app.get('/ahorro', async (req, res) => {
+    try{
+        const ahorroMostrar = await ahorro.todos();
+        res.status(200).json(ahorroMostrar);
+    }catch (error){
+        console.error('Error al obtener el ahorro:', error);
+        res.status(500).json({message: 'Error al obtener el ahorro'});
+    }
+});
+
+app.get('/recordatorios', async (req, res) => {
+    try{
+        const recordatorioMostrar = await recordatorio.todos();
+        res.status(200).json(recordatorioMostrar);
+    }catch (error){
+        console.error('Error al obtener los recordatorios:', error);
+        res.status(500).json({message: 'Error al obtener los recordatorios'});
+    }
+});
+
 // Ruta para procesar el formulario
-app.post('/usurio/submit', (req, res) => {
+app.post('/usuario/submit', (req, res) => {
     const {nombre, id_imagen} = req.body;
         // Verificar si los datos llegan
         console.log('Datos recibidos:', req.body);
@@ -67,7 +111,7 @@ app.post('/usurio/submit', (req, res) => {
         const data = { nombre, id_imagen };
         console.log('Datos que se enviarán al controlador:', data);
     
-        tarjeta.agregar(data)
+        usuario.agregar(data)
     });
 
 app.post('/tarjeta/submit', (req, res) => {
@@ -134,7 +178,7 @@ app.post('/recordatorios/submit', (req, res) => {
     recordatorio.agregar(data)
 });
 //rutas
-app.use('/api/usurio',require('./controllers/usuario/usuario.js'));
+app.use('/api/usuario',require('./controllers/usuario/usuario.js'));
 app.use('/api/tarjeta',require('./controllers/tarjeta/tarjeta.js'));
 app.use('/api/ahorro',require('./controllers/ahorro/ahorro.js'));
 app.use('/api/movimientos',require('./controllers/movimientos/movimientos.js'));
