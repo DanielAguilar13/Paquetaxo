@@ -1,5 +1,6 @@
 const mysql = require('mysql');
 const config = require('../config');
+const { reject } = require('any-promise');
 
 const dbconfig = {
     host: config.mysql.host,
@@ -84,6 +85,14 @@ function eliminar(tabla, data){
     });   
 }
 
+async function categoria(){
+    return new Promise ( (resolve, reject) => {
+        conexion.query(`SELECT * FROM categoria`, (error, result) => {
+            return error ? reject(error) : resolve(result);
+        })
+    });
+}
+
 module.exports = {
     todos,
     uno,
@@ -91,4 +100,5 @@ module.exports = {
     actualizar,
     agregar,
     eliminar,
+    categoria,
 }
