@@ -199,6 +199,51 @@ app.post('/recordatorios/submit', (req, res) => {
 
     recordatorio.agregar(data)
 });
+
+// Metodos DELETE para eliminar informacion
+app.delete('/api/movimientos/:id', async (req, res) => {
+    const { id } = req.params; // Obtener el ID del recordatorio desde la URL
+    try {
+        await movimiento.eliminar({ id }); // Llamar a la función `eliminar` del controlador
+        res.status(200).json({ message: 'Recordatorio eliminado exitosamente' });
+    } catch (error) {
+        console.error('Error al eliminar el recordatorio:', error);
+        res.status(500).json({ message: 'Error al eliminar el recordatorio' });
+    }
+});
+
+app.delete('/api/ahorro/:id', async (req, res) => {
+    const { id } = req.params; // Obtener el ID del recordatorio desde la URL
+    try {
+        await ahorro.eliminar({ id }); // Llamar a la función `eliminar` del controlador
+        res.status(200).json({ message: 'Recordatorio eliminado exitosamente' });
+    } catch (error) {
+        console.error('Error al eliminar el recordatorio:', error);
+        res.status(500).json({ message: 'Error al eliminar el recordatorio' });
+    }
+});
+
+app.delete('/api/tarjetas/:id', async (req, res) => {
+    const { id } = req.params; // Obtener el ID del recordatorio desde la URL
+    try {
+        await tarjeta.eliminar({ id }); // Llamar a la función `eliminar` del controlador
+        res.status(200).json({ message: 'Recordatorio eliminado exitosamente' });
+    } catch (error) {
+        console.error('Error al eliminar el recordatorio:', error);
+        res.status(500).json({ message: 'Error al eliminar el recordatorio' });
+    }
+});
+app.delete('/api/recordatorios/:id', async (req, res) => {
+    const { id } = req.params; // Obtener el ID del recordatorio desde la URL
+    try {
+        await recordatorio.eliminar({ id }); // Llamar a la función `eliminar` del controlador
+        res.status(200).json({ message: 'Recordatorio eliminado exitosamente' });
+    } catch (error) {
+        console.error('Error al eliminar el recordatorio:', error);
+        res.status(500).json({ message: 'Error al eliminar el recordatorio' });
+    }
+});
+
 //rutas
 app.use('/api/usuario',require('./controllers/usuario/usuario.js'));
 app.use('/api/tarjeta',require('./controllers/tarjeta/tarjeta.js'));

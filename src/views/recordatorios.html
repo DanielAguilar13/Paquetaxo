@@ -80,6 +80,25 @@
                 });
             })
             .catch(error => console.error('Error al obtener los datos:', error));// URL de la API
+
+            function eliminarRecordatorio(id) {
+                if (confirm('¿Estás seguro de que deseas eliminar este recordatorio?')) {
+                    fetch(`/api/recordatorios/${id}`, {
+                        method: 'DELETE',
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Error al eliminar el recordatorio');
+                        }
+                        alert('Recordatorio eliminado exitosamente');
+                        location.reload(); // Recargar la página para actualizar la tabla
+                    })
+                    .catch(error => {
+                        console.error('Error al eliminar el recordatorio:', error);
+                        alert('No se pudo eliminar el recordatorio. Por favor, inténtalo de nuevo.');
+                    });
+                }
+            }
         </script>
 
         <!-- Paginación -->
@@ -87,5 +106,8 @@
         <script src="./js/paginacion-recordatorios.js"></script>
     
     </div>
+
+    <!-- Modal de confirmación -->
+    
 </body>
 </html>
