@@ -32,7 +32,7 @@ module.exports = function (dbInyectada){
         todos,
         uno,
         agregar,
-        eliminar,
+        eliminar
     }
 }
 

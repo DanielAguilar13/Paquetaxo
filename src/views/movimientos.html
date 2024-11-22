@@ -48,7 +48,6 @@
                     <th>Tipo de pago</th>
                     <th>Metodo de pago</th>
                     <th>Fecha</th>
-                    <th>Fecha</th>
                     <th>Opción</th>
                 </tr>
             </thead>
@@ -80,13 +79,32 @@
                         <td>${item.fecha}</td>
                         <td class="actions">
                             <button class="btn btn-edit" onclick="editarRecordatorio(${item.id})">✏️</button>
-                            <button class="btn btn-delete" onclick="eliminarRecordatorio(${item.id})">🗑️</button>
+                            <button class="btn btn-delete" onclick="eliminarMovimiento(${item.id})">🗑️</button>
                         </td>
                     `;
                     tabla.appendChild(fila);
                 });
             })
             .catch(error => console.error('Error al obtener los datos:', error));// URL de la API
+
+            function eliminarMovimiento(id) {
+                if (confirm('¿Estás seguro de que deseas eliminar este Movimiento?')) {
+                    fetch(`/api/movimientos/${id}`, {
+                        method: 'DELETE',
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Error al eliminar el Movimiento');
+                        }
+                        alert('Movimiento eliminado exitosamente');
+                        location.reload(); // Recargar la página para actualizar la tabla
+                    })
+                    .catch(error => {
+                        console.error('Error al eliminar el movimiento:', error);
+                        alert('No se pudo eliminar el movimiento. Por favor, inténtalo de nuevo.');
+                    });
+                }
+            }
         </script>
         </table>
         <!-- Paginación -->
@@ -98,18 +116,6 @@
             <button>&raquo;</button>
         </div>
     </div>
-    <!-- Modal de confirmación -->
-    <div id="deleteModal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <i class="fa-solid fa-circle-exclamation fa-3x"></i>
-            <h3>¿Estás seguro de que deseas eliminar este elemento?</h3>
-            <div class="modal-actions">
-                <button id="confirmDelete" class="btn-confirm">Eliminar</button>
-                <button id="cancelDelete" class="btn-cancel">Cancelar</button>
-            </div>
-        </div>
-    </div>
-    <script src="../js/modal-eliminar.js"></script>
+    
 </body>
 </html>
