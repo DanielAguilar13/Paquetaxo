@@ -34,7 +34,7 @@
     <h1>Gestor de Gastos Personales</h1>
     <img src="./img/icono1.png" alt="User" onclick="openSidebar()" class="open-btn">       
 </div>
-<script src="../js/sidebar.js"></script>
+<script src="./js/sidebar.js"></script>
 
     <!-- Contenedores en columnas -->
     <div class="main-container">
@@ -44,14 +44,27 @@
             <div class="chart-container">
                 <canvas id="expenseChart" width="400" height="400"></canvas>
             </div>
-            <div id="expenseList" style="margin: 10px; font-size: 14px;"></div>    
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Concepto</th>
+                        <th>Categoría</th>
+                        <th>Monto</th>
+                    </tr>
+                </thead>
+                <tbody id="tabla-datos">
+                    <!-- Los datos se cargarán aquí -->
+                </tbody>
+            </table>
+            
         </div>
 
         <!-- Contenedor Derecho -->
         <div class="container">
             <h2>Visualización de estado de cuenta</h2>
             <div class="chart-container">
-                <canvas id="accountStatusChart" width="400" height="400"></canvas>
+                <canvas id="accountStatusChart" width="100" height="100"></canvas>
             </div>
             <div id="accountStatusList" style="margin: 10px; font-size: 14px;"></div>  
             <div class="balance-container">
@@ -68,7 +81,7 @@
             </div>
         </div>
     </div>
-<script src="./js/Grafica copy.js"></script>
+<script src="./js/Grafica.js"></script>
 <!-- Importa jsPDF -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
 <!-- Importa jsPDF-AutoTable -->

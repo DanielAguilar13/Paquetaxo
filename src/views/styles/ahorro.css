@@ -44,7 +44,7 @@ body {
   justify-content: center;
   text-align: center;
 }
-
+  
 /* Header */
 .header {
   background: var(--color-primary);
@@ -105,7 +105,7 @@ body {
 .nav:hover .open-btn {
   opacity: 3; /* Muestra la imagen */
 }
-
+  
 /* Barra Lateral */
 .sidebar {
   height: 100%;
@@ -181,9 +181,9 @@ body {
 }
 
 .balance-status {
-  margin-top: 5px;
-  color: #2b2c61;
-  font-size: 1.1em;
+    margin-top: 5px;
+    color: #2b2c61;
+    font-size: 1.1em;
 }
 /* Animaciones */
 @keyframes fadeIn {

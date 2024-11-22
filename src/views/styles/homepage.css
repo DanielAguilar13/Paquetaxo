@@ -48,8 +48,8 @@ body {
 }
 
 .chart-container {
-  width: 300px;
-  height: 300px;
+  width: 400px;
+  height: 400px;
   display: flex;
   align-items: center;
   justify-content: center; /* Centrar el canvas */
@@ -94,7 +94,7 @@ body {
 .balance-container .balance-user-icon img {
   width: 200px;
   height: 200px;
-  margin: 15px 0; /* Espacio alrededor de la imagen */
+  margin: 20px 0; /* Espacio alrededor de la imagen */
 }
 
 /* Estilo para el balance y el monto */
@@ -244,17 +244,17 @@ body {
 
 /* Tabla*/
 .table {
-  width: 100%;
+  width: 50%;
   border-collapse: separate;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   animation: fadeInUp 1s ease forwards;
 }
 
 .table th, .table td {
-  padding: 12px;
+  padding: 10px;
   border: 1px solid var(--color-border);
   text-align: left;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .table th {
@@ -269,7 +269,7 @@ body {
 
 /* Ajuste de la última columna (para botones) */
 .table td:last-child, .table th:last-child {
-  width: 100px;  /* Ajusta el tamaño según lo necesario */
+  width: 10px;  /* Ajusta el tamaño según lo necesario */
   white-space: nowrap; /* Evita que el contenido se divida en múltiples líneas */
   text-align: left;  /* Centra los botones */
 }
@@ -278,11 +278,6 @@ body {
 .table .btn {
   font-size: 12px;  /* Reduce el tamaño de la fuente si es necesario */
   padding: 6px 10px;  /* Ajusta el tamaño de los botones */
-}
-
-.actions {
-  display: flex;
-  gap: 20px;
 }
 
 .btn {
