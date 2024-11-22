@@ -1,3 +1,4 @@
+// Obtener movimientos y configurar tabla y gráfica
 fetch('/movimientos')
     .then(response => {
         if (!response.ok) {
@@ -5,30 +6,53 @@ fetch('/movimientos')
         }
         return response.json();
     })
-    .then(data => {
-        const tabla = document.getElementById('tabla-datos');
-        tabla.innerHTML = '';
-        data.forEach(item => {  
-            const fila = document.createElement('tr');
-            fila.innerHTML = `
-                <td>${item.fecha}</td>
-                <td>${item.concepto}</td>
-                <td>${item.id_categoria}</td>
-                <td>${item.cantidad}</td>
-            `;
-            tabla.appendChild(fila);
-        });
-        configurarGrafica(data);
-        window.gastos = data;
+    .then(movimientos => {
+        // Obtener categorías y hacer el mapeo
+        fetch('/categorias')
+            .then(response => response.json())
+            .then(categorias => {
+                // Crear un mapa para encontrar los nombres por el ID de categoría
+                const categoriasMap = categorias.reduce((map, categoria) => {
+                    map[categoria.id] = categoria.nombre;
+                    return map;
+                }, {});
+
+                // Actualizar la tabla con los nombres de categorías
+                const tabla = document.getElementById('tabla-datos');
+                tabla.innerHTML = '';
+                movimientos.forEach(item => {
+                    const fila = document.createElement('tr');
+                    fila.innerHTML = `
+                        <td>${item.fecha}</td>
+                        <td>${item.concepto}</td>
+                        <td>${categoriasMap[item.id_categoria] || 'Sin categoría'}</td>
+                        <td>${item.cantidad}</td>
+                    `;
+                    tabla.appendChild(fila);
+                });
+
+                // Configurar gráfica con los movimientos
+                configurarGrafica(movimientos.map(mov => ({
+                    ...mov,
+                    categoria: categoriasMap[mov.id_categoria] || 'Sin categoría'
+                })));
+
+                // Hacer los datos accesibles globalmente
+                window.gastos = movimientos.map(mov => ({
+                    ...mov,
+                    categoria: categoriasMap[mov.id_categoria] || 'Sin categoría'
+                }));
+            })
+            .catch(error => console.error('Error al cargar las categorías:', error));
     })
     .catch(error => {
-        console.error('Error:', error);
+        console.error('Error al cargar los movimientos:', error);
         alert('Hubo un problema al cargar los datos.');
     });
 
 function configurarGrafica(gastos) {
     const chartData = {
-        labels: gastos.map(gasto => gasto.concepto),
+        labels: gastos.map(gasto => gasto.categoria), // Mostrar las categorías en lugar de conceptos
         datasets: [{
             label: 'Gastos Mensuales',
             data: gastos.map(gasto => gasto.cantidad),
@@ -98,7 +122,7 @@ function generatePDF() {
                 body: window.gastos.map(gasto => [
                     gasto.fecha, 
                     gasto.concepto, 
-                    gasto.id_categoria, 
+                    gasto.categoria, 
                     `$${gasto.cantidad}`
                 ]),
                 theme: 'grid',
