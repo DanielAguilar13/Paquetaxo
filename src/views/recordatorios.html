@@ -80,6 +80,25 @@
                 });
             })
             .catch(error => console.error('Error al obtener los datos:', error));// URL de la API
+
+            function eliminarRecordatorio(id) {
+                if (confirm('¿Estás seguro de que deseas eliminar este recordatorio?')) {
+                    fetch(`/api/recordatorios/${id}`, {
+                        method: 'DELETE',
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Error al eliminar el recordatorio');
+                        }
+                        alert('Recordatorio eliminado exitosamente');
+                        location.reload(); // Recargar la página para actualizar la tabla
+                    })
+                    .catch(error => {
+                        console.error('Error al eliminar el recordatorio:', error);
+                        alert('No se pudo eliminar el recordatorio. Por favor, inténtalo de nuevo.');
+                    });
+                }
+            }
         </script>
 
         <!-- Paginación -->
@@ -89,17 +108,6 @@
     </div>
 
     <!-- Modal de confirmación -->
-    <div id="deleteModal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <i class="fa-solid fa-circle-exclamation fa-3x"></i>
-            <h3>¿Estás seguro de que deseas eliminar este elemento?</h3>
-            <div class="modal-actions">
-                <button id="confirmDelete" class="btn-confirm">Eliminar</button>
-                <button id="cancelDelete" class="btn-cancel">Cancelar</button>
-            </div>
-        </div>
-    </div>
-    <script src="../js/recordatorios-eliminar.js"></script>
+    
 </body>
 </html>

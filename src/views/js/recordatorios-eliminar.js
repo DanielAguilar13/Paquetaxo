@@ -24,20 +24,19 @@ function eliminarRecordatorio(id) {
 // Confirmar la eliminación
 document.getElementById('confirmDelete').addEventListener('click', () => {
     // Realizar la solicitud DELETE a la API
-    fetch(`/recordatorios/${recordatorioId}`, {
+    fetch(`/api/recordatorios/${id}`, {
         method: 'DELETE',
     })
     .then(response => {
         if (!response.ok) {
-            throw new Error('Error al eliminar el recordatorio: ' + response.statusText);
+            throw new Error('Error al eliminar el recordatorio');
         }
-        // Si la eliminación es exitosa, recargar la página o eliminar la fila de la tabla
-        document.getElementById(`recordatorio-${recordatorioId}`).remove(); // Eliminar la fila de la tabla
-        closeDeleteModal(); // Cerrar el modal
+        alert('Recordatorio eliminado exitosamente');
+        location.reload(); // Recargar la página para actualizar la tabla
     })
     .catch(error => {
         console.error('Error al eliminar el recordatorio:', error);
-        closeDeleteModal(); // Cerrar el modal en caso de error
+        alert('No se pudo eliminar el recordatorio. Por favor, inténtalo de nuevo.');
     });
 });
 

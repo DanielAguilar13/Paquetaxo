@@ -21,10 +21,9 @@
                 <span class="form_line"></span>
             </div>
             <div class="form_group">
-                <select id="id_categoria" name="id_categoria" class="form_input" required onchange="">
-                    <option value="" disabled selected>Elegir categoria</option>
-                    <option value="Ingreso">Ingreso</option>
-                    <option value="Egreso">Egreso</option>
+                <select id="id_categoria" name="id_categoria">
+                    <option value="" selected disabled></option>
+                    <!-- Opciones se cargarán dinámicamente -->
                 </select>
                 <label for="id_categoria" class="form_label">Categoria</label>
                 <span class="form_line"></span>
@@ -69,6 +68,19 @@
         </div>
     </form>
     <script>
+        // Llenar el select con datos de la API
+        fetch('/categorias')
+        .then(response => response.json())
+        .then(data => {
+            const select = document.getElementById('id_categoria');
+            data.forEach(categoria => {
+                const option = document.createElement('option');
+                option.value = categoria.id; // ID de la categoría
+                option.textContent = categoria.nombre; // Nombre de la categoría
+                select.appendChild(option);
+            });
+        })
+        .catch(error => console.error('Error al cargar las categorías:', error));
         function goBackToHome() {
             window.location.href = "./movimientos.html";
         }
