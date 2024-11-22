@@ -32,8 +32,9 @@ module.exports = function (dbInyectada){
             });
     }
     
-    async function eliminar (body){
-        return db.eliminar(TABLA, body);
+    async function eliminar (data){
+        const { id } = data;
+        return db.eliminar(TABLA, id);
     }
 
     return {
@@ -41,7 +42,7 @@ module.exports = function (dbInyectada){
         todos,
         uno,
         agregar,
-        eliminar,
+        eliminar
     }
 }
 
