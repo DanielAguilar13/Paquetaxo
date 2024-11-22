@@ -7,26 +7,26 @@
     <title>GGP - Movimientos</title>
 </head>
 <body>
-    <form action="/movimientos/submit" method="POST" id="form-movimientos" class="form" novalidate>
+    <form action="/movimientos/submit" id="form-movimientos" class="form" method="POST">
         <h2 class="form_tittle">Movimiento</h2>
         <div class="form_container">
             <!-- Concepto -->
             <div class="form_group">
-                <input type="text" id="concepto" name="concepto" class="form_input" placeholder=" " required minlength="3" pattern="^[A-Za-z\s]+$" title="El concepto debe tener al menos 3 caracteres y solo puede contener letras y espacios.">
+                <input type="text" id="concepto" name="concepto" class="form_input" placeholder="">
                 <label for="concepto" class="form_label">Concepto</label>
                 <span class="form_line"></span>
             </div>
 
             <!-- Cantidad -->
             <div class="form_group">
-                <input type="number" id="cantidad" name="cantidad" class="form_input" placeholder=" " required min="0.01" step="0.01" title="La cantidad debe ser un número positivo con hasta dos decimales.">
+                <input type="number" id="cantidad" name="cantidad" class="form_input" placeholder=" " min="0.01" step="any">
                 <label for="cantidad" class="form_label">Cantidad</label>
                 <span class="form_line"></span>
             </div>
 
             <!-- Categoría -->
             <div class="form_group">
-                <select id="id_categoria" name="id_categoria" class="form_input" required>
+                <select id="id_categoria" name="id_categoria" class="form_input">
                     <option value="" disabled selected>Elegir categoría</option>
                     <!-- Opciones generadas dinámicamente -->
                 </select>
@@ -36,7 +36,7 @@
 
             <!-- Tipo de Pago -->
             <div class="form_group">
-                <select id="id_tipo" name="id_tipo" class="form_input" required>
+                <select id="id_tipo" name="id_tipo" class="form_input">
                     <option value="" disabled selected>Elegir tipo de pago</option>
                     <!-- Opciones generadas dinámicamente -->
                 </select>
@@ -46,7 +46,7 @@
 
             <!-- Tarjeta -->
             <div class="form_group">
-                <select id="id_tarjeta" name="id_tarjeta" class="form_input" required>
+                <select id="id_tarjeta" name="id_tarjeta" class="form_input">
                     <option value="" disabled selected>Elegir tarjeta</option>
                     <!-- Opciones generadas dinámicamente -->
                 </select>
@@ -56,20 +56,22 @@
 
             <!-- Fecha -->
             <div class="form_group">
-                <input type="date" id="fecha" name="fecha" class="form_input" placeholder=" " required>
+                <input type="date" id="fecha" name="fecha" class="form_input" placeholder=" ">
                 <label for="fecha" class="form_label">Fecha de movimiento</label>
                 <span class="form_line"></span>
             </div>
 
+            <!--Alerta-->
+            <div id="alerta" class="alert" style="display: none;"></div>
+
             <!-- Botones -->
             <div class="button_container">
-                <input type="submit" class="form_submit" value="Guardar">
-                <input type="button" class="form_delete" value="Cancelar" onclick="goBackToHome()">
+                <button type="submit" class="form_submit">Enviar</button>
+                <button type="button" class="form_delete" onclick="goBackToHome()">Cancelar</button>
             </div>
+            
         </div>
     </form>
-    <script>
-    </script>
     <script src="./js/movimientos-añadir.js"></script>
 </body>
 </html>

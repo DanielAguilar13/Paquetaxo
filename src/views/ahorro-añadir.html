@@ -12,15 +12,15 @@
         <div class="form_container">
             <!-- Campo para establecer cantidad -->
             <div class="form_group">
-                <input type="number" id="cantidad" name="cantidad" class="form_input" placeholder=" ">
+                <input type="number" id="cantidad" name="cantidad" min="0.01" step="any" class="form_input" placeholder=" ">
                 <label for="cantidad" class="form_label">Ingresar la cantidad</label>
                 <span class="form_line"></span>
             </div>
 
+            <!-- Selección de concepto -->
             <div class="form_group">
-                <select id="concepto" name="concepto" class="form_input" required>
+                <select id="concepto" name="concepto" class="form_input">
                     <option value="" disabled selected>Elegir concepto</option>
-                    <!-- Opciones generadas dinámicamente -->
                 </select>
                 <label for="concepto" class="form_label">Concepto</label>
                 <span class="form_line"></span>
@@ -28,7 +28,7 @@
 
             <!-- Campo para límite de gastos -->
             <div class="form_group">
-                <input type="number" id="limite_gasto" name="limite_gasto" class="form_input" placeholder=" ">
+                <input type="number" id="limite_gasto" name="limite_gasto" min="0.01" step="any" class="form_input" placeholder=" ">
                 <label for="limite_gasto" class="form_label">Establecer Límite de Gastos</label>
                 <span class="form_line"></span>
             </div>
@@ -40,26 +40,20 @@
                 <span class="form_line"></span>
             </div>
 
-            <!-- Botones de acción -->
-            <div class="button_container">
-                <button type="button" class="form_submit" onclick="verificarGasto()">Registrar Gasto</button>
-                <button type="button" class="form_delete" onclick="cancelarYRedirigir()">Cancelar</button>
+            <!-- Contenedor para mensajes de alerta -->
+            <div id="alerta" class="alert" style="display: none;">
+                <!-- Aquí se mostrarán los mensajes de error -->
             </div>
 
-            <!-- Alerta de aviso -->
-            <div id="alerta" class="alert" style="display: none;"></div>
+            <!-- Botones de acción -->
+            <div class="button_container">
+                <button type="submit" class="form_submit">Enviar</button>
+                <button type="button" class="form_delete" onclick="goBackToHome()">Cancelar</button>
+            </div>
         </div>
     </form>
 
-    <!-- Modal de alerta -->
-    <div id="modal-alerta" class="modal" style="display: none;">
-        <div class="modal-content">
-            <button class="close-button" onclick="cerrarModal()" aria-label="Cerrar modal">&times;</button>
-            <p id="modal-mensaje"></p>
-        </div>
-    </div>
-
     <!-- Importar el script -->
-    <script src="./js/gastos.js"></script>
+    <script src="./js/ahorro-añadir.js"></script>
 </body>
 </html>

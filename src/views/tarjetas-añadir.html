@@ -11,51 +11,50 @@
         <h2 class="form_tittle">Tarjeta</h2>
         <div class="form_container">
             <div class="form_group">
-                <input type="text" id="nombre" name="nombre" class="form_input" placeholder=" " required>
+                <input type="text" id="nombre" name="nombre" class="form_input" placeholder=" ">
                 <label for="nombre" class="form_label">Nombre de la tarjeta</label>
                 <span class="form_line"></span>
             </div>
             <div class="form_group">
-                <input type="text" id="ultimos_digitos" name="ultimos_digitos" class="form_input" placeholder=" " required>
+                <input type="text" id="ultimos_digitos" name="ultimos_digitos" class="form_input" placeholder=" ">
                 <label for="digitos" class="form_label">Últimos 4 dígitos</label>
                 <span class="form_line"></span>
             </div>
             <div class="form_group">
-                <input type="number" id="limite_credito" name="limite_credito" class="form_input" placeholder=" " required>
+                <input type="number" id="limite_credito" name="limite_credito" class="form_input" placeholder=" ">
                 <label for="limite_credito" class="form_label">Limite de crédito</label>
                 <span class="form_line"></span>
             </div>
             <div class="form_group">
-                <input type="number" id="dia_corte" name="dia_corte" class="form_input" placeholder=" " required>
+                <input type="number" id="dia_corte" name="dia_corte" class="form_input" placeholder=" ">
                 <label for="dia_corte" class="form_label">Dia de corte</label>
                 <span class="form_line"></span>
             </div>
             <div class="form_group">
-                <input type="number" id="saldo" name="saldo" min="0.01" step="any" class="form_input" placeholder=" " required>
+                <input type="number" id="saldo" name="saldo" min="0.01" step="any" class="form_input" placeholder=" ">
                 <label for="saldo" class="form_label">Saldo</label>
                 <span class="form_line"></span>
             </div>
             <div class="form_group">
-                <input type="number" id="mes_vencimiento" name="mes_vencimiento" class="form_input" placeholder=" " required>
+                <input type="number" id="mes_vencimiento" name="mes_vencimiento" class="form_input" placeholder=" ">
                 <label for="mes_vencimiento" class="form_label">Mes de vencimiento</label>
                 <span class="form_line"></span>
             </div>
             <div class="form_group">
-                <input type="number" id="anio_vencimiento" name="anio_vencimiento" class="form_input" placeholder=" " required>
+                <input type="number" id="anio_vencimiento" name="anio_vencimiento" class="form_input" placeholder=" ">
                 <label for="anio_vencimiento" class="form_label">Año de vencimiento</label>
                 <span class="form_line"></span>
             </div>
+            <!--Alerta-->
+            <div id="alerta" class="alert" style="display: none;"></div>
+
+            <!-- Botones -->
             <div class="button_container">
-                <input type="submit" class="form_submit" value="Guardar" onclick="goBackToHome()">
-                <input type="button" class="form_delete" value="Cancelar" onclick="goBackToHome()">
+                <button type="submit" class="form_submit">Enviar</button>
+                <button type="button" class="form_delete" onclick="goBackToHome()">Cancelar</button>
             </div>
         </div>
     </form>
-
-    <script>
-        function goBackToHome() {
-            window.location.href = "./tarjetas.html"; // Cambia a la ruta de la página de inicio
-        }
-    </script>
+    <script src="./js/tarjetas-añadir.js"></script>
 </body>
 </html>

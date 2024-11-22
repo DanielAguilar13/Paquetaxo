@@ -7,36 +7,42 @@
     <title>GGP - Recordatorios</title>
 </head>
 <body>
-    <form action="/recordatorios/submit" method="POST" id="form-recordatorios" class="form" novalidate>
+    <form action="/recordatorios/submit" id="form-recordatorios" class="form" method="POST">
         <h2 class="form_tittle">Recordatorio</h2>
         <div class="form_container">
             <!-- Campo para el recordatorio -->
             <div class="form_group">
-                <input type="text" id="concepto" name="concepto" class="form_input" placeholder=" " required minlength="6">
+                <input type="text" id="concepto" name="concepto" class="form_input" placeholder=" ">
                 <label for="concepto" class="form_label">Recordatorio</label>
                 <span class="form_line"></span>
+                <small class="error_message" id="concepto_error"></small>
             </div>
 
             <!-- Campo para la categoría -->
             <div class="form_group">
-                <select id="id_categoria" name="id_categoria" class="form_input" required>
+                <select id="id_categoria" name="id_categoria" class="form_input">
                     <option value="" selected disabled>Seleccionar categoría</option>
                 </select>
                 <label for="id_categoria" class="form_label">Categoría</label>
                 <span class="form_line"></span>
+                <small class="error_message" id="concepto_error"></small>
             </div>
 
             <!-- Campo para la fecha -->
             <div class="form_group">
-                <input type="date" id="fecha" name="fecha" class="form_input" placeholder=" " required>
+                <input type="date" id="fecha" name="fecha" class="form_input" placeholder=" ">
                 <label for="fecha" class="form_label">Fecha de recordatorio</label>
                 <span class="form_line"></span>
+                <small class="error_message" id="concepto_error"></small>
             </div>
 
-            <!-- Contenedor de botones -->
+            <!--Alerta-->
+            <div id="alerta" class="alert" style="display: none;"></div>
+
+            <!-- Botones -->
             <div class="button_container">
-                <input type="submit" class="form_submit" value="Guardar">
-                <input type="button" class="form_delete" value="Cancelar" onclick="goBackToHome()">
+                <button type="submit" class="form_submit">Enviar</button>
+                <button type="button" class="form_delete" onclick="goBackToHome()">Cancelar</button>
             </div>
         </div>
     </form>

@@ -330,42 +330,13 @@ form {
   }
 }
 
-/* Estilos del Modal */
-.modal {
-  display: none; /* Oculto por defecto */
-  position: fixed;
-  z-index: 1000; /* Por encima de otros elementos */
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro semi-transparente */
-}
-
-/* Contenido del Modal */
-.modal-content {
-  background-color: #fff;
-  margin: 15% auto; /* Centrado vertical y horizontal */
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%; /* Ajusta el ancho */
-  max-width: 400px; /* Tamaño máximo */
-  border-radius: 8px;
-  text-align: center;
-}
-
-/* Botón de cerrar */
-.close-button {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.close-button:hover,
-.close-button:focus {
-  color: black;
-  text-decoration: none;
+.alert {
+  display: none; /* Ocultar por defecto */
+  color: var(--color-btn-delete);
+  font-size: 14px;
+  padding: 10px;
+  border: 1px solid var(--color-btn-delete-hover);
+  border-radius: 4px;
+  background-color: var(--color-gray);
+  margin-bottom: 10px;
 }
