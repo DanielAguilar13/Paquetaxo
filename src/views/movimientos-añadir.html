@@ -7,61 +7,61 @@
     <title>GGP - Movimientos</title>
 </head>
 <body>
-    <form action="/movimientos/submit" method="POST" id="form-movimientos" class="form">
+    <form action="/movimientos/submit" method="POST" id="form-movimientos" class="form" novalidate>
         <h2 class="form_tittle">Movimiento</h2>
         <div class="form_container">
+            <!-- Concepto -->
             <div class="form_group">
-                <input type="text" id="concepto" name="concepto" class="form_input" placeholder=" ">
-                <label for="nombre" class="form_label">Concepto</label>
+                <input type="text" id="concepto" name="concepto" class="form_input" placeholder=" " required minlength="3" pattern="^[A-Za-z\s]+$" title="El concepto debe tener al menos 3 caracteres y solo puede contener letras y espacios.">
+                <label for="concepto" class="form_label">Concepto</label>
                 <span class="form_line"></span>
             </div>
+
+            <!-- Cantidad -->
             <div class="form_group">
-                <input type="number" id="cantidad" name="cantidad" min="0.01" step="any" class="form_input" placeholder=" ">
-                <label for="tipo" class="form_label">Cantidad</label>
+                <input type="number" id="cantidad" name="cantidad" class="form_input" placeholder=" " required min="0.01" step="0.01" title="La cantidad debe ser un número positivo con hasta dos decimales.">
+                <label for="cantidad" class="form_label">Cantidad</label>
                 <span class="form_line"></span>
             </div>
+
+            <!-- Categoría -->
             <div class="form_group">
-                <select id="id_categoria" name="id_categoria" class="form_input" required onchange="">
-                    <option value="" disabled selected>Elegir categoria</option>
-                    <option value="Ingreso">Ingreso</option>
-                    <option value="Egreso">Egreso</option>
+                <select id="id_categoria" name="id_categoria" class="form_input" required>
+                    <option value="" disabled selected>Elegir categoría</option>
+                    <!-- Opciones generadas dinámicamente -->
                 </select>
-                <label for="id_categoria" class="form_label">Categoria</label>
+                <label for="id_categoria" class="form_label">Categoría</label>
                 <span class="form_line"></span>
             </div>
+
+            <!-- Tipo de Pago -->
             <div class="form_group">
-                <select id="id_tipo" name="id_tipo" class="form_input" required onchange="">
+                <select id="id_tipo" name="id_tipo" class="form_input" required>
                     <option value="" disabled selected>Elegir tipo de pago</option>
-                    <option value="Debito">Débito</option>
-                    <option value="Credito">Crédito</option>
-                    <option value="Efectivo">Efectivo</option>
+                    <!-- Opciones generadas dinámicamente -->
                 </select>
                 <label for="id_tipo" class="form_label">Tipo de Pago</label>
                 <span class="form_line"></span>
             </div>
-            <div class="form_group" id="metodo_pago_debito" style="display: none;">
-                <select id="id_tarjeta" name="id_tarjeta" class="form_input">
-                    <option value="" disabled selected>Seleccionar método</option>
-                    <option value="TarjetaDebito1">Tarjeta1</option>
-                    <option value="TarjetaDebito2">Tarjeta2</option>
-                </select>
-                <label for="id_tarjeta" name="id_tarjeta" class="form_label">Método de Pago</label>
-                <span class="form_line"></span>
-            </div>
-            <div class="form_group" id="metodo_pago_credito" style="display: none;">
-                <select id="id_tarjeta" name="id_tarjeta" class="form_input">
-                    <option value="" disabled selected>Seleccionar método</option>
-                    <option value="TarjetaCredito1">Tarjeta3</option>
-                    <option value="TarjetaCredito2">Tarjeta4</option>
-                </select>
-                <label for="id_tarjeta" name="id_tarjeta" class="form_label">Método de Pago</label>
-                <span class="form_line"></span>
-            </div>
+
+            <!-- Tarjeta -->
             <div class="form_group">
-                <input type="date" id="fechamov" class="form_input" placeholder=" ">
-                <label for="fechamov" class="form_label">Fecha de movimiento</label>
+                <select id="id_tarjeta" name="id_tarjeta" class="form_input" required>
+                    <option value="" disabled selected>Elegir tarjeta</option>
+                    <!-- Opciones generadas dinámicamente -->
+                </select>
+                <label for="id_tarjeta" class="form_label">Tarjeta</label>
                 <span class="form_line"></span>
             </div>
+
+            <!-- Fecha -->
+            <div class="form_group">
+                <input type="date" id="fecha" name="fecha" class="form_input" placeholder=" " required>
+                <label for="fecha" class="form_label">Fecha de movimiento</label>
+                <span class="form_line"></span>
+            </div>
+
+            <!-- Botones -->
             <div class="button_container">
                 <input type="submit" class="form_submit" value="Guardar">
                 <input type="button" class="form_delete" value="Cancelar" onclick="goBackToHome()">
@@ -69,9 +69,7 @@
         </div>
     </form>
     <script>
-        function goBackToHome() {
-            window.location.href = "./movimientos.html";
-        }
     </script>
+    <script src="./js/movimientos-añadir.js"></script>
 </body>
 </html>

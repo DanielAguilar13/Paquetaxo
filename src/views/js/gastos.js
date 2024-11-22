@@ -5,6 +5,20 @@ function verificarGasto() {
   const limiteGasto = document.getElementById('limite_gasto').value.trim();
   const fecha = document.getElementById('fecha').value.trim();
 
+  // Llenar el select con datos de la API
+fetch('/movimientos')
+.then(response => response.json())
+.then(data => {
+    const select = document.getElementById('concepto');
+    data.forEach(concepto => {
+        const option = document.createElement('option');
+        option.value = concepto.id; // ID de la categoría
+        option.textContent = concepto.concepto; // Nombre de la categoría
+        select.appendChild(option);
+    });
+})
+.catch(error => console.error('Error al cargar las categorías:', error));
+
   // Validar campo "Cantidad"
   if (cantidad === '' || isNaN(cantidad) || parseFloat(cantidad) <= 0) {
       mostrarAlerta("Por favor, ingresa una cantidad válida (número mayor a 0).", "alert-error");

@@ -9,6 +9,7 @@ const ahorro = require('./controllers/ahorro/index.js');
 const movimiento = require('./controllers/movimientos/index.js');
 const recordatorio = require('./controllers/recordatorios/index.js');
 const categoria = require('./DB/db.js');
+const tipo_de_pago = require('./DB/db.js');
 const error = require('./DB/errors.js');
 
 const app = express();
@@ -109,6 +110,16 @@ app.get('/categorias', async (req, res) => {
     }
 });
 
+app.get('/tipo_de_pago', async (req, res) => {
+    try{
+        const tipoPagoMostrar = await tipo_de_pago.tipo_de_pago();
+        res.status(200).json(tipoPagoMostrar);
+    }catch (error){
+        console.error('Error al obtener tipo de pago:', error);
+        res.status(500).json({message: 'Error al obtener el tipo de pago'});
+    }
+});
+
 // Ruta para procesar el formulario
 app.post('/usuario/submit', (req, res) => {
     const {nombre, id_imagen} = req.body;
@@ -131,7 +142,7 @@ app.post('/tarjeta/submit', (req, res) => {
     // Verificar si los datos llegan
     console.log('Datos recibidos:', req.body);
 
-    if (!nombre || !ultimos_digitos || !limite_credito || !dia_corte || !saldo || !mes_vencimiento, anio_vencimiento) {
+    if (!nombre || !ultimos_digitos || !limite_credito || !dia_corte || !saldo || !mes_vencimiento || !anio_vencimiento) {
         return res.status(400).send('Faltan datos');
     }
 

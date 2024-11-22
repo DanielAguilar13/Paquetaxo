@@ -7,7 +7,7 @@
     <title>GGP - Ahorro</title>
 </head>
 <body>
-    <form action="/ahorro/submit" id="form-recordatorios" class="form" method="POST">
+    <form action="/ahorro/submit" id="form-ahorro" class="form" method="POST">
         <h2 class="form_tittle">Gestor de Ingresos</h2>
         <div class="form_container">
             <!-- Campo para establecer cantidad -->
@@ -17,9 +17,11 @@
                 <span class="form_line"></span>
             </div>
 
-            <!-- Campo para concepto -->
             <div class="form_group">
-                <input type="text" id="concepto" name="concepto" class="form_input" placeholder=" ">
+                <select id="concepto" name="concepto" class="form_input" required>
+                    <option value="" disabled selected>Elegir concepto</option>
+                    <!-- Opciones generadas dinámicamente -->
+                </select>
                 <label for="concepto" class="form_label">Concepto</label>
                 <span class="form_line"></span>
             </div>
