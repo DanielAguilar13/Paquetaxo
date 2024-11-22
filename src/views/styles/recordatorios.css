@@ -183,7 +183,7 @@ body {
   padding: 12px;
   border: 1px solid var(--color-border);
   text-align: left;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .table th {
@@ -194,6 +194,14 @@ body {
 
 .table tr:nth-child(even) {
   background-color: var(--color-highlight);
+}
+
+.table td:first-child, .table th:first-child {
+  width: 45%;
+}
+
+.table td:last-child(3), .table th:last-child(3) {
+  width: 5%;  /* Ajusta el tamaño según lo necesario */
 }
 
 /* Ajuste de la última columna (para botones) */
@@ -236,33 +244,48 @@ body {
   transform: scale(1.1);
 }
 
-/* Paginación */
+/* Estilos para la paginación */
 .pagination {
   display: flex;
   justify-content: center;
-  gap: 8px;
-  margin: 20px 0;
-  animation: fadeIn 0.6s ease forwards;
+  align-items: center;
+  margin-top: 20px;
 }
 
 .pagination button {
-  padding: 8px 12px;
-  background-color: var(--color-pagination);
-  color: var(--color-white);
-  border: none;
-  border-radius: 4px;
+  padding: 8px 16px;
+  margin: 0 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  border: none;
+  background-color: var(--color-pagination);
+  border-radius: 4px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.pagination button:hover {
-  background-color: var(--color-pagination-hover);
-  transform: scale(1.1);
-}
-
-.pagination button.active {
+/* Efecto de activación */
+.pagination .active {
   background-color: var(--color-pagination-active);
-  font-weight: bold;
+  color: var(--color-border);
+  transform: scale(1.1); /* Le da un efecto de "agrandado" a la página activa */
+  transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+/* Estado deshabilitado */
+.pagination button:disabled {
+  background-color: var(--color-border);
+  cursor: not-allowed;
+  transition: background-color 0.3s ease;
+}
+
+/* Hover para el efecto de animación */
+.pagination button:hover {
+  background-color: var(--color-highlight);
+  transform: scale(1.05); /* Le da un ligero aumento al tamaño del botón al pasar el mouse */
+}
+
+/* Transición en la opacidad del botón */
+.pagination button:not(:disabled) {
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 /* Modal */
@@ -405,7 +428,7 @@ body {
   }
 
   .btn-add {
-    width: 100%;
+    width: 22%;
     margin-top: 10px;
   }
 

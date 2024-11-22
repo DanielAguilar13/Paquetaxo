@@ -27,7 +27,8 @@
         <img src="./img/logo.png" alt="Logo GGP">
         <img src="./img/logo.png" alt="Logo GGP">
         <h1>Gestor de Gastos Personales</h1>
-        <img src="./img/icono1.png" alt="User" onclick="openSidebar()" class="open-btn">   
+        <img src="./img/icono1.png" alt="User" onclick="openSidebar()" class="open-btn">
+        <script src="./js/sidebar.js"></script>
     </header>
     <script src="../js/sidebar.js"></script>
     <script src="../js/sidebar.js"></script>
@@ -39,7 +40,7 @@
         </div>
 
         <!-- Tabla de recordatorios -->
-        <table>
+        <table class="table">
             <thead>
                 <tr>
                     <th>Concepto</th>
@@ -80,29 +81,34 @@
                 });
             })
             .catch(error => console.error('Error al obtener los datos:', error));// URL de la API
+
+            function eliminarRecordatorio(id) {
+                if (confirm('¿Estás seguro de que deseas eliminar este recordatorio?')) {
+                    fetch(`/api/recordatorios/${id}`, {
+                        method: 'DELETE',
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Error al eliminar el recordatorio');
+                        }
+                        alert('Recordatorio eliminado exitosamente');
+                        location.reload(); // Recargar la página para actualizar la tabla
+                    })
+                    .catch(error => {
+                        console.error('Error al eliminar el recordatorio:', error);
+                        alert('No se pudo eliminar el recordatorio. Por favor, inténtalo de nuevo.');
+                    });
+                }
+            }
         </script>
+
         <!-- Paginación -->
-        <div class="pagination">
-            <button>&laquo;</button>
-            <button class="active">1</button>
-            <button>2</button>
-            <button>3</button>
-            <button>&raquo;</button>
-        </div>
+        <div id="pagination" class="pagination"></div>
+        <script src="./js/paginacion-recordatorios.js"></script>
+    
     </div>
+
     <!-- Modal de confirmación -->
-    <div id="deleteModal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <i class="fa-solid fa-circle-exclamation fa-3x"></i>
-            <h3>¿Estás seguro de que deseas eliminar este elemento?</h3>
-            <div class="modal-actions">
-                <button id="confirmDelete" class="btn-confirm">Eliminar</button>
-                <button id="cancelDelete" class="btn-cancel">Cancelar</button>
-            </div>
-        </div>
-    </div>
-    <script src="../js/modal-eliminar.js"></script>
-    <script src="../js/modal-eliminar.js"></script>
+    
 </body>
 </html>
