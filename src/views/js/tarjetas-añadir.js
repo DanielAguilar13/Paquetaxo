@@ -1,3 +1,50 @@
+document.getElementById("form-tarjetas").addEventListener("submit", function (e) {
+    e.preventDefault(); // Prevenir el comportamiento predeterminado del formulario
+
+    const id = document.getElementById("id").value || 0;
+    const nombre = document.getElementById("nombre").value;
+    const ultimos_digitos = document.getElementById("ultimos_digitos").value;
+    const limite_credito = document.getElementById("limite_credito").value;
+    const dia_corte = document.getElementById("dia_corte").value;
+    const saldo = document.getElementById("saldo").value;
+    const mes_vencimiento = document.getElementById("mes_vencimiento").value;
+    const anio_vencimiento = document.getElementById("anio_vencimiento").value;
+
+    const data = {
+        id: id, // Si es `0`, se creará un nuevo registro
+        nombre: nombre,
+        ultimos_digitos: ultimos_digitos,
+        limite_credito: limite_credito,
+        dia_corte: dia_corte,
+        saldo: saldo,
+        mes_vencimiento: mes_vencimiento,
+        anio_vencimiento: anio_vencimiento
+    };
+
+    // Enviar los datos a la API con `POST`
+    fetch("/api/tarjeta", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+    })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("Error en la operación");
+            }
+            return response.json();
+        })
+        .then((result) => {
+            alert("Operación exitosa");
+            window.location.href = "/tarjetas.html"; // Redirigir después del éxito
+        })
+        .catch((error) => {
+            console.error("Error:", error);
+            alert("Hubo un error al procesar la solicitud");
+        });
+});
+
 // Función para volver a la página de inicio
 function goBackToHome() {
     const formulario = document.getElementById('form-tarjetas');
