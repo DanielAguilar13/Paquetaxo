@@ -21,7 +21,7 @@ window.onload = function () {
     fechaInput.setAttribute('max', futureDate);
 
     // Llenar el select con datos de la API
-    fetch('/movimientos')
+    fetch('/movimiento')
         .then(response => response.json())
         .then(data => {
             const select = document.getElementById('concepto');
