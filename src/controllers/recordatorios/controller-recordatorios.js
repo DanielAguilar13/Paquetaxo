@@ -20,16 +20,8 @@ module.exports = function (dbInyectada){
     
     function agregar(data) {
         console.log('Datos recibidos en la función agregar:', data);
-    
-        return db.insertar('recordatorios', data)
-            .then((result) => {
-                console.log('Inserción exitosa en la base de datos:', result);
-                return result;
-            })
-            .catch((error) => {
-                console.error('Error en la función agregar:', error);
-                throw error;
-            });
+        return db.agregar(TABLA, data)
+
     }
     
     async function eliminar (data){

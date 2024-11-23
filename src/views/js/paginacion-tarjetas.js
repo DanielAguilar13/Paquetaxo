@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let allRecords = [];  // Almacenará todos los movimientos
 
     // Función para cargar los movimientos
-    fetch('/movimientos')
+    fetch('/tarjetas')
         .then(response => {
             if (!response.ok) {
                 throw new Error('Error al obtener los datos: ' + response.statusText);
