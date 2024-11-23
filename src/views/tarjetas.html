@@ -43,11 +43,11 @@
                 <tr>
                     <th>Nombre</th>
                     <th>Ultimos 4 digitos</th>
-                    <th>Fecha de expiracion</th>
-                    <th>Tipo de tarjeta</th>
+                    <th>Limite de credito</th>
+                    <th>Dia del corte</th>
                     <th>Saldo</th>
-                    <th>Fecha de corte</th>
-                    <th>Deuda</th>
+                    <th>Mes de vencimiento</th>
+                    <th>Año de vencimiento</th>
                     <th>Opción</th>
                 </tr>
             </thead>
@@ -56,6 +56,7 @@
             </tbody>
         </table>
         <script>
+<<<<<<< HEAD
             fetch('/tarjetas')
             .then(response => {
                  if (!response.ok) {
@@ -106,19 +107,45 @@
                     });
                 }
             }
+=======
+          fetch('/tarjetas')
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Error al obtener los datos: ' + response.statusText);
+            }
+            return response.json();
+          })
+          .then(data => {
+            const tabla = document.getElementById('tabla-datos');
+            tabla.innerHTML = ''; // Limpiar la tabla antes de agregar datos
+>>>>>>> main
 
+            // Iterar sobre los datos y generar las filas
+            data.forEach(item => {
+              const fila = document.createElement('tr');
+              fila.innerHTML = `
+                <td>${item.nombre}</td>
+                <td>${item.ultimos_digitos}</td>
+                <td>${item.limite_credito}</td>
+                <td>${item.dia_corte}</td>
+                <td>${item.saldo}</td>
+                <td>${item.mes_vencimiento}</td>
+                <td>${item.anio_vencimiento}</td>
+                <td class="actions">
+                  <button class="btn btn-edit" onclick="editarRecordatorio(${item.id})">✏️</button>
+                  <button class="btn btn-delete" onclick="eliminarRecordatorio(${item.id})">🗑️</button>
+                </td>
+              `;
+              tabla.appendChild(fila);
+            });
+          })
+          .catch(error => console.error('Error al obtener los datos:', error));
         </script>
 
         <!-- Paginación -->
-        <div class="pagination">
-            <button>&laquo;</button>
-            <button class="active">1</button>
-            <button>2</button>
-            <button>3</button>
-            <button>&raquo;</button>
-        </div>
+        <div id="pagination" class="pagination"></div>
+        <script src="./js/paginacion-tarjetas.js"></script>
     </div>
 
-   
 </body>
 </html>

@@ -28,9 +28,7 @@
         <h1>Gestor de Gastos Personales</h1>
         <img src="./img/icono1.png" alt="User" onclick="openSidebar()" class="open-btn">              
     </div>
-    <script src="./js/sidebar.js"></script>
-    <script src="./js/sidebar.js"></script>
-    <script src="./js/sidebar.js"></script>
+    <script src="../js/sidebar.js"></script>
 
     <div class="container">
         <!-- Barra de título y botón -->
@@ -70,6 +68,7 @@
                 // Iterar sobre los datos y generar las filas
                 data.forEach(item => {
                     const fila = document.createElement('tr');
+                    fila.id = `fila-${item.id}`;
                     fila.innerHTML = `
                         <td>${item.concepto}</td>
                         <td>${item.cantidad}</td>
@@ -108,14 +107,13 @@
         </script>
         </table>
         <!-- Paginación -->
-        <div class="pagination">
-            <button>&laquo;</button>
-            <button class="active">1</button>
-            <button>2</button>
-            <button>3</button>
-            <button>&raquo;</button>
-        </div>
+        <div id="pagination" class="pagination"></div>
+        <script src="./js/movimientos-eliminar.js"></script>
+        <script src="./js/paginacion-movimientos.js"></script>
     </div>
+<<<<<<< HEAD
     
+=======
+>>>>>>> main
 </body>
 </html>

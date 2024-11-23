@@ -93,6 +93,14 @@ async function categoria(){
     });
 }
 
+async function tipo_de_pago() {
+    return new Promise((resolve, reject) => {
+        conexion.query(`SELECT * FROM tipo_de_pago`, (error, result) => {
+            return error ? reject(error) : resolve(result);
+        });
+    });
+}
+
 module.exports = {
     todos,
     uno,
@@ -101,4 +109,5 @@ module.exports = {
     agregar,
     eliminar,
     categoria,
+    tipo_de_pago
 }
