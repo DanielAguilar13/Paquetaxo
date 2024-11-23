@@ -1,5 +1,5 @@
 // Obtener movimientos y configurar tabla y gráfica
-fetch('/movimientos')
+fetch('/movimiento')
     .then(response => {
         if (!response.ok) {
             throw new Error('Error al obtener los datos: ' + response.statusText);
@@ -21,9 +21,11 @@ fetch('/movimientos')
                 const tabla = document.getElementById('tabla-datos');
                 tabla.innerHTML = '';
                 movimientos.forEach(item => {
+                    const fecha = new Date(item.fecha);
+                    const fechaFormateada = `${fecha.getDate().toString().padStart(2, '0')}/${(fecha.getMonth() + 1).toString().padStart(2, '0')}/${fecha.getFullYear()}`;
                     const fila = document.createElement('tr');
                     fila.innerHTML = `
-                        <td>${item.fecha}</td>
+                        <td>${fechaFormateada}</td>
                         <td>${item.concepto}</td>
                         <td>${categoriasMap[item.id_categoria] || 'Sin categoría'}</td>
                         <td>${item.cantidad}</td>

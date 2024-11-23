@@ -31,7 +31,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         pageRecords.forEach(item => {
             const fecha = new Date(item.fecha);
-            const fechaFormateada = `${fecha.getDate().toString().padStart(2, '0')}/${(fecha.getMonth() + 1).toString().padStart(2, '0')}/${fecha.getFullYear()}`;            const fila = document.createElement('tr');
+            const fechaFormateada = `${fecha.getDate().toString().padStart(2, '0')}/${(fecha.getMonth() + 1).toString().padStart(2, '0')}/${fecha.getFullYear()}`;           
+            const fila = document.createElement('tr');
             fila.innerHTML = `
                 <td>${item.concepto}</td>
                 <td>${item.id_categoria}</td>

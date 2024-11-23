@@ -203,37 +203,37 @@ app.post('/recordatorios/submit', (req, res) => {
 //Metodos para obtener de un valor 
 
 app.get('/movimientos/uno/:id', async(req, res) => {
-    const {id} = req.params.id;
+    const { id } = req.params;
     try {
         // Llama a la función `uno` para buscar el recordatorio
-        const recordatorio = await recordatorio.uno(id);
+        const movimientosUno = await movimiento.uno(id);
 
         // Verifica si se encontró el recordatorio
-        if (recordatorio.length === 0) {
+        if (movimientosUno.length === 0) {
             return res.status(404).json({ error: 'Movimiento no encontrado' });
         }
 
-        res.json(recordatorio[0]); // Devuelve el primer resultado como un objeto
+        res.json(movimientosUno[0]); // Devuelve el primer resultado como un objeto
     } catch (error) {
-        console.error('Error al obtener el recordatorio:', error);
+        console.error('Error al obtener el movimiento:', error);
         res.status(500).json({ error: 'Error interno del servidor' });
     }
 });
 
 app.get('/tarjetas/uno/:id', async(req, res) => {
-    const {id} = req.params.id;
+    const { id } = req.params;
     try {
         // Llama a la función `uno` para buscar el recordatorio
-        const recordatorio = await recordatorio.uno(id);
+        const tarjetasUno = await tarjeta.uno(id);
 
         // Verifica si se encontró el recordatorio
-        if (recordatorio.length === 0) {
-            return res.status(404).json({ error: 'Movimiento no encontrado' });
+        if (tarjetasUno.length === 0) {
+            return res.status(404).json({ error: 'Tarjeta no encontrada' });
         }
 
-        res.json(recordatorio[0]); // Devuelve el primer resultado como un objeto
+        res.json(tarjetasUno[0]); // Devuelve el primer resultado como un objeto
     } catch (error) {
-        console.error('Error al obtener el recordatorio:', error);
+        console.error('Error al obtener la tarjeta:', error);
         res.status(500).json({ error: 'Error interno del servidor' });
     }
 });

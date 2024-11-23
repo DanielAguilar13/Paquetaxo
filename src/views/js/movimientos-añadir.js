@@ -1,3 +1,49 @@
+document.getElementById("form-movimientos").addEventListener("submit", function (e) {
+    e.preventDefault(); // Prevenir el comportamiento predeterminado del formulario
+
+    const id = document.getElementById("id").value || 0; // Si no tiene id, es creación
+    const concepto = document.getElementById("concepto").value;
+    const cantidad = document.getElementById("cantidad").value;
+    const id_categoria = document.getElementById("id_categoria").value;
+    const id_tipo = document.getElementById("id_tipo").value;
+    const id_tarjeta = document.getElementById("id_tarjeta").value;
+    const fecha = document.getElementById("fecha").value;
+
+    const data = {
+        id: id, // Si es `0`, se creará un nuevo registro
+        concepto: concepto,
+        cantidad: cantidad,
+        id_categoria: id_categoria,
+        id_tipo: id_tipo,
+        id_tarjeta: id_tarjeta,
+        fecha: fecha,
+    };
+
+    // Enviar los datos a la API con `POST`
+    fetch("/api/movimientos", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+    })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("Error en la operación");
+            }
+            return response.json();
+        })
+        .then((result) => {
+            alert("Operación exitosa");
+            window.location.href = "/movimientos.html"; // Redirigir después del éxito
+        })
+        .catch((error) => {
+            console.error("Error:", error);
+            alert("Hubo un error al procesar la solicitud");
+        });
+});
+
+
 // Función para volver a la página de inicio
 function goBackToHome() {
     // Reiniciar el formulario

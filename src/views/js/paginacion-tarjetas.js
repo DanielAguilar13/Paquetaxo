@@ -40,8 +40,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     <td>${item.mes_vencimiento}</td>
                     <td>${item.anio_vencimiento}</td>
                     <td class="actions">
-                        <button class="btn btn-edit" onclick="editarRecordatorio(${item.id})">✏️</button>
-                        <button class="btn btn-delete" onclick="eliminarRecordatorio(${item.id})">🗑️</button>
+                        <button class="btn btn-edit" onclick="editarTarjeta(${item.id})">✏️</button>
+                        <button class="btn btn-delete" onclick="eliminarTarjeta(${item.id})">🗑️</button>
                     </td>
                 `;
                 tabla.appendChild(fila);
