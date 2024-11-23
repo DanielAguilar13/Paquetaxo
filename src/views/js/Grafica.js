@@ -1,5 +1,5 @@
 // Obtener movimientos y configurar tabla y gráfica
-fetch('/movimientos')
+fetch('/movimiento')
     .then(response => {
         if (!response.ok) {
             throw new Error('Error al obtener los datos: ' + response.statusText);
