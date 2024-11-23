@@ -189,6 +189,25 @@ app.post('/recordatorios/submit', (req, res) => {
     recordatorio.agregar(data)
 });
 
+//Metodos para obtener de un valor 
+
+app.get('/movimientos/uno/:id', async(req, res) => {
+    const {id} = req.params.id;
+    try {
+        // Llama a la función `uno` para buscar el recordatorio
+        const recordatorio = await recordatorio.uno('recordatorios', id);
+
+        // Verifica si se encontró el recordatorio
+        if (recordatorio.length === 0) {
+            return res.status(404).json({ error: 'Recordatorio no encontrado' });
+        }
+
+        res.json(recordatorio[0]); // Devuelve el primer resultado como un objeto
+    } catch (error) {
+        console.error('Error al obtener el recordatorio:', error);
+        res.status(500).json({ error: 'Error interno del servidor' });
+    }
+});
 // Metodos DELETE para eliminar informacion
 app.delete('/api/movimientos/:id', async (req, res) => {
     const { id } = req.params; // Obtener el ID del recordatorio desde la URL

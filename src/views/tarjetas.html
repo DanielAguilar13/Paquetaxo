@@ -57,37 +57,54 @@
         </table>
         <script>
             fetch('/tarjetas')
-  .then(response => {
-    if (!response.ok) {
-      throw new Error('Error al obtener los datos: ' + response.statusText);
-    }
-    return response.json();
-  })
-  .then(data => {
-    const tabla = document.getElementById('tabla-datos');
-    tabla.innerHTML = ''; // Limpiar la tabla antes de agregar datos
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Error al obtener los datos: ' + response.statusText);
+              }
+              return response.json();
+            })
+            .then(data => {
+              const tabla = document.getElementById('tabla-datos');
+              tabla.innerHTML = ''; // Limpiar la tabla antes de agregar datos
 
-    // Iterar sobre los datos y generar las filas
-    data.forEach(item => {
-      const fila = document.createElement('tr');
-      fila.innerHTML = `
-        <td>${item.nombre}</td>
-        <td>${item.ultimos_digitos}</td>
-        <td>${item.fecha_expiracion}</td>
-        <td>${item.tipo_tarjeta}</td>
-        <td>${item.saldo}</td>
-        <td>${item.fecha_corte}</td>
-        <td>${item.deuda}</td>
-        <td class="actions">
-          <button class="btn btn-edit" onclick="editarRecordatorio(${item.id})">✏️</button>
-          <button class="btn btn-delete" onclick="eliminarRecordatorio(${item.id})">🗑️</button>
-        </td>
-      `;
-      tabla.appendChild(fila);
-    });
-  })
-  .catch(error => console.error('Error al obtener los datos:', error));
-
+              // Iterar sobre los datos y generar las filas
+              data.forEach(item => {
+                const fila = document.createElement('tr');
+                fila.innerHTML = `
+                  <td>${item.nombre}</td>
+                  <td>${item.ultimos_digitos}</td>
+                  <td>${item.fecha_expiracion}</td>
+                  <td>${item.tipo_tarjeta}</td>
+                  <td>${item.saldo}</td>
+                  <td>${item.fecha_corte}</td>
+                  <td>${item.deuda}</td>
+                  <td class="actions">
+                    <button class="btn btn-edit" onclick="editarRecordatorio(${item.id})">✏️</button>
+                    <button class="btn btn-delete" onclick="eliminarTarjeta(${item.id})">🗑️</button>
+                  </td>
+                `;
+                tabla.appendChild(fila);
+                });
+              })
+              .catch(error => console.error('Error al obtener los datos:', error));
+              function eliminarTarjeta(id) {
+                if (confirm('¿Estás seguro de que deseas eliminar esta tarjeta?')) {
+                    fetch(`/api/tarjetas/${id}`, {
+                        method: 'DELETE',
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Error al eliminar la tarjeta');
+                        }
+                        alert('Tarjeta eliminada exitosamente');
+                        location.reload(); // Recargar la página para actualizar la tabla
+                    })
+                    .catch(error => {
+                        console.error('Error al eliminar la tarjeta:', error);
+                        alert('No se pudo eliminar la tarjeta. Por favor, inténtalo de nuevo.');
+                    });
+                }
+            }
         </script>
 
         <!-- Paginación -->

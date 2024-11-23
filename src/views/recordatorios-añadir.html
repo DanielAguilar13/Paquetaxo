@@ -10,6 +10,7 @@
     <form action="/recordatorios/submit" method="POST" id="form-recordatorios" class="form">
         <h2 class="form_tittle">Recordatorio</h2>
         <div class="form_container">
+            <input type="hidden" id="id" name="id">
             <!-- Campo para el recordatorio -->
             <div class="form_group">
                 <input type="text" id="concepto" name="concepto" class="form_input" placeholder=" ">
@@ -36,7 +37,7 @@
 
             <!-- Contenedor de botones -->
             <div class="button_container">
-                <input type="submit" class="form_submit" value="Guardar" onclick="goBackToHome()">
+                <input type="submit" class="form_submit" value="Guardar" onclick="">
                 <p class="warnings" id="warnings"></p>
                 <input type="button" class="form_delete" value="Cancelar" onclick="goBackToHome()">
             </div>
