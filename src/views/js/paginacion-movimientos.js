@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let allRecords = [];  // Almacenará todos los movimientos
 
     // Función para cargar los movimientos
-    fetch('/movimientos')
+    fetch('/movimiento')
         .then(response => {
             if (!response.ok) {
                 throw new Error('Error al obtener los datos: ' + response.statusText);
@@ -31,19 +31,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
         pageRecords.forEach(item => {
             const fila = document.createElement('tr');
-                    fila.innerHTML = `
-                        <td>${item.concepto}</td>
-                        <td>${item.cantidad}</td>
-                        <td>${item.id_categoria}</td>
-                        <td>${item.id_tipo}</td>
-                        <td>${item.id_tarjeta}</td>
-                        <td>${item.fecha}</td>
-                        <td class="actions">
-                            <button class="btn btn-edit" onclick="editarRecordatorio(${item.id})">✏️</button>
-                            <button class="btn btn-delete" onclick="eliminarRecordatorio(${item.id})">🗑️</button>
-                        </td>
-                    `;
-                    tabla.appendChild(fila);
+            fila.innerHTML = `
+                <td>${item.concepto}</td>
+                <td>${item.cantidad}</td>
+                <td>${item.id_categoria}</td>
+                <td>${item.id_tipo}</td>
+                <td>${item.id_tarjeta}</td>
+                <td>${item.fecha}</td>
+                <td class="actions">
+                    <button class="btn btn-edit" onclick="editarMovimiento(${item.id})">✏️</button>
+                    <button class="btn btn-delete" onclick="eliminarMovimiento(${item.id})">🗑️</button>
+                </td>
+            `;
+            tabla.appendChild(fila);
         });
     }
 
