@@ -34,7 +34,7 @@
         <!-- Barra de título y botón -->
         <div class="title-bar">
             <h2>Movimientos</h2>
-            <a class="btn-add" href="./movimientos-añadir.html">Agregar Movimeinto</a>
+            <a class="btn-add" href="./movimientos-añadir.html">Agregar Movimiento</a>
         </div>
         <!-- Tabla de recordatorios -->
         <table class="table">
@@ -54,7 +54,7 @@
             </tbody>
         </table>
         <script>
-            fetch('/movimientos')
+            fetch('/movimiento')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Error al obtener los datos: ' + response.statusText);
@@ -77,7 +77,7 @@
                         <td>${item.id_tarjeta}</td>
                         <td>${item.fecha}</td>
                         <td class="actions">
-                            <button class="btn btn-edit" onclick="editarRecordatorio(${item.id})">✏️</button>
+                            <button class="btn btn-edit" onclick="editarMovimiento(${item.id})">✏️</button>
                             <button class="btn btn-delete" onclick="eliminarMovimiento(${item.id})">🗑️</button>
                         </td>
                     `;
@@ -104,6 +104,26 @@
                     });
                 }
             }
+            function editarRecordatorio(id) {
+                // Obtener los datos del recordatorio por ID
+                fetch(`/movimientos/uno/${id}`)
+                    .then((response) => {
+                        if (!response.ok) {
+                            throw new Error("Error al obtener el movimiento");
+                        }
+                        return response.json();
+                    })
+                    .then((recordatorio) => {
+                        // Redirigir al formulario con los datos cargados en la URL
+                        const url = new URL("movimientos-añadir.html", window.location.origin);
+                        url.searchParams.set("id", movimiento.id); // Agrega el ID como parámetro
+                        window.location.href = url; // Redirige al formulario
+                    })
+                    .catch((error) => {
+                        console.error("Error al obtener el movimiento:", error);
+                        alert("No se pudo cargar el movimiento para editar.");
+                    });
+            }
         </script>
         </table>
         <!-- Paginación -->
@@ -111,9 +131,6 @@
         <script src="./js/movimientos-eliminar.js"></script>
         <script src="./js/paginacion-movimientos.js"></script>
     </div>
-<<<<<<< HEAD
     
-=======
->>>>>>> main
 </body>
 </html>

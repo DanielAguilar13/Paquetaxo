@@ -1,3 +1,44 @@
+document.getElementById("form-recordatorios").addEventListener("submit", function (e) {
+    e.preventDefault(); // Prevenir el comportamiento predeterminado del formulario
+
+    const id = document.getElementById("id").value || 0; // Si no tiene id, es creación
+    const concepto = document.getElementById("concepto").value;
+    const id_categoria = document.getElementById("id_categoria").value;
+    const fecha = document.getElementById("fecha").value;
+
+    const data = {
+        id: id, // Si es `0`, se creará un nuevo registro
+        concepto: concepto,
+        id_categoria: id_categoria,
+        fecha: fecha,
+    };
+
+    // Enviar los datos a la API con `POST`
+    fetch("/api/recordatorios", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+    })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("Error en la operación");
+            }
+            return response.json();
+        })
+        .then((result) => {
+            alert("Operación exitosa");
+            window.location.href = "/recordatorios.html"; // Redirigir después del éxito
+        })
+        .catch((error) => {
+            console.error("Error:", error);
+            alert("Hubo un error al procesar la solicitud");
+        });
+});
+
+
+
 // Configurar la fecha mínima y máxima para el input de fecha
 function goBackToHome() {
     // Reiniciar el formulario

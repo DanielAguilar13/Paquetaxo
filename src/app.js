@@ -70,7 +70,7 @@ app.get('/tarjetas', async (req, res) => {
     }
 });
 
-app.get('/movimientos', async (req, res) => {
+app.get('/movimiento', async (req, res) => {
     try{
         const movimientosMostar = await movimiento.todos();
         res.status(200).json(movimientosMostar);
@@ -206,11 +206,11 @@ app.get('/movimientos/uno/:id', async(req, res) => {
     const {id} = req.params.id;
     try {
         // Llama a la función `uno` para buscar el recordatorio
-        const recordatorio = await recordatorio.uno('recordatorios', id);
+        const recordatorio = await recordatorio.uno(id);
 
         // Verifica si se encontró el recordatorio
         if (recordatorio.length === 0) {
-            return res.status(404).json({ error: 'Recordatorio no encontrado' });
+            return res.status(404).json({ error: 'Movimiento no encontrado' });
         }
 
         res.json(recordatorio[0]); // Devuelve el primer resultado como un objeto
@@ -219,6 +219,39 @@ app.get('/movimientos/uno/:id', async(req, res) => {
         res.status(500).json({ error: 'Error interno del servidor' });
     }
 });
+
+app.get('/tarjetas/uno/:id', async(req, res) => {
+    const {id} = req.params.id;
+    try {
+        // Llama a la función `uno` para buscar el recordatorio
+        const recordatorio = await recordatorio.uno(id);
+
+        // Verifica si se encontró el recordatorio
+        if (recordatorio.length === 0) {
+            return res.status(404).json({ error: 'Movimiento no encontrado' });
+        }
+
+        res.json(recordatorio[0]); // Devuelve el primer resultado como un objeto
+    } catch (error) {
+        console.error('Error al obtener el recordatorio:', error);
+        res.status(500).json({ error: 'Error interno del servidor' });
+    }
+});
+
+app.get('/recordatorios/uno/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        const recordatorioUno = await recordatorio.uno(id);
+        if (recordatorioUno.length === 0) {
+            return res.status(404).json({ error: 'Recordatorio no encontrado' });
+        }
+        res.json(recordatorioUno[0]);
+    } catch (error) {
+        console.error('Error al obtener el recordatorio:', error);
+        res.status(500).json({ error: 'Error interno del servidor' });
+    }
+});
+
 // Metodos DELETE para eliminar informacion
 app.delete('/api/movimientos/:id', async (req, res) => {
     const { id } = req.params; // Obtener el ID del recordatorio desde la URL

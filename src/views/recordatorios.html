@@ -29,12 +29,7 @@
         <img src="./img/icono1.png" alt="User" onclick="openSidebar()" class="open-btn">
         <script src="./js/sidebar.js"></script>
     </header>
-<<<<<<< HEAD
     <script src="./js/sidebar.js"></script>
-=======
-    <script src="../js/sidebar.js"></script>
-    <script src="../js/sidebar.js"></script>
->>>>>>> main
     <div class="container">
         <!-- Barra de título y botón -->
         <div class="title-bar">
@@ -57,34 +52,7 @@
             </tbody>
         </table>
         <script>
-            fetch('/recordatorios')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Error al obtener los datos: ' + response.statusText);
-                }
-                return response.json();
-            })
-            .then(data => {
-                const tabla = document.getElementById('tabla-datos');
-                tabla.innerHTML = ''; // Limpiar la tabla antes de agregar datos
-
-                // Iterar sobre los datos y generar las filas
-                data.forEach(item => {
-                    const fila = document.createElement('tr');
-                    fila.innerHTML = `
-                        <td>${item.concepto}</td>
-                        <td>${item.id_categoria}</td>
-                        <td>${item.fecha}</td>
-                        <td class="actions">
-                            <button class="btn btn-edit" onclick="editarRecordatorio(${item.id})">✏️</button>
-                            <button class="btn btn-delete" onclick="eliminarRecordatorio(${item.id})">🗑️</button>
-                        </td>
-                    `;
-                    tabla.appendChild(fila);
-                });
-            })
-            .catch(error => console.error('Error al obtener los datos:', error));// URL de la API
-
+            
             function eliminarRecordatorio(id) {
                 if (confirm('¿Estás seguro de que deseas eliminar este recordatorio?')) {
                     fetch(`/api/recordatorios/${id}`, {
@@ -102,6 +70,26 @@
                         alert('No se pudo eliminar el recordatorio. Por favor, inténtalo de nuevo.');
                     });
                 }
+            }
+            function editarRecordatorio(id) {
+                // Obtener los datos del recordatorio por ID
+                fetch(`/recordatorios/uno/${id}`)
+                    .then((response) => {
+                        if (!response.ok) {
+                            throw new Error("Error al obtener el recordatorio");
+                        }
+                        return response.json();
+                    })
+                    .then((recordatorio) => {
+                        // Redirigir al formulario con los datos cargados en la URL
+                        const url = new URL("recordatorios-añadir.html", window.location.origin);
+                        url.searchParams.set("id", recordatorio.id); // Agrega el ID como parámetro
+                        window.location.href = url; // Redirige al formulario
+                    })
+                    .catch((error) => {
+                        console.error("Error al obtener el recordatorio:", error);
+                        alert("No se pudo cargar el recordatorio para editar.");
+                    });
             }
         </script>
 
