@@ -54,38 +54,6 @@
             </tbody>
         </table>
         <script>
-            fetch('/movimiento')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Error al obtener los datos: ' + response.statusText);
-                }
-                return response.json();
-            })
-            .then(data => {
-                const tabla = document.getElementById('tabla-datos');
-                tabla.innerHTML = ''; // Limpiar la tabla antes de agregar datos
-
-                // Iterar sobre los datos y generar las filas
-                data.forEach(item => {
-                    const fila = document.createElement('tr');
-                    fila.id = `fila-${item.id}`;
-                    fila.innerHTML = `
-                        <td>${item.concepto}</td>
-                        <td>${item.cantidad}</td>
-                        <td>${item.id_categoria}</td>
-                        <td>${item.id_tipo}</td>
-                        <td>${item.id_tarjeta}</td>
-                        <td>${item.fecha}</td>
-                        <td class="actions">
-                            <button class="btn btn-edit" onclick="editarMovimiento(${item.id})">✏️</button>
-                            <button class="btn btn-delete" onclick="eliminarMovimiento(${item.id})">🗑️</button>
-                        </td>
-                    `;
-                    tabla.appendChild(fila);
-                });
-            })
-            .catch(error => console.error('Error al obtener los datos:', error));// URL de la API
-
             function eliminarMovimiento(id) {
                 if (confirm('¿Estás seguro de que deseas eliminar este Movimiento?')) {
                     fetch(`/api/movimientos/${id}`, {
@@ -104,8 +72,8 @@
                     });
                 }
             }
-            function editarRecordatorio(id) {
-                // Obtener los datos del recordatorio por ID
+            function editarMovimiento(id) {
+                console.log("ID recibido para editar:", id); // Agrega un log para verificar
                 fetch(`/movimientos/uno/${id}`)
                     .then((response) => {
                         if (!response.ok) {
@@ -113,22 +81,21 @@
                         }
                         return response.json();
                     })
-                    .then((recordatorio) => {
-                        // Redirigir al formulario con los datos cargados en la URL
+                    .then((movimiento) => {
                         const url = new URL("movimientos-añadir.html", window.location.origin);
-                        url.searchParams.set("id", movimiento.id); // Agrega el ID como parámetro
-                        window.location.href = url; // Redirige al formulario
+                        url.searchParams.set("id", movimiento.id); // Aquí se pasa el ID
+                        window.location.href = url;
                     })
                     .catch((error) => {
                         console.error("Error al obtener el movimiento:", error);
                         alert("No se pudo cargar el movimiento para editar.");
                     });
             }
+            
         </script>
         </table>
         <!-- Paginación -->
         <div id="pagination" class="pagination"></div>
-        <script src="./js/movimientos-eliminar.js"></script>
         <script src="./js/paginacion-movimientos.js"></script>
     </div>
     
