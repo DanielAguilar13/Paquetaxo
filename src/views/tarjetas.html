@@ -74,6 +74,26 @@
                     });
                 }
             }
+            function editarTarjeta(id) {
+                // Obtener los datos del recordatorio por ID
+                fetch(`/tarjetas/uno/${id}`)
+                    .then((response) => {
+                        if (!response.ok) {
+                            throw new Error("Error al obtener la tarjeta");
+                        }
+                        return response.json();
+                    })
+                    .then((tarjeta) => {
+                        // Redirigir al formulario con los datos cargados en la URL
+                        const url = new URL("tarjetas-añadir.html", window.location.origin);
+                        url.searchParams.set("id", tarjeta.id); // Agrega el ID como parámetro
+                        window.location.href = url; // Redirige al formulario
+                    })
+                    .catch((error) => {
+                        console.error("Error al obtener la tarjeta:", error);
+                        alert("No se pudo cargar la tarjeta para editar.");
+                    });
+            }
         </script>
         <!-- Paginación -->
         <div id="pagination" class="pagination"></div>

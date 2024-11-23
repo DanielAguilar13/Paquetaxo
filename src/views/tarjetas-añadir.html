@@ -7,9 +7,10 @@
     <title>GGP - Tarjetas</title>
 </head>
 <body>
-    <form action="/tarjeta/submit" method="POST" id="form-tarjetas" class="form">
+    <form action="" method="POST" id="form-tarjetas" class="form">
         <h2 class="form_tittle">Tarjeta</h2>
         <div class="form_container">
+            <input type="hidden" id="id" name="id">
             <div class="form_group">
                 <input type="text" id="nombre" name="nombre" class="form_input" placeholder=" ">
                 <label for="nombre" class="form_label">Nombre de la tarjeta</label>
@@ -55,6 +56,57 @@
             </div>
         </div>
     </form>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get('id'); // Leer el ID de la URL
+    
+            if (id) {
+                // Cargar datos si es edición
+                fetch(`/tarjetas/uno/${id}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById('id').value = data.id ;
+                        document.getElementById('nombre').value = data.nombre || '';
+                        document.getElementById('ultimos_digitos').value = data.ultimos_digitos || '';
+                        document.getElementById('limite_credito').value = data.limite_credito || 0;
+                        document.getElementById('dia_corte').value = data.dia_corte || 0;
+                        document.getElementById('saldo').value = data.saldo || 0;
+                        document.getElementById('mes_vencimiento').value = data.mes_vencimiento || 1;
+                        document.getElementById('anio_vencimiento').value = data.anio_vencimiento;
+                    })
+                    .catch(error => console.error('Error al cargar los datos:', error));
+            }
+        });
+    
+        document.getElementById('form-tarjetas').addEventListener('submit', (event) => {
+            event.preventDefault();
+    
+            const id = document.getElementById('id').value || 0;
+            const nombre = document.getElementById('nombre').value;
+            const ultimos_digitos = document.getElementById('ultimos_digitos').value;
+            const limite_credito = document.getElementById('limite_credito').value;
+            const dia_corte = document.getElementById('dia_corte').value;
+            const saldo = document.getElementById('saldo').value;
+            const mes_vencimiento = document.getElementById('mes_vencimiento').value;
+            const anio_vencimiento = document.getElementById('anio_vencimiento').value;
+    
+            fetch('/tarjetas/submit', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id, nombre, ultimos_digitos, limite_credito, dia_corte, saldo, mes_vencimiento, anio_vencimiento }),
+            })
+                .then(response => {
+                    if (!response.ok) throw new Error('Error al enviar el formulario');
+                    return response.json();
+                })
+                .then(data => {
+                    alert('Operación exitosa');
+                    window.location.href = '/tarjetas.html'; // Redirigir al listado
+                })
+                .catch(error => console.error('Error al enviar:', error));
+        });
+    </script>
     <script src="./js/tarjetas-añadir.js"></script>
 </body>
 </html>
