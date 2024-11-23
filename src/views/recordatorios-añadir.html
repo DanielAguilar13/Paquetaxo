@@ -7,61 +7,52 @@
     <title>GGP - Recordatorios</title>
 </head>
 <body>
-    <form action="/recordatorios/submit" method="POST" id="form-recordatorios" class="form">
+    <form action="/recordatorios/submit" id="form-recordatorios" class="form" method="POST">
         <h2 class="form_tittle">Recordatorio</h2>
         <div class="form_container">
             <input type="hidden" id="id" name="id">
             <!-- Campo para el recordatorio -->
             <div class="form_group">
                 <input type="text" id="concepto" name="concepto" class="form_input" placeholder=" ">
-                <label for="nombre" class="form_label">Recordatorio</label>
+                <label for="concepto" class="form_label">Recordatorio</label>
                 <span class="form_line"></span>
+                <small class="error_message" id="concepto_error"></small>
             </div>
 
-            <!-- Campo para el tipo -->
+            <!-- Campo para la categoría -->
             <div class="form_group">
-                <select id="id_categoria" name="id_categoria">
-                    <option value="" selected disabled></option>
-                    <!-- Opciones se cargarán dinámicamente -->
+                <select id="id_categoria" name="id_categoria" class="form_input">
+                    <option value="" selected disabled>Seleccionar categoría</option>
                 </select>
-                <label for="id_categoria" class="form_label">Categoria</label>
+                <label for="id_categoria" class="form_label">Categoría</label>
                 <span class="form_line"></span>
+                <small class="error_message" id="concepto_error"></small>
             </div>
 
             <!-- Campo para la fecha -->
             <div class="form_group">
                 <input type="date" id="fecha" name="fecha" class="form_input" placeholder=" ">
-                <label for="tipo" class="form_label">Fecha</label>
+                <label for="fecha" class="form_label">Fecha de recordatorio</label>
                 <span class="form_line"></span>
+                <small class="error_message" id="concepto_error"></small>
             </div>
 
-            <!-- Contenedor de botones -->
+            <!--Alerta-->
+            <div id="alerta" class="alert" style="display: none;"></div>
+
+            <!-- Botones -->
             <div class="button_container">
+<<<<<<< HEAD
                 <input type="submit" class="form_submit" value="Guardar" onclick="">
                 <p class="warnings" id="warnings"></p>
                 <input type="button" class="form_delete" value="Cancelar" onclick="goBackToHome()">
+=======
+                <button type="submit" class="form_submit">Enviar</button>
+                <button type="button" class="form_delete" onclick="goBackToHome()">Cancelar</button>
+>>>>>>> main
             </div>
         </div>
     </form>
-
-    <script>
-        // Llenar el select con datos de la API
-        fetch('/categorias')
-        .then(response => response.json())
-        .then(data => {
-            const select = document.getElementById('id_categoria');
-            data.forEach(categoria => {
-                const option = document.createElement('option');
-                option.value = categoria.id; // ID de la categoría
-                option.textContent = categoria.nombre; // Nombre de la categoría
-                select.appendChild(option);
-            });
-        })
-        .catch(error => console.error('Error al cargar las categorías:', error));
-        function goBackToHome() {
-            window.location.href = "recordatorios.html";
-        }
-    </script>
-    <script src="./js/recordatorios.js"></script>
+    <script src="./js/recordatorios-añadir.js"></script>
 </body>
 </html>
