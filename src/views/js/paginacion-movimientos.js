@@ -30,20 +30,22 @@ document.addEventListener('DOMContentLoaded', function() {
         tabla.innerHTML = '';  // Limpiamos la tabla antes de agregar los nuevos datos
 
         pageRecords.forEach(item => {
+            const fecha = new Date(item.fecha);
+            const fechaFormateada = `${fecha.getDate().toString().padStart(2, '0')}/${(fecha.getMonth() + 1).toString().padStart(2, '0')}/${fecha.getFullYear()}`;
             const fila = document.createElement('tr');
-            fila.innerHTML = `
-                <td>${item.concepto}</td>
-                <td>${item.cantidad}</td>
-                <td>${item.id_categoria}</td>
-                <td>${item.id_tipo}</td>
-                <td>${item.id_tarjeta}</td>
-                <td>${item.fecha}</td>
-                <td class="actions">
-                    <button class="btn btn-edit" onclick="editarMovimiento(${item.id})">✏️</button>
-                    <button class="btn btn-delete" onclick="eliminarMovimiento(${item.id})">🗑️</button>
-                </td>
-            `;
-            tabla.appendChild(fila);
+                    fila.innerHTML = `
+                        <td>${item.concepto}</td>
+                        <td>${item.cantidad}</td>
+                        <td>${item.id_categoria}</td>
+                        <td>${item.id_tipo}</td>
+                        <td>${item.id_tarjeta}</td>
+                        <td>${fechaFormateada}</td>
+                        <td class="actions">
+                            <button class="btn btn-edit" onclick="editarMovimiento(${item.id})">✏️</button>
+                            <button class="btn btn-delete" onclick="eliminarMovimiento(${item.id})">🗑️</button>
+                        </td>
+                    `;
+                    tabla.appendChild(fila);
         });
     }
 
