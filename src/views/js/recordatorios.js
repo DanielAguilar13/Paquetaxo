@@ -1,51 +1,61 @@
-// Seleccionamos el formulario y el elemento donde se mostrarán los mensajes de advertencia
-const form = document.getElementById('form-recordatorios');
-const warningsElement = document.getElementById('warnings');
+document.addEventListener("DOMContentLoaded", () => {
+    const modalContainer = document.createElement("div");
+    modalContainer.id = "modal-container";
+    modalContainer.classList.add("modal-container");
+    document.body.appendChild(modalContainer);
 
-// Función para validar el formulario
-form.addEventListener('submit', (event) => {
-    // Prevenimos el envío del formulario
-    event.preventDefault();
+    // Función para obtener la fecha actual en formato 'YYYY-MM-DD'
+    const getCurrentDate = () => {
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = String(today.getMonth() + 1).padStart(2, '0'); // Mes (0 indexado)
+        const day = String(today.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    };
 
-    // Obtenemos los valores de los campos
-    const recordatorio = document.getElementById('concepto').value.trim();
-    const tipo = document.getElementById('id_categoria').value.trim();
-    const fecha = document.getElementById('fecha').value.trim();
+    // Ejemplo de datos de recordatorios; reemplázalo con datos reales.
+    const recordatorios = [
+        { concepto: "Pagar alquiler", fecha: "2024-11-24", tipo: "Finanzas" },
+        { concepto: "Revisar proyecto", fecha: "2024-11-25", tipo: "Trabajo" },
+    ];
 
-    // Inicializamos la variable de advertencias
-    let warnings = '';
-    let error = false;
+    // Función para verificar si hay recordatorios para hoy
+    const verificarRecordatorios = () => {
+        const fechaActual = getCurrentDate();
+        const recordatoriosHoy = recordatorios.filter(r => r.fecha === fechaActual);
 
-    // Validación del campo "Recordatorio"
-    if (recordatorio === '') {
-        warnings += 'Por favor, ingresa el recordatorio.<br>';
-        error = true;
-    } else if (recordatorio.length < 6) {
-        warnings += 'El recordatorio debe tener al menos 6 letras.<br>';
-        error = true;
-    }
+        if (recordatoriosHoy.length > 0) {
+            const modalContent = document.createElement("div");
+            modalContent.classList.add("modal-content");
 
-    // Validación del campo "Tipo"
-    if (tipo === '') {
-        warnings += 'Por favor, ingresa el tipo.<br>';
-        error = true;
-    }
+            // Agregar contenido de recordatorios al modal
+            const closeButton = document.createElement("button");
+            closeButton.textContent = "Cerrar";
+            closeButton.classList.add("modal-close");
+            closeButton.addEventListener("click", () => {
+                modalContainer.style.display = "none";
+            });
 
-    // Validación del campo "Fecha"
-    if (fecha === '') {
-        warnings += 'Por favor, selecciona una fecha.<br>';
-        error = true;
-    }
+            const header = document.createElement("h2");
+            header.textContent = "Recordatorios para hoy:";
+            modalContent.appendChild(header);
 
-    // Si hay errores, mostramos las advertencias
-    if (error) {
-        warningsElement.innerHTML = warnings;
-        warningsElement.style.color = 'red'; // Color rojo para advertencias
-    } else {
-        warningsElement.innerHTML = 'Formulario enviado correctamente.';
-        warningsElement.style.color = 'green'; // Color verde para éxito
+            recordatoriosHoy.forEach(recordatorio => {
+                const recordatorioElement = document.createElement("p");
+                recordatorioElement.innerHTML = `
+                    <strong>${recordatorio.concepto}</strong><br>
+                    Tipo: ${recordatorio.tipo}
+                `;
+                modalContent.appendChild(recordatorioElement);
+            });
 
-        // Opcional: Puedes agregar lógica para enviar el formulario por AJAX o similar
-        setTimeout(() => form.submit(), 1000); // Envía el formulario tras un breve retraso
-    }
+            modalContent.appendChild(closeButton);
+            modalContainer.appendChild(modalContent);
+
+            // Mostrar el modal
+            modalContainer.style.display = "block";
+        }
+    };
+
+    verificarRecordatorios();
 });

@@ -1,0 +1,71 @@
+/* Estilo para el modal */
+.modal-container {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Fondo semi-transparente */
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Estilo para el modal */
+.modal-content {
+    background-color: #ffffff; /* Fondo blanco */
+    padding: 25px;
+    border-radius: 20px; /* Bordes redondeados */
+    max-width: 500px;
+    text-align: center;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3); /* Sombra */
+    animation: slideIn 0.3s ease-out;
+    font-family: 'Poppins', sans-serif; /* Fuente Poppins */
+}
+
+/* Título del modal */
+.modal-content h2 {
+    font-size: 28px; /* Título más grande */
+    font-weight: 600; /* Peso más grueso */
+    margin-bottom: 20px;
+    color: #7b1fa2; /* Morado vibrante */
+    text-transform: uppercase; /* Mayúsculas */
+}
+
+/* Texto del contenido */
+.modal-content p {
+    font-size: 25px; /* Texto principal */
+    line-height: 2;
+    margin: 12px 0;
+    font-weight: 400; /* Peso normal para el texto */
+}
+
+.modal-close {
+    margin-top: 20px;
+    padding: 12px 25px;
+    border: none;
+    background-color: #7b1fa2; /* Morado vibrante */
+    color: white;
+    border-radius: 15px; /* Bordes redondeados */
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.modal-close:hover {
+    background-color: #4a0072; /* Morado más oscuro */
+}
+
+/* Animación de entrada */
+@keyframes slideIn {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
