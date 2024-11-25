@@ -83,10 +83,10 @@ form.addEventListener('submit', function (event) {
         messages.push('Los últimos 4 dígitos deben ser un número de 4 cifras.');
     }
 
-    // Validar límite de crédito
-    if (!limiteCredito.value || parseFloat(limiteCredito.value) <= 0) {
+    // Validar límite de crédito (permitir decimales)
+    if (!limiteCredito.value || !/^\d+(\.\d{1,2})?$/.test(limiteCredito.value) || parseFloat(limiteCredito.value) <= 0) {
         isValid = false;
-        messages.push('El límite de crédito debe ser un número positivo.');
+        messages.push('El límite de crédito debe ser un número positivo, con hasta 2 decimales.');
     }
 
     // Validar día de corte
@@ -95,10 +95,10 @@ form.addEventListener('submit', function (event) {
         messages.push('El día de corte debe ser un número entre 1 y 31.');
     }
 
-    // Validar saldo
-    if (!saldo.value || parseFloat(saldo.value) < 0) {
+    // Validar saldo (permitir decimales)
+    if (!saldo.value || !/^\d+(\.\d{1,2})?$/.test(saldo.value) || parseFloat(saldo.value) < 0) {
         isValid = false;
-        messages.push('El saldo debe ser un número positivo.');
+        messages.push('El saldo debe ser un número positivo, con hasta 2 decimales.');
     }
 
     // Validar mes de vencimiento y año de vencimiento

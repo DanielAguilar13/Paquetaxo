@@ -31,7 +31,7 @@ body {
 }
 
 /* Form Styles */
-form {
+.form {
   background: linear-gradient(to right, var(--color-gray), var(--color-white));
   width: 320px;
   padding: 24px;
