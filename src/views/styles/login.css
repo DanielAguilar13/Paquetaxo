@@ -20,7 +20,7 @@
 
 /* Global Styles */
 body {
-  font-family: Tahoma, sans-serif;
+  font-family: 'Poppins', sans-serif;
   background: linear-gradient(to right, var(--color-background), var(--color-highlight));
   display: flex;
   justify-content: center;

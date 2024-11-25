@@ -23,7 +23,7 @@
 
 /* Estilos globales */
 body {
-  font-family: Tahoma, sans-serif;
+  font-family: 'Poppins', sans-serif;
   background: #6b46c1;
   margin: 0;
   padding: 0;
@@ -55,23 +55,38 @@ body {
   margin-bottom: 50px;
   animation: slideIn 0.6s ease-out forwards;
   flex-wrap: wrap;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.header:hover {
+  background-color: var(--color-white);
+  transform: translateY(-5px); /* Pequeño movimiento al hover */
+}
+
+.header:hover h1 {
+  color: var(--color-pagination-active); /* Cambia automáticamente el color del h1 */
 }
 
 .header img {
   width: 50px;
   margin-left: auto;
   margin-right: 10px;
+  transition: transform 0.3s ease; /* Suaviza el hover de imagen */
+}
+
+.header img:hover {
+  transform: rotate(10deg) scale(1.1); /* Efecto leve de rotación y escala */
 }
 
 .header h1 {
   margin: 0;
   font-size: 1.5em;
+  text-transform: uppercase;
+  transition: color 0.3s ease, transform 0.3s ease; /* Suaviza cambios */
 }
 
-.nav {
-  margin-left: auto;
-  display: flex;
-  gap: 15px;
+.header h1:hover {
+  transform: scale(1.05); /* Añade un leve escalado */
 }
 
 .btn-add {
@@ -83,27 +98,6 @@ body {
   cursor: pointer;
   font-weight: bold;
   transition: background-color 0.4s ease;
-}
-
-.nav a {
-  color: #fff;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.nav img {
-  width: 50px;
-  margin-right: 10px;
-}
-
-/* Estilo inicial para ocultar el botón */
-.open-btn {
-  cursor: pointer; /* Muestra el cursor como un puntero para indicar clic */
-}
-
-/* Muestra el botón cuando se pasa el ratón por encima del contenedor */
-.nav:hover .open-btn {
-  opacity: 3; /* Muestra la imagen */
 }
   
 /* Barra Lateral */
@@ -148,6 +142,28 @@ body {
   border-bottom: 1px solid var(--color-secondary); /* Línea inferior */
   margin-bottom: 1rem;
 }
+
+.close-btn {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.5625rem;
+  font-size: 2.25rem;
+  color: var(--color-white);
+  cursor: pointer;
+  transition: color 0.5s ease;
+}
+
+.close-btn:hover {
+  color: var(--color-highlight);
+}
+
+.open-btn {
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
 /* Título y botón */
 .title-bar {
   display: flex;

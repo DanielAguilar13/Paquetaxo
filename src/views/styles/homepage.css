@@ -23,7 +23,7 @@
 
 /* Estilos globales */
 body {
-  font-family: Tahoma, sans-serif;
+  font-family: 'Poppins', sans-serif;
   background: var(--color-background);
   color: var(--color-dark);
   margin: 0;
@@ -117,7 +117,6 @@ body {
   color: black;
 }
 
-
 /* Header */
 .header {
   background: var(--color-primary);
@@ -128,17 +127,38 @@ body {
   margin-bottom: 50px;
   animation: slideIn 0.6s ease-out forwards;
   flex-wrap: wrap;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.header:hover {
+  background-color: var(--color-white);
+  transform: translateY(-5px); /* Pequeño movimiento al hover */
+}
+
+.header:hover h1 {
+  color: var(--color-pagination-active); /* Cambia automáticamente el color del h1 */
 }
 
 .header img {
   width: 50px;
   margin-left: auto;
   margin-right: 10px;
+  transition: transform 0.3s ease; /* Suaviza el hover de imagen */
+}
+
+.header img:hover {
+  transform: rotate(10deg) scale(1.1); /* Efecto leve de rotación y escala */
 }
 
 .header h1 {
   margin: 0;
   font-size: 1.5em;
+  text-transform: uppercase;
+  transition: color 0.3s ease, transform 0.3s ease; /* Suaviza cambios */
+}
+
+.header h1:hover {
+  transform: scale(1.05); /* Añade un leve escalado */
 }
 
 /* Barra Lateral */
@@ -203,12 +223,6 @@ body {
   padding: 8px;
   border-radius: 50%;
   transition: transform 0.3s ease, background-color 0.3s ease;
-}
-
-.nav:hover .open-btn,
-.open-btn:hover {
-  transform: scale(1.1); /* Aumenta el tamaño ligeramente */
-  background-color: var(--color-highlight); /* Cambia el fondo al color de resaltado */
 }
 
 /* Título y botón */
