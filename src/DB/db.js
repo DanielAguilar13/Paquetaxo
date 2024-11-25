@@ -108,6 +108,14 @@ async function saldo() {
         }); 
     });
 }
+
+async function gasto(){
+    return new Promise((resolve, reject) => {
+        conexion.query(`SELECT SUM(cantidad) AS gasto FROM movimientos`, (error, result) =>{
+            return error ? reject(error) : resolve(result);
+        }); 
+    });
+}
 module.exports = {
     todos,
     uno,
@@ -117,5 +125,6 @@ module.exports = {
     eliminar,
     categoria,
     tipo_de_pago,
-    saldo
+    saldo,
+    gasto,
 }
