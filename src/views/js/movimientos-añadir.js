@@ -43,13 +43,12 @@ document.getElementById("form-movimientos").addEventListener("submit", function 
         });
 });
 
-
 // Función para volver a la página de inicio
 function goBackToHome() {
     // Reiniciar el formulario
     const formulario = document.getElementById('form-movimientos');
     formulario.reset(); // Limpia todos los campos del formulario
-    window.location.href = "recordatorios.html";
+    window.location.href = "movimientos.html";
 }
 
 window.onload = function() {

@@ -101,17 +101,23 @@ form.addEventListener('submit', function (event) {
         messages.push('El saldo debe ser un número positivo.');
     }
 
-    // Validar mes de vencimiento
-    if (!mesVencimiento.value || parseInt(mesVencimiento.value) < 1 || parseInt(mesVencimiento.value) > 12) {
+    // Validar mes de vencimiento y año de vencimiento
+    const mes = parseInt(mesVencimiento.value);
+    const anio = parseInt(anioVencimiento.value);
+
+    if (!anioVencimiento.value || anio < 24 || anio > 50) {
         isValid = false;
-        messages.push('El mes de vencimiento debe ser un número entre 1 y 12.');
+        messages.push('El año de vencimiento debe estar entre 24 y 50.');
     }
 
-    // Validar año de vencimiento
-    const currentYear = new Date().getFullYear();
-    if (!anioVencimiento.value || parseInt(anioVencimiento.value) < currentYear) {
+    if (anio === 24 && (mes != 12)) {
         isValid = false;
-        messages.push(`El año de vencimiento debe ser ${currentYear} o mayor.`);
+        messages.push('Para el año 24, el mes de vencimiento debe ser 12.');
+    }
+
+    if (!mesVencimiento.value || mes < 1 || mes > 12) {
+        isValid = false;
+        messages.push('El mes de vencimiento debe ser un número entre 1 y 12.');
     }
 
     // Mostrar errores si los hay
