@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GASTI - Perfil</title>
+  <link rel="stylesheet" href="./styles/perfil.css">
+</head>
+<body>
+  <form action="/usuario/submit">
+    <legend>Perfil de usuario</legend>
+    <label for="nombre">Escribe un nombre de usuario:</label>
+    <input type="text" id="nombre" name="nombre" placeholder="Ej: Pepe123 ">
+    
+    <label>Selecciona una imagen de usuario:</label>
+    <div class="image-grid">
+      <label>
+        <input type="radio" id="id_imagen" name="id_imagen" value="img1">
+        <img src="./img/icono1.png" alt="Imagen 1">
+      </label>
+      <label>
+        <input type="radio" id="id_imagen" name="id_imagen" value="img2">
+        <img src="./img/icono2.png" alt="Imagen 2">
+      </label>
+      <label>
+        <input type="radio" id="id_imagen" name="id_imagen" value="img3">
+        <img src="./img/icono3.png" alt="Imagen 3">
+      </label>
+      <label>
+        <input type="radio" id="id_imagen" name="id_imagen" value="img4">
+        <img src="./img/icono4.png" alt="Imagen 4">
+      </label>
+      <label>
+        <input type="radio" id="id_imagen" name="id_imagen" value="img5">
+        <img src="./img/icono5.png" alt="Imagen 5">
+      </label>
+      <label>
+        <input type="radio" id="id_imagen" name="id_imagen" value="img6">
+        <img src="./img/icono6.png" alt="Imagen 6">
+      </label>
+    </div> 
+    <div>
+      <button type="submit" class="submit-button">Guardar</button>
+    </div>
+    <div>
+      <button type="button" class="back-button" onclick="window.location.href='./homepage.html'">Atrás</button>
+    </div>
+  </form>
+  <script src="./js/login.js"></script>
+</body>
+</html>

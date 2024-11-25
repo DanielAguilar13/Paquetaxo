@@ -1,0 +1,296 @@
+:root {
+    /* Paleta de colores */
+    --color-background: #6b46c1;
+    --color-primary: #3a2e5e;
+    --color-secondary: #7d5fc9;
+    --color-highlight: #b68dfa;
+    --color-accent: #e7c6ff;
+
+    /* Colores neutrales */
+    --color-white: #ffffff;
+    --color-dark: #1b1b2f;
+    --color-border: #d1c4e9;
+    --color-table-header: #f0eef8;
+
+    /* Colores adicionales para botones */
+    --color-btn-delete: #f80000;
+    --color-btn-delete-hover: #ff6e6e;
+    --color-pagination: #6d6d6d;
+    --color-primary-hover: #460eec;
+    --color-pagination-hover: #4c4c4c;
+    --color-pagination-active: #7851a9;
+}
+
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--color-background);
+    color: var(--color-white);
+    overflow-x: hidden;
+}
+
+/*Header*/
+header {
+    display: flex;
+    flex-direction: row; /* Mantener dirección horizontal */
+    justify-content: center; /* Centrar elementos horizontalmente */
+    align-items: center; /* Centrar elementos verticalmente */
+    padding: 15px 30px;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+header:hover {
+    background-color: var(--color-secondary);
+    transform: none; /* Elimina el movimiento del header */
+}
+
+.text-header {
+    font-size: 28px;
+    font-weight: bold;
+    color: var(--color-primary);
+    text-transform: uppercase;
+    animation: fadeIn 1s ease-in-out;
+    cursor: text; /* Cambiar cursor a texto */
+    transition: color 0.3s ease;
+}
+
+.text-header:hover {
+    color: var(--color-highlight); /* Cambiar solo el color, sin escalado */
+    transform: none; /* Elimina el efecto de escala */
+}
+
+.img-logo {
+    max-width: 50px; /* Tamaño controlado de la imagen */
+    height: auto;
+    margin-right: 15px; /* Espacio entre la imagen y el texto */
+}
+
+.background {
+    position: relative;
+    height: 500px;
+    background: linear-gradient(
+            rgba(0, 0, 0, 0.5),
+            rgba(0, 0, 0, 0.5)
+        ),
+        url(../img/index.png) center/cover no-repeat;
+    animation: slideBackground 10s infinite alternate ease-in-out;
+}
+
+@keyframes slideBackground {
+    0% {
+        background-position: center top;
+    }
+    100% {
+        background-position: center bottom;
+    }
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.4);
+    opacity: 0.8;
+    animation: fadeIn 2s ease-in-out;
+}
+
+.start-btn {
+    background-color: var(--color-highlight);
+    color: var(--color-white);
+    border: none;
+    padding: 15px 30px;
+    font-size: 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+    animation: bounce 2s infinite;
+}
+
+.start-btn:hover {
+    background-color: var(--color-primary-hover);
+    transform: scale(1.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Bounce animation */
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Works Section */
+.works {
+    text-align: center;
+    padding: 60px 20px;
+    background-color: var(--color-secondary);
+    overflow: hidden;
+    position: relative;
+}
+
+.works h1 {
+    font-size: 36px;
+    color: var(--color-white);
+    animation: fadeInUp 1.2s ease-in-out;
+}
+
+.works h1::after {
+    content: "";
+    display: block;
+    width: 80px;
+    height: 3px;
+    margin: 10px auto 0;
+    background-color: var(--color-highlight);
+    animation: growLine 1s ease-in-out forwards;
+}
+
+/* Line animation */
+@keyframes growLine {
+    from {
+        width: 0;
+    }
+    to {
+        width: 80px;
+    }
+}
+
+/* Vision and Studio Sections */
+.vision, .mision, .contact {
+    padding: 50px 20px;
+    color: var(--color-white);
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+}
+
+.vision {
+    background-color: var(--color-primary);
+    animation: fadeInUp 1.5s ease-in-out;
+}
+
+.mision {
+    background-color: var(--color-dark);
+    animation: fadeInUp 1.8s ease-in-out;
+}
+
+.contact {
+    background-color: var(--color-accent);
+    animation: fadeInUp 2s ease-in-out;
+}
+
+/* Hover effects */
+.vision:hover, .mision:hover, .contact:hover {
+    transform: scale(1.02);
+}
+
+/* Section Titles */
+h2 {
+    font-size: 28px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    animation: fadeInUp 1s ease-in-out;
+}
+
+p {
+    font-size: 18px;
+    line-height: 1.5;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Ajustes para tabletas */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column; /* Elementos apilados */
+        padding: 10px;
+        text-align: center;
+    }
+
+    .logo {
+        font-size: 22px; /* Reducir el tamaño del logo */
+    }
+
+    .img-logo {
+        max-width: 40px; /* Imagen del logo más pequeña */
+        margin-right: 0;
+    }
+
+    .background {
+        height: 300px; /* Reducir altura del background */
+    }
+
+    .start-btn {
+        font-size: 16px; /* Botón más pequeño */
+        padding: 10px 20px;
+    }
+
+    .works {
+        padding: 40px 15px;
+    }
+
+    h2 {
+        font-size: 22px; /* Títulos más compactos */
+    }
+
+    p {
+        font-size: 14px; /* Texto más pequeño */
+    }
+}
+
+
+/* Ajustes adicionales para evitar desbordamientos */
+img,
+iframe {
+    max-width: 100%; /* Asegurar que las imágenes y iframes no se desborden */
+    height: auto;
+}
+
+.start-btn {
+    width: 100%; /* Botón ocupará todo el ancho disponible */
+    max-width: 300px; /* Limitar tamaño máximo */
+    margin: 0 auto; /* Centrar el botón */
+}
+
+.text-container {
+    padding: 10px; /* Ajustar el contenido interno para móviles */
+}

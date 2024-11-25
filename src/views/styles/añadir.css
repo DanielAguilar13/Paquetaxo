@@ -21,7 +21,7 @@
 
 /* Estilos globales */
 body {
-  font-family: Tahoma, sans-serif;
+  font-family: 'Poppins', sans-serif;
   background: linear-gradient(
     to right,
     var(--color-background),
