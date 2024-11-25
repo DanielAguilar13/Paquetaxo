@@ -1,3 +1,43 @@
+document.getElementById("form-ahorro").addEventListener("submit", function (e) {
+    e.preventDefault(); // Prevenir el comportamiento predeterminado del formulario
+
+    const id = document.getElementById("id").value || 0; // Si no tiene id, es creación
+    const cantidad = document.getElementById("cantidad").value;
+    const concepto = document.getElementById("concepto").value;
+    const limite_gasto = document.getElementById("limite_gasto").value;
+    const fecha = document.getElementById("fecha").value;
+
+    const data = {
+        id: id, // Si es `0`, se creará un nuevo registro
+        cantidad: cantidad,
+        concepto: concepto,
+        limite_gasto: limite_gasto,
+        fecha: fecha,
+    };
+
+    // Enviar los datos a la API con `POST`
+    fetch("/api/ahorro", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+    })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("Error en la operación");
+            }
+            return response.json();
+        })
+        .then((result) => {
+            alert("Operación exitosa");
+            window.location.href = "/ahorro.html"; // Redirigir después del éxito
+        })
+        .catch((error) => {
+            console.error("Error:", error);
+            alert("Hubo un error al procesar la solicitud");
+        });
+});
 // Función para volver a la página de inicio
 function goBackToHome() {
     const formulario = document.getElementById('form-ahorro');
@@ -21,18 +61,7 @@ window.onload = function () {
     fechaInput.setAttribute('max', futureDate);
 
     // Llenar el select con datos de la API
-    fetch('/movimiento')
-        .then(response => response.json())
-        .then(data => {
-            const select = document.getElementById('concepto');
-            data.forEach(concepto => {
-                const option = document.createElement('option');
-                option.value = concepto.id; // ID del concepto
-                option.textContent = concepto.concepto; // Nombre del concepto
-                select.appendChild(option);
-            });
-        })
-        .catch(error => console.error('Error al cargar los conceptos:', error));
+    
 };
 
 // Validar formulario antes de enviarlo

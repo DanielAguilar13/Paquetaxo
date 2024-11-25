@@ -30,16 +30,16 @@ SET time_zone = "+00:00";
 CREATE TABLE `ahorro` (
   `id` int(11) NOT NULL,
   `cantidad` int(11) DEFAULT NULL,
-  `concepto` int(11) DEFAULT NULL,
+  `concepto` varchar(50) DEFAULT NULL,
   `limite_gasto` int(11) DEFAULT NULL,
   `fecha` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
 INSERT INTO `ahorro` (`id`, `cantidad`, `concepto`, `limite_gasto`, `fecha`) VALUES
-(1, 1000, 1, 500, '2024-12-14'),
-(2, 2000, 2, 1000, '2024-11-30'),
-(3, 3000, 3, 1500, '2024-11-29');
+(1, 1000, 'Quincena', 500, '2024-12-14'),
+(2, 2000, 'Abono', 1000, '2024-11-30'),
+(3, 3000, 'Bonos', 2500, '2024-11-29');
 -- --------------------------------------------------------
 
 --

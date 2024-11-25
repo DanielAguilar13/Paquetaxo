@@ -56,7 +56,7 @@
             </tbody>
         </table>
         <script>
-            function eliminarTarjetas(id) {
+            function eliminarTarjeta(id) {
                 if (confirm('¿Estás seguro de que deseas eliminar esta tarjeta?')) {
                     fetch(`/api/tarjetas/${id}`, {
                         method: 'DELETE',
