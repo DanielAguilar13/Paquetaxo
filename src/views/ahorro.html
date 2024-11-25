@@ -42,13 +42,38 @@
                 <div class="balance-label">Balance</div>
                 <div class="balance-amount">$573.45</div>
                 <div class="balance-status">Disponible</div>
+                <div class="button-add"><a href="./ahorro-añadir.html" class="btn-add">Ingreso</a></div>
             </div>
+            
         </div>
-
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                // Obtener el saldo desde la API
+                fetch('/saldo')
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Error al obtener el saldo');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        // Asegurarse de que los datos existan y sean válidos
+                        if (data && data.length > 0) {
+                            const saldo = data[0].saldo; // Asegúrate de que el objeto tenga el campo 'saldo'
+                            document.querySelector('.balance-amount').textContent = `$${saldo.toFixed(2)}`;
+                        } else {
+                            console.error('No se encontró saldo en la respuesta');
+                            document.querySelector('.balance-amount').textContent = '$0.00';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error al cargar el saldo:', error);
+                        document.querySelector('.balance-amount').textContent = 'Error';
+                    });
+            });
+        </script>
         <!-- Botón Añadir -->
-        <div class="button-add">
-            <a href="./ahorro-añadir.html" class="btn-add">Ingreso</a>
-        </div>
+        
     </main>
 </body>
 </html>

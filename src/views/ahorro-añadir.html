@@ -10,6 +10,7 @@
     <form action="/ahorro/submit" id="form-ahorro" class="form" method="POST">
         <h2 class="form_tittle">Gestor de Ingresos</h2>
         <div class="form_container">
+            <input type="hidden" id="id" name="id">
             <!-- Campo para establecer cantidad -->
             <div class="form_group">
                 <input type="number" id="cantidad" name="cantidad" min="0.01" step="any" class="form_input" placeholder=" ">
@@ -19,9 +20,7 @@
 
             <!-- Selección de concepto -->
             <div class="form_group">
-                <select id="concepto" name="concepto" class="form_input">
-                    <option value="" disabled selected>Elegir concepto</option>
-                </select>
+                <input type="text" id="concepto" name="concepto" class="form_input" placeholder=" ">
                 <label for="concepto" class="form_label">Concepto</label>
                 <span class="form_line"></span>
             </div>
@@ -47,12 +46,56 @@
 
             <!-- Botones de acción -->
             <div class="button_container">
-                <button type="submit" class="form_submit">Enviar</button>
+                <button type="submit" class="form_submit" >Enviar</button>
                 <button type="button" class="form_delete" onclick="goBackToHome()">Cancelar</button>
             </div>
         </div>
     </form>
-
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get('id'); // Leer el ID de la URL
+    
+            if (id) {
+                // Cargar datos si es edición
+                fetch(`/ahorro/uno/${id}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById('id').value = data.id;
+                        document.getElementById('cantidad').value = data.cantidad;
+                        document.getElementById('concepto').value = data.concepto;
+                        document.getElementById('limite_gasto').value = data.limite_gasto;
+                        document.getElementById('fecha').value = data.fecha;
+                    })
+                    .catch(error => console.error('Error al cargar los datos:', error));
+            }
+        });
+    
+        document.getElementById('form-ahorro').addEventListener('submit', (event) => {
+            event.preventDefault();
+    
+            const id = document.getElementById('id').value || 0;
+            const cantidad = document.getElementById('cantidad').value;
+            const concepto = document.getElementById('concepto').value;
+            const limite_gasto = document.getElementById('limite_gasto').value;
+            const fecha = document.getElementById('fecha').value;
+    
+            fetch('/ahorro/submit', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id, cantidad, concepto, fecha }),
+            })
+                .then(response => {
+                    if (!response.ok) throw new Error('Error al enviar el formulario');
+                    return response.json();
+                })
+                .then(data => {
+                    alert('Operación exitosa');
+                    window.location.href = '/ahorro.html'; // Redirigir al listado
+                })
+                .catch(error => console.error('Error al enviar:', error));
+        });
+    </script>
     <!-- Importar el script -->
     <script src="./js/ahorro-añadir.js"></script>
 </body>

@@ -7,7 +7,7 @@
     <title>GASTI - Tarjetas</title>
 </head>
 <body>
-    <form action="" method="POST" id="form-tarjetas" class="form">
+    <form action=""  id="form-tarjetas" class="form" method="POST">
         <h2 class="form_tittle">Tarjeta</h2>
         <div class="form_container">
             <input type="hidden" id="id" name="id">
@@ -91,7 +91,7 @@
             const mes_vencimiento = document.getElementById('mes_vencimiento').value;
             const anio_vencimiento = document.getElementById('anio_vencimiento').value;
     
-            fetch('/tarjetas/submit', {
+            fetch('/tarjeta/submit', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ id, nombre, ultimos_digitos, limite_credito, dia_corte, saldo, mes_vencimiento, anio_vencimiento }),

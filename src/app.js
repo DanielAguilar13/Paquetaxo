@@ -10,6 +10,8 @@ const movimiento = require('./controllers/movimientos/index.js');
 const recordatorio = require('./controllers/recordatorios/index.js');
 const categoria = require('./DB/db.js');
 const tipo_de_pago = require('./DB/db.js');
+const saldo = require('./DB/db.js');
+const gasto = require('./DB/db.js');
 const error = require('./DB/errors.js');
 
 const app = express();
@@ -120,6 +122,25 @@ app.get('/tipo_de_pago', async (req, res) => {
     }
 });
 
+app.get('/saldo', async (req, res) => {
+    try{
+        const saldoMostrar = await saldo.saldo();
+        res.status(200).json(saldoMostrar);
+    }catch (error){
+        console.error('Error al obtener el saldo:', error);
+        res.status(500).json({message: 'Error al obtener el el saldo'});
+    }
+});
+
+app.get('/gasto', async (req, res) => {
+    try{
+        const gastoMostar = await gasto.gasto();
+        res.status(200).json(gastoMostar);
+    }catch (error){
+        console.error('Error al obtener el saldo:', error);
+        res.status(500).json({message: 'Error al obtener el el saldo'});
+    }
+});
 // Ruta para procesar el formulario
 app.post('/usuario/submit', (req, res) => {
     const {nombre, id_imagen} = req.body;
@@ -169,16 +190,16 @@ app.post('/movimientos/submit', (req, res) => {
 });
 
 app.post('/ahorro/submit', (req, res) => {
-    const { cantidad, concepto, id_tarjeta, fecha } = req.body;
+    const { cantidad, concepto, limite_gasto, fecha } = req.body;
 
     // Verificar si los datos llegan
     console.log('Datos recibidos:', req.body);
 
-    if ( !cantidad || !concepto || !id_tarjeta || !fecha) {
+    if ( !cantidad || !concepto || !limite_gasto || !fecha) {
         return res.status(400).send('Faltan datos');
     }
 
-    const data = { cantidad, concepto, id_tarjeta, fecha };
+    const data = { cantidad, concepto, limite_gasto, fecha };
     console.log('Datos que se enviarán al controlador:', data);
 
     ahorro.agregar(data)
@@ -266,6 +287,20 @@ app.get('/recordatorios/uno/:id', async (req, res) => {
         res.json(recordatorioUno[0]);
     } catch (error) {
         console.error('Error al obtener el recordatorio:', error);
+        res.status(500).json({ error: 'Error interno del servidor' });
+    }
+});
+
+app.get('/ahorro/uno/${id}', async (req, res) => {
+    const { id } = req.params;
+    try {
+        const ahorroUno = await ahorro.uno(id);
+        if (ahorroUno.length === 0) {
+            return res.status(404).json({ error: 'Recordatorio no encontrado' });
+        }
+        res.json(ahorroUno[0]);
+    } catch (error) {
+        console.error('Error al obtener el ahorro:', error);
         res.status(500).json({ error: 'Error interno del servidor' });
     }
 });

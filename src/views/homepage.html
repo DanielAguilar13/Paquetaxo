@@ -70,7 +70,7 @@
             <div class="balance-container">
                 <h1>Ahorros</h1>
                 <div class="balance-user-icon">
-                    <img src="./img/verde.png" alt="User Icon">
+                    <img id="estadoCarita" src="./img/logo.png" alt="Estado inicial" alt="User Icon">
                 </div>
                 <div class="balance-info">
                     <div class="balance-label">Balance</div>
@@ -81,6 +81,33 @@
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Obtener el saldo desde la API
+            fetch('/saldo')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Error al obtener el saldo');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Asegurarse de que los datos existan y sean válidos
+                    if (data && data.length > 0) {
+                        const saldo = data[0].saldo; // Asegúrate de que el objeto tenga el campo 'saldo'
+                        document.querySelector('.balance-amount').textContent = `$${saldo.toFixed(2)}`;
+                    } else {
+                        console.error('No se encontró saldo en la respuesta');
+                        document.querySelector('.balance-amount').textContent = '$0.00';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error al cargar el saldo:', error);
+                    document.querySelector('.balance-amount').textContent = 'Error';
+                });
+        });
+    </script>
+    <script src="./js/estado-carita.js" defer></script>
 <script src="./js/Grafica.js"></script>
 <!-- Importa jsPDF -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
