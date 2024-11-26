@@ -38,7 +38,6 @@ document.getElementById("form-recordatorios").addEventListener("submit", functio
 });
 
 
-
 // Configurar la fecha mínima y máxima para el input de fecha
 function goBackToHome() {
     // Reiniciar el formulario
