@@ -124,7 +124,7 @@ label {
 
 
 /* Buttons */
-.submit-button, .back-button {
+.form_submit, .form_delete {
   width: 100%;
   padding: 10px;
   border: 6px;
@@ -137,20 +137,20 @@ label {
   transition: transform 0.2s ease, background-color 0.4s ease;
 }
 
-.submit-button {
+.form_submit {
   background-color: var(--color-btn-submit);
 }
 
-.submit-button:hover {
+.form_submit:hover {
   background-color: var(--color-btn-submit-hover);
   transform: translateY(-3px);
 }
 
-.back-button {
+.form_delete {
   background-color: var(--color-btn-delete);
 }
 
-.back-button:hover {
+.form_delete:hover {
   background-color: var(--color-btn-delete-hover);
   transform: translateY(-3px);
 }

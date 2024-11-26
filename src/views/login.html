@@ -69,7 +69,7 @@
     
       const id = document.getElementById('id').value || 0;
       const nombre = document.getElementById('nombre').value;
-      const id_imagen = document.getElementById('id_imagen').value;
+      const id_imagen = document.querySelector('input[name="id_imagen"]:checked')?.value;
       
       fetch('/login/submit', {
         method: 'POST',

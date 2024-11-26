@@ -8,8 +8,9 @@
   <link rel="stylesheet" href="./styles/perfil.css">
 </head>
 <body>
-  <form action="">
+  <form action="" id="form-usuario" class="form" method="POST">
     <legend>Perfil de usuario</legend>
+    <input type="hidden" id="id" name="id">
     <label for="nombre">Escribe un nombre de usuario:</label>
     <input type="text" id="nombre" name="nombre" placeholder="Ej: Pepe123 ">
     
@@ -47,6 +48,46 @@
       <button type="button" class="back-button" onclick="window.location.href='./homepage.html'">Atrás</button>
     </div>
   </form>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get('id'); // Leer el ID de la URL
+      
+      if (id) {
+        // Cargar datos si es edición
+        fetch(`/usuario/uno/${id}`)
+          .then(response => response.json())
+          .then(data => {
+            document.getElementById('id').value = data.id;
+            document.getElementById('nombre').value = data.nombre;
+            document.getElementById('id_imagen').value = data.id_imagen;
+          })
+          .catch(error => console.error('Error al cargar los datos:', error));
+      }
+    });
+    document.getElementById('form-usuario').addEventListener('submit', (event) => {
+      event.preventDefault();
+    
+      const id = document.getElementById('id').value || 0;
+      const nombre = document.getElementById('nombre').value;
+      const id_imagen = document.querySelector('input[name="id_imagen"]:checked')?.value;
+      
+      fetch('/login/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id, nombre, id_imagen }),
+      })
+        .then(response => {
+          if (!response.ok) throw new Error('Error al enviar el formulario');
+          return response.json();
+        })
+        .then(data => {
+          
+          window.location.href = '/homepage.html'; // Redirigir al homepage
+        })
+        .catch(error => console.error('Error al enviar:', error));
+    });
+  </script>
   <script src="./js/login.js"></script>
 </body>
 </html>

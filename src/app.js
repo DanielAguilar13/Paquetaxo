@@ -249,12 +249,12 @@ app.get('/usuario/uno/:id', async(req, res) => {
 
         // Verifica si se encontró el recordatorio
         if (usuarioUno.length === 0) {
-            return res.status(404).json({ error: 'Movimiento no encontrado' });
+            return res.status(404).json({ error: 'usuario no encontrado' });
         }
 
         res.json(usuarioUno[0]); // Devuelve el primer resultado como un objeto
     } catch (error) {
-        console.error('Error al obtener el movimiento:', error);
+        console.error('Error al obtener el usuario:', error);
         res.status(500).json({ error: 'Error interno del servidor' });
     }
 });
