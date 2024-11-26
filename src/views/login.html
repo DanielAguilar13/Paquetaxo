@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GASTI - Login</title>
   <link rel="stylesheet" href="./styles/login.css">
+  <title>GASTI - Login</title>
 </head>
 <body>
-  <form action="/usuario/submit">
+  <form action="" id="form-usuario" class="form" method="POST">
+    <input type="hidden" id="id" name="id">
     <legend>Perfil de usuario</legend>
     <label for="nombre">Escribe un nombre de usuario:</label>
     <input type="text" id="nombre" name="nombre" placeholder="Ej: Pepe123 ">
@@ -16,37 +16,77 @@
     <label>Selecciona una imagen de usuario:</label>
     <div class="image-grid">
       <label>
-        <input type="radio" id="id_imagen" name="id_imagen" value="img1">
+        <input type="radio" id="id_imagen" name="id_imagen" value="1">
         <img src="./img/icono1.png" alt="Imagen 1">
       </label>
       <label>
-        <input type="radio" id="id_imagen" name="id_imagen" value="img2">
+        <input type="radio" id="id_imagen" name="id_imagen" value="2">
         <img src="./img/icono2.png" alt="Imagen 2">
       </label>
       <label>
-        <input type="radio" id="id_imagen" name="id_imagen" value="img3">
+        <input type="radio" id="id_imagen" name="id_imagen" value="3">
         <img src="./img/icono3.png" alt="Imagen 3">
       </label>
       <label>
-        <input type="radio" id="id_imagen" name="id_imagen" value="img4">
+        <input type="radio" id="id_imagen" name="id_imagen" value="4">
         <img src="./img/icono4.png" alt="Imagen 4">
       </label>
       <label>
-        <input type="radio" id="id_imagen" name="id_imagen" value="img5">
+        <input type="radio" id="id_imagen" name="id_imagen" value="5">
         <img src="./img/icono5.png" alt="Imagen 5">
       </label>
       <label>
-        <input type="radio" id="id_imagen" name="id_imagen" value="img6">
+        <input type="radio" id="id_imagen" name="id_imagen" value="6">
         <img src="./img/icono6.png" alt="Imagen 6">
       </label>
     </div> 
     <div>
-      <button type="submit" class="submit-button">Guardar</button>
+      <button type="submit" class="form_submit">Guardar</button>
     </div>
     <div>
-      <button type="button" class="back-button" onclick="window.location.href='./index.html'">Atrás</button>
+      <button type="button" class="form_delete" onclick="window.location.href='./index.html'">Atrás</button>
     </div>
   </form>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get('id'); // Leer el ID de la URL
+    
+      if (id) {
+        // Cargar datos si es edición
+        fetch(`/usuario/uno/${id}`)
+          .then(response => response.json())
+          .then(data => {
+            document.getElementById('id').value = data.id;
+            document.getElementById('nombre').value = data.nombre;
+            document.getElementById('id_imagen').value = data.id_imagen;
+          })
+          .catch(error => console.error('Error al cargar los datos:', error));
+      }
+    });
+    document.getElementById('form-usuario').addEventListener('submit', (event) => {
+      event.preventDefault();
+    
+      const id = document.getElementById('id').value || 0;
+      const nombre = document.getElementById('nombre').value;
+      const id_imagen = document.getElementById('id_imagen').value;
+      
+      fetch('/login/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id, nombre, id_imagen }),
+      })
+        .then(response => {
+          if (!response.ok) throw new Error('Error al enviar el formulario');
+          return response.json();
+        })
+        .then(data => {
+          
+          window.location.href = '/homepage.html'; // Redirigir al homepage
+        })
+        .catch(error => console.error('Error al enviar:', error));
+    });
+  </script>
   <script src="./js/login.js"></script>
 </body>
 </html>
