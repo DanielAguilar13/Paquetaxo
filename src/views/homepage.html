@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="./styles/movimientos.css">
     <link rel="stylesheet" href="./styles/notificacion.css">
     <script src="https://kit.fontawesome.com/58dc328e94.js" crossorigin="anonymous"></script>
-    <title>GGP - Inicio</title> 
+    <title>GASTI - Inicio</title> 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
@@ -32,7 +32,7 @@
 <div class="header">
     <!-- Imagen del logo como botón para abrir la barra lateral -->
     <img src="./img/logo.png" alt="Logo GGP">
-    <h1>Gestor de Gastos Personales</h1>
+    <h1>Gasti</h1>
     <img src="./img/icono1.png" alt="User" onclick="openSidebar()" class="open-btn">       
 </div>
 <script src="./js/sidebar.js"></script>
@@ -82,6 +82,32 @@
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Obtener el saldo desde la API
+            fetch('/saldo')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Error al obtener el saldo');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Asegurarse de que los datos existan y sean válidos
+                    if (data && data.length > 0) {
+                        const saldo = data[0].saldo; // Asegúrate de que el objeto tenga el campo 'saldo'
+                        document.querySelector('.balance-amount').textContent = `$${saldo.toFixed(2)}`;
+                    } else {
+                        console.error('No se encontró saldo en la respuesta');
+                        document.querySelector('.balance-amount').textContent = '$0.00';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error al cargar el saldo:', error);
+                    document.querySelector('.balance-amount').textContent = 'Error';
+                });
+        });
+    </script>
 <script src="./js/Grafica.js"></script>
 <script src="./js/recordatorios.js" ></script>
 <!-- Importa jsPDF -->

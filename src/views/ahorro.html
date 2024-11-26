@@ -5,27 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles/ahorro.css">
     <script src="https://kit.fontawesome.com/58dc328e94.js" crossorigin="anonymous"></script>
-    <title>GGP - Ahorro</title>
+    <title>GASTI - Ahorro</title>
 </head>
 <body>
     <!-- Barra Lateral -->
-    <nav id="sidebar" class="sidebar">
+    <div id="sidebar" class="sidebar">
         <a href="javascript:void(0)" class="close-btn" onclick="closeSidebar()">×</a>
         <div class="sidebar-name">Nombre del Usuario</div>
         <a href="./homepage.html"><i class="fas fa-home"></i> Inicio</a>
-        <a href="./login.html"><i class="fas fa-user"></i> Perfil</a>
+        <a href="./perfil.html"><i class="fas fa-user"></i> Perfil</a>
         <a href="./tarjetas.html"><i class="fas fa-credit-card"></i> Tarjetas</a>
         <a href="./movimientos.html"><i class="fas fa-exchange-alt"></i> Movimientos</a>
         <a href="./ahorro.html"><i class="fas fa-piggy-bank"></i> Ahorro</a>
         <a href="./recordatorios.html"><i class="fas fa-bell"></i> Recordatorios</a>
-    </nav>
+    </div>
 
     <!-- Encabezado -->
-    <header class="header">
+    <div class="header">
+        <!-- Imagen del logo como botón para abrir la barra lateral -->
         <img src="./img/logo.png" alt="Logo GGP">
-        <h1>Gestor de Gastos Personales</h1>       
+        <h1>Gasti</h1>       
         <img src="./img/icono1.png" alt="User" onclick="openSidebar()" class="open-btn">       
-    </header>
+    </div>
 
     <script src="./js/sidebar.js"></script>
 
@@ -41,13 +42,38 @@
                 <div class="balance-label">Balance</div>
                 <div class="balance-amount">$573.45</div>
                 <div class="balance-status">Disponible</div>
+                <div class="button-add"><a href="./ahorro-añadir.html" class="btn-add">Ingreso</a></div>
             </div>
+            
         </div>
-
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                // Obtener el saldo desde la API
+                fetch('/saldo')
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Error al obtener el saldo');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        // Asegurarse de que los datos existan y sean válidos
+                        if (data && data.length > 0) {
+                            const saldo = data[0].saldo; // Asegúrate de que el objeto tenga el campo 'saldo'
+                            document.querySelector('.balance-amount').textContent = `$${saldo.toFixed(2)}`;
+                        } else {
+                            console.error('No se encontró saldo en la respuesta');
+                            document.querySelector('.balance-amount').textContent = '$0.00';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error al cargar el saldo:', error);
+                        document.querySelector('.balance-amount').textContent = 'Error';
+                    });
+            });
+        </script>
         <!-- Botón Añadir -->
-        <div class="button-add">
-            <a href="./ahorro-añadir.html" class="btn-add">Ingreso</a>
-        </div>
+        
     </main>
 </body>
 </html>

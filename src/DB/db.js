@@ -101,6 +101,13 @@ async function tipo_de_pago() {
     });
 }
 
+async function saldo() {
+    return new Promise((resolve, reject) => {
+        conexion.query(`SELECT SUM(cantidad) AS saldo FROM ahorro`, (error, result) =>{
+            return error ? reject(error) : resolve(result);
+        }); 
+    });
+}
 module.exports = {
     todos,
     uno,
@@ -109,5 +116,6 @@ module.exports = {
     agregar,
     eliminar,
     categoria,
-    tipo_de_pago
+    tipo_de_pago,
+    saldo
 }

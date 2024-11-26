@@ -23,7 +23,7 @@
 
 /* Estilos globales */
 body {
-  font-family: Tahoma, sans-serif;
+  font-family: 'Poppins', sans-serif;
   background: var(--color-background);
   color: var(--color-dark);
   margin: 0;
@@ -53,17 +53,38 @@ body {
   margin-bottom: 50px;
   animation: slideIn 0.6s ease-out forwards;
   flex-wrap: wrap;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.header:hover {
+  background-color: var(--color-white);
+  transform: translateY(-5px); /* Pequeño movimiento al hover */
+}
+
+.header:hover h1 {
+  color: var(--color-pagination-active); /* Cambia automáticamente el color del h1 */
 }
 
 .header img {
   width: 50px;
   margin-left: auto;
   margin-right: 10px;
+  transition: transform 0.3s ease; /* Suaviza el hover de imagen */
+}
+
+.header img:hover {
+  transform: rotate(10deg) scale(1.1); /* Efecto leve de rotación y escala */
 }
 
 .header h1 {
   margin: 0;
   font-size: 1.5em;
+  text-transform: uppercase;
+  transition: color 0.3s ease, transform 0.3s ease; /* Suaviza cambios */
+}
+
+.header h1:hover {
+  transform: scale(1.05); /* Añade un leve escalado */
 }
 
 /* Barra Lateral */
@@ -280,102 +301,6 @@ body {
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-/* Modal */
-.modal {
-  display: none; /* Ocultar inicialmente */
-  position: fixed;
-  z-index: 1000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  display: flex; /* Usar flexbox para centrar */
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
-  animation: fadeIn 0.5s ease; /* Animación de fondo */
-}
-
-/* Contenido del modal */
-.modal-content {
-  background-color: var(--color-white); /* Fondo blanco */
-  margin: 15% auto;
-  padding: 20px;
-  border: 1px solid var(--color-secondary); /* Borde con color secundario */
-  width: 40%;
-  max-width: 500px; /* Maximo tamaño para evitar que el modal sea muy grande en pantallas grandes */
-  border-radius: 8px;
-  text-align: center;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.8); /* Sombras para mejor visibilidad */
-  animation: scaleUp 0.3s ease forwards; /* Efecto de escalado */
-}
-
-/* Título del modal */
-.modal-content h3 {
-  margin-bottom: 20px;
-  color: var(--color-dark); /* Color oscuro para el texto */
-  font-size: 1.4em;
-}
-
-/* Icono dentro del modal */
-.modal-content i {
-  font-size: 4rem; /* Más grande para destacar */
-  margin-bottom: 15px; /* Espacio entre el ícono y el texto */
-  color: var(--color-primary); /* Color del icono */
-}
-
-/* Acciones del modal (botones) */
-.modal-actions {
-  display: flex;
-  justify-content: space-between;
-  gap: 15px;
-}
-
-/* Botones de acción dentro del modal */
-.modal-actions button {
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-  border: none;
-  border-radius: 5px;
-  transition: background-color 0.3s ease; /* Efecto suave en hover */
-  width: 48%; /* Ajuste de tamaño de los botones */
-}
-
-/* Botón de confirmación */
-.btn-confirm {
-  background-color: var(--color-primary); /* Color primario */
-  color: var(--color-white);
-}
-
-.btn-confirm:hover {
-  background-color: var(--color-primary-hover); /* Hover en color primario */
-}
-
-/* Botón de cancelación */
-.btn-cancel {
-  background-color: var(--color-btn-delete); /* Rojo para eliminar */
-  color: var(--color-white); /* Texto blanco */
-}
-
-.btn-cancel:hover {
-  background-color: var(--color-btn-delete-hover); /* Hover en color rojo claro */
-}
-
-/* Botón de cierre del modal */
-.close-modal {
-  position: absolute;
-  top: 10px;
-  right: 20px;
-  font-size: 25px;
-  font-weight: bold;
-  cursor: pointer;
-  color: var(--color-dark); /* Color oscuro */
-}
-
-.close-modal:hover {
-  color: var(--color-secondary); /* Cambio de color en hover */
-}
 
 /* Animaciones */
 @keyframes fadeIn {
@@ -401,7 +326,7 @@ body {
 /* Responsividad */
 @media (max-width: 768px) {
   .container {
-    width: 95%;
+    width: 100%;
     padding: 15px;
   }
 
@@ -412,30 +337,73 @@ body {
   .title-bar {
     flex-direction: column;
     align-items: center;
+    gap: 10px;
   }
 
   .title-bar h2 {
-    margin: auto 0;
     font-size: 1em;
+    margin: 0;
   }
 
   .btn-add {
-    width: 100%;
+    width: 90%;
     margin-top: 10px;
+    text-align: center; /* Centrado del texto dentro del botón */
   }
 
-  .table th, .table td {
-    font-size: 12px;
-    padding: 10px;
+  /* Tablas */
+  .table-container {
+    width: 100%;
+    overflow-x: auto; /* Scroll horizontal */
+    margin-bottom: 20px;
+  }
+
+  .table {
+    width: 100%;
+    min-width: 600px; /* Asegura que la tabla tenga un tamaño manejable para scroll */
+    font-size: 12px; /* Ajusta el tamaño en pantallas pequeñas */
+  }
+
+  .table th,
+  .table td {
+    padding: 8px;
+    text-align: left;
+  }
+
+  .table td:last-child,
+  .table th:last-child {
+    width: auto; /* Permite flexibilidad para el contenido */
+  }
+
+  .table .btn {
+    font-size: 10px; /* Botones más pequeños */
+    padding: 6px 12px; /* Ajusta el tamaño */
+    margin: 0 auto; /* Centra el botón dentro de la celda */
+    display: block; /* Asegura que el botón ocupe toda la línea */
+    text-align: center; /* Centra el texto dentro del botón */
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap; /* Botones en filas en lugar de una sola línea */
+    gap: 10px;
+    justify-content: center; /* Centra los botones en contenedores pequeños */
+  }
+
+  .pagination {
+    flex-wrap: wrap;
+    gap: 5px;
+    justify-content: center; /* Centra los botones de paginación */
   }
 
   .pagination button {
     padding: 6px 10px;
+    font-size: 12px;
   }
 
   .sidebar {
-    width: 0; /* La sidebar estará oculta por defecto */
-    transition: width 0.3s ease; /* Añadimos transición para cuando se abra */
+    width: 0; /* Oculta la barra lateral por defecto */
+    transition: width 0.3s ease;
   }
 
   .sidebar a {
@@ -443,16 +411,11 @@ body {
     padding: 12px 16px;
   }
 
-  /* Barra lateral abierta manualmente */
   .sidebar.sidebar-open {
-    width: 200px; /* Define el ancho cuando la sidebar esté abierta */
-  }
-
-  .sidebar.sidebar-open a {
-    display: block; /* Asegura que los enlaces sean visibles solo cuando se abre */
+    width: 200px;
   }
 
   .sidebar-name {
-    font-size: 1.3rem; /* Tamaño de fuente */
+    font-size: 1.3rem;
   }
 }
