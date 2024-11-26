@@ -67,11 +67,11 @@
     document.getElementById('form-usuario').addEventListener('submit', (event) => {
       event.preventDefault();
     
-      const id = document.getElementById('id').value;
+      const id = document.getElementById('id').value || 0;
       const nombre = document.getElementById('nombre').value;
       const id_imagen = document.getElementById('id_imagen').value;
-            
-      fetch('/usuario/submit', {
+      
+      fetch('/login/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id, nombre, id_imagen }),
@@ -81,7 +81,7 @@
           return response.json();
         })
         .then(data => {
-          alert('Operación exitosa');
+          
           window.location.href = '/homepage.html'; // Redirigir al homepage
         })
         .catch(error => console.error('Error al enviar:', error));

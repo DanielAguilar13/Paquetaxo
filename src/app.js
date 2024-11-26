@@ -34,10 +34,10 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'views','index.html'));
 });
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views','homepage.html'));
+    res.sendFile(path.join(__dirname, 'views','login.html'));
 });
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views','login.html'));
+    res.sendFile(path.join(__dirname, 'views','homepage.html'));
 });
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'views','tarjetas.html'));
@@ -142,20 +142,20 @@ app.get('/gasto', async (req, res) => {
     }
 });
 // Ruta para procesar el formulario
-app.post('/usuario/submit', (req, res) => {
-    const {nombre, id_imagen} = req.body;
+app.post('/login/submit', (req, res) => {
+    const {id, nombre, id_imagen} = req.body;
         // Verificar si los datos llegan
-        console.log('Datos recibidos:', req.body);
+    console.log('Datos recibidos:', req.body);
 
-        if (!nombre || !id_imagen) {
-            return res.status(400).send('Faltan datos');
-        }
-    
-        const data = { nombre, id_imagen };
-        console.log('Datos que se enviarán al controlador:', data);
-    
-        usuario.agregar(data)
-    });
+    if (!id || !nombre || !id_imagen) {
+        return res.status(400).send('Faltan datos');
+    }
+
+    const data = {id, nombre, id_imagen };
+    console.log('Datos que se enviarán al controlador:', data);
+
+    usuario.agregar(data)
+});
 
 app.post('/tarjeta/submit', (req, res) => {
     const { nombre, ultimos_digitos, limite_credito, dia_corte, saldo, mes_vencimiento, anio_vencimiento} = req.body;
