@@ -90,6 +90,12 @@ body {
   margin-top: -350px; /*Margen superior del titulo ahorros y visualización de estado de cuenta*/
 }
 
+.hidden-canvas {
+  visibility: hidden;
+  position: static;
+}
+
+
 /* Estilo para la carita */
 .balance-container .balance-user-icon img {
   width: 200px;
