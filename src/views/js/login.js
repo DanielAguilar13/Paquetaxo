@@ -1,40 +1,3 @@
-document.getElementById("form-usuario").addEventListener("submit", function (e) {
-    e.preventDefault(); // Prevenir el comportamiento predeterminado del formulario
-    
-    const id = document.getElementById("id").value || 0;
-    const nombre = document.getElementById("nombre").value;
-    const id_imagen = document.getElementById("id_imagen").value;
-
-    const data = {
-        id: id, // Si es `0`, se creará un nuevo registro
-        nombre: nombre,
-        id_imagen: id_imagen,
-    };
-
-    // Enviar los datos a la API con `POST`
-    fetch("/api/usuario", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-    })
-        .then((response) => {
-            if (!response.ok) {
-                throw new Error("Error en la operación");
-            }
-            return response.json();
-        })
-        .then((result) => {
-            
-            window.location.href = "/homepage.html"; // Redirigir después del éxito
-        })
-        .catch((error) => {
-            console.error("Error:", error);
-            alert("Hubo un error al procesar la solicitud");
-        });
-});
-
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.querySelector('form');
     const usernameInput = form.querySelector('input[type="text"]');
@@ -67,17 +30,45 @@ document.addEventListener('DOMContentLoaded', () => {
             messages.push("Por favor, selecciona una imagen de usuario.");
         }
 
-        // Mostrar errores si existen
+        // Si hay errores, mostrar alerta y no enviar el formulario
         if (messages.length > 0) {
             mostrarAlerta(messages.join('\n')); // Unir mensajes con salto de línea
             return;
         }
 
-        // Si todas las validaciones pasan, enviar el formulario
-        mostrarAlerta("Formulario enviado correctamente.", true);
-        setTimeout(() => {
-            form.submit(); // Enviar formulario después de mostrar el mensaje
-        }, 1000);
+        // Si las validaciones pasan, enviar los datos
+        const id = document.getElementById("id").value || 0;
+        const nombre = document.getElementById("nombre").value;
+        const id_imagen = document.querySelector('input[name="id_imagen"]:checked')?.value;
+
+        const data = {
+            id: id, // Si es `0`, se creará un nuevo registro
+            nombre: nombre,
+            id_imagen: id_imagen,
+        };
+
+        // Enviar los datos a la API con `POST`
+        fetch("/api/usuario", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("Error en la operación");
+            }
+            return response.json();
+        })
+        .then((result) => {
+            // Redirigir después del éxito
+            window.location.href = "/homepage.html";
+        })
+        .catch((error) => {
+            console.error("Error:", error);
+            alert("Hubo un error al procesar la solicitud");
+        });
     });
 
     // Función para mostrar alertas

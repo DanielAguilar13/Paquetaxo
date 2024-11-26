@@ -14,7 +14,7 @@
         <a href="javascript:void(0)" class="close-btn" onclick="closeSidebar()">×</a>
         <div class="sidebar-name">Nombre del Usuario</div>
         <a href="./homepage.html"><i class="fas fa-home"></i> Inicio</a>
-        <a href="./perfil.html"><i class="fas fa-user"></i> Perfil</a>
+        <a href="./perfil.html" onclick="editarUsuario(1)"><i class="fas fa-user"></i> Perfil</a>
         <a href="./tarjetas.html"><i class="fas fa-credit-card"></i> Tarjetas</a>
         <a href="./movimientos.html"><i class="fas fa-exchange-alt"></i> Movimientos</a>
         <a href="./ahorro.html"><i class="fas fa-piggy-bank"></i> Ahorro</a>
@@ -89,6 +89,49 @@
                     .catch((error) => {
                         console.error("Error al obtener el recordatorio:", error);
                         alert("No se pudo cargar el recordatorio para editar.");
+                    });
+            }
+            document.addEventListener('DOMContentLoaded', () => {
+                // Obtener el nombre del usuario desde la API
+                fetch('/usuario/uno/1') // Cambia esta URL según el endpoint correcto de tu API
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Error al obtener el usuario');
+                        }
+                        return response.json();
+                    })
+                    .then(usuario => {
+                        // Insertar el nombre del usuario en el HTML
+                        const sidebarName = document.querySelector('.sidebar-name');
+                        if (sidebarName && usuario.nombre) {
+                            sidebarName.textContent = usuario.nombre; // Mostrar el nombre en la barra lateral
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error al cargar los datos del usuario:', error);
+                        const sidebarName = document.querySelector('.sidebar-name');
+                        if (sidebarName) {
+                            sidebarName.textContent = 'Nombre no disponible'; // Mensaje por defecto si hay un error
+                        }
+                    });
+            });
+            function editarUsuario(id) {
+                console.log("ID recibido para editar:", id); // Agrega un log para verificar
+                fetch(`/usuario/uno/${id}`)
+                    .then((response) => {
+                        if (!response.ok) {
+                            throw new Error("Error al obtener el usuario");
+                        }
+                        return response.json();
+                    })
+                    .then((usuario) => {
+                        const url = new URL("perfil.html", window.location.origin);
+                        url.searchParams.set("id", usuario.id); // Aquí se pasa el ID
+                        window.location.href = url;
+                    })
+                    .catch((error) => {
+                        console.error("Error al obtener el usuario:", error);
+                        alert("No se pudo cargar el usuario para editar.");
                     });
             }
         </script>
