@@ -143,15 +143,15 @@ app.get('/gasto', async (req, res) => {
 });
 // Ruta para procesar el formulario
 app.post('/login/submit', (req, res) => {
-    const { nombre, id_imagen} = req.body;
+    const {id, nombre, id_imagen} = req.body;
         // Verificar si los datos llegan
     console.log('Datos recibidos:', req.body);
 
-    if (!nombre || !id_imagen) {
+    if (!id || !nombre || !id_imagen) {
         return res.status(400).send('Faltan datos');
     }
 
-    const data = {nombre, id_imagen };
+    const data = {id, nombre, id_imagen };
     console.log('Datos que se enviarán al controlador:', data);
 
     usuario.agregar(data)

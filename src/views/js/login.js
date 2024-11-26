@@ -26,7 +26,7 @@ document.getElementById("form-usuario").addEventListener("submit", function (e) 
             return response.json();
         })
         .then((result) => {
-            alert("Operación exitosa");
+            
             window.location.href = "/homepage.html"; // Redirigir después del éxito
         })
         .catch((error) => {
