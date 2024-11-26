@@ -17,27 +17,27 @@
     <label>Selecciona una imagen de usuario:</label>
     <div class="image-grid">
       <label>
-        <input type="radio" id="id_imagen" name="id_imagen" value="img1">
+        <input type="radio" id="id_imagen" name="id_imagen" value="1">
         <img src="./img/icono1.png" alt="Imagen 1">
       </label>
       <label>
-        <input type="radio" id="id_imagen" name="id_imagen" value="img2">
+        <input type="radio" id="id_imagen" name="id_imagen" value="2">
         <img src="./img/icono2.png" alt="Imagen 2">
       </label>
       <label>
-        <input type="radio" id="id_imagen" name="id_imagen" value="img3">
+        <input type="radio" id="id_imagen" name="id_imagen" value="3">
         <img src="./img/icono3.png" alt="Imagen 3">
       </label>
       <label>
-        <input type="radio" id="id_imagen" name="id_imagen" value="img4">
+        <input type="radio" id="id_imagen" name="id_imagen" value="4">
         <img src="./img/icono4.png" alt="Imagen 4">
       </label>
       <label>
-        <input type="radio" id="id_imagen" name="id_imagen" value="img5">
+        <input type="radio" id="id_imagen" name="id_imagen" value="5">
         <img src="./img/icono5.png" alt="Imagen 5">
       </label>
       <label>
-        <input type="radio" id="id_imagen" name="id_imagen" value="img6">
+        <input type="radio" id="id_imagen" name="id_imagen" value="6">
         <img src="./img/icono6.png" alt="Imagen 6">
       </label>
     </div> 
@@ -60,11 +60,24 @@
           .then(data => {
             document.getElementById('id').value = data.id;
             document.getElementById('nombre').value = data.nombre;
-            document.getElementById('id_imagen').value = data.id_imagen;
+
+            // Seleccionar el radio button correspondiente al id_imagen
+            const selectedImageRadio = document.querySelector(`input[name="id_imagen"][value="${data.id_imagen}"]`);
+            
+            if (selectedImageRadio) {
+                selectedImageRadio.checked = true;
+
+                // Remarcar el icono de la imagen seleccionada
+                const selectedImageIcon = selectedImageRadio.closest('label'); 
+                if (selectedImageIcon) {
+                    selectedImageIcon.classList.add('selected-image'); // Añadir una clase para remarcar la imagen
+                }
+            }
           })
           .catch(error => console.error('Error al cargar los datos:', error));
       }
     });
+
     document.getElementById('form-usuario').addEventListener('submit', (event) => {
       event.preventDefault();
     
