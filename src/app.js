@@ -11,6 +11,7 @@ const recordatorio = require('./controllers/recordatorios/index.js');
 const categoria = require('./DB/db.js');
 const tipo_de_pago = require('./DB/db.js');
 const saldo = require('./DB/db.js');
+const gasto = require('./DB/db.js');
 const error = require('./DB/errors.js');
 
 const app = express();
@@ -129,7 +130,17 @@ app.get('/saldo', async (req, res) => {
         console.error('Error al obtener el saldo:', error);
         res.status(500).json({message: 'Error al obtener el el saldo'});
     }
-})
+});
+
+app.get('/gasto', async (req, res) => {
+    try{
+        const gastoMostar = await gasto.gasto();
+        res.status(200).json(gastoMostar);
+    }catch (error){
+        console.error('Error al obtener el saldo:', error);
+        res.status(500).json({message: 'Error al obtener el el saldo'});
+    }
+});
 // Ruta para procesar el formulario
 app.post('/usuario/submit', (req, res) => {
     const {nombre, id_imagen} = req.body;
@@ -275,6 +286,7 @@ app.get('/ahorro/uno/${id}', async (req, res) => {
         res.status(500).json({ error: 'Error interno del servidor' });
     }
 });
+
 // Metodos DELETE para eliminar informacion
 app.delete('/api/movimientos/:id', async (req, res) => {
     const { id } = req.params; // Obtener el ID del recordatorio desde la URL

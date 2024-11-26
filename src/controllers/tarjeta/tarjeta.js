@@ -34,7 +34,7 @@ async function agregar(req, res, next) {
     try {
         console.log('Datos recibidos en agregar:', req.body); // Ver los datos que llegan al backend
 
-        const items = await controlador.agregar('recordatorios', req.body);
+        const items = await controlador.agregar(req.body);
         let mensaje;
 
         if (req.body.id == 0) {

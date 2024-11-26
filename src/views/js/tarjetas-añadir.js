@@ -18,7 +18,7 @@ document.getElementById("form-tarjetas").addEventListener("submit", function (e)
         dia_corte: dia_corte,
         saldo: saldo,
         mes_vencimiento: mes_vencimiento,
-        anio_vencimiento: anio_vencimiento
+        anio_vencimiento: anio_vencimiento,
     };
 
     // Enviar los datos a la API con `POST`
