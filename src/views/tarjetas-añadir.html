@@ -7,7 +7,7 @@
     <title>GASTI - Tarjetas</title>
 </head>
 <body>
-    <form action=""  id="form-tarjetas" class="form" method="POST">
+    <form action="" method="POST" id="form-tarjetas" class="form">
         <h2 class="form_tittle">Tarjeta</h2>
         <div class="form_container">
             <input type="hidden" id="id" name="id">
@@ -22,15 +22,27 @@
                 <span class="form_line"></span>
             </div>
             <div class="form_group">
-                <input type="number" id="limite_credito" name="limite_credito" min="0.01" step="any" class="form_input" placeholder=" ">
-                <label for="limite_credito" class="form_label">Limite de crédito</label>
-                <span class="form_line"></span>
+                <label for="tipo_tarjeta" class="form_label">Tipo de tarjeta</label>
+                <select id="tipo_tarjeta" name="tipo_tarjeta" class="form_input">
+                    <option value="">Seleccione una opción</option>
+                    <option value="debito">Débito</option>
+                    <option value="credito">Crédito</option>
+                </select>
             </div>
-            <div class="form_group">
-                <input type="number" id="dia_corte" name="dia_corte" class="form_input" placeholder=" ">
-                <label for="dia_corte" class="form_label">Dia de corte</label>
-                <span class="form_line"></span>
+
+            <div id="campos_credito" class="hidden">
+                <div class="form_group">
+                    <input type="number" id="limite_credito" name="limite_credito" min="0.01" step="any" class="form_input" placeholder=" ">
+                    <label for="limite_credito" class="form_label">Límite de crédito</label>
+                    <span class="form_line"></span>
+                </div>
+                <div class="form_group">
+                    <input type="number" id="dia_corte" name="dia_corte" class="form_input" placeholder=" ">
+                    <label for="dia_corte" class="form_label">Día de corte</label>
+                    <span class="form_line"></span>
+                </div>
             </div>
+            
             <div class="form_group">
                 <input type="number" id="saldo" name="saldo" min="0.01" step="any" class="form_input" placeholder=" ">
                 <label for="saldo" class="form_label">Saldo</label>
@@ -55,6 +67,11 @@
                 <button type="button" class="form_delete" onclick="goBackToHome()">Cancelar</button>
             </div>
         </div>
+        <style>
+        .hidden {
+            display: none;
+        }
+        </style>
     </form>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -91,7 +108,7 @@
             const mes_vencimiento = document.getElementById('mes_vencimiento').value;
             const anio_vencimiento = document.getElementById('anio_vencimiento').value;
     
-            fetch('/tarjeta/submit', {
+            fetch('/tarjetas/submit', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ id, nombre, ultimos_digitos, limite_credito, dia_corte, saldo, mes_vencimiento, anio_vencimiento }),
