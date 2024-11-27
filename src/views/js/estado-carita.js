@@ -22,10 +22,10 @@ async function actualizarEstado() {
         if (porcentaje < 50) {
             estadoCarita.src = "./img/cara_verde.png";
             estadoCarita.alt = "Todo bajo control";
-        } else if (porcentaje >= 50 && porcentaje < 100) {
+        } else if (porcentaje >= 50 && porcentaje < 80) {
             estadoCarita.src = "./img/cara_amarillo.png";
             estadoCarita.alt = "Alerta: alcanzaste la mitad";
-        } else if (porcentaje >= 100) {
+        } else if (porcentaje >= 80) {
             estadoCarita.src = "./img/cara_rojo.png";
             estadoCarita.alt = "Cuidado: límite alcanzado o superado";
         } else {
