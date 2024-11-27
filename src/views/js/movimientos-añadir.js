@@ -1,3 +1,4 @@
+// Manejo del formulario al enviar
 document.getElementById("form-movimientos").addEventListener("submit", function (e) {
     e.preventDefault(); // Prevenir el comportamiento predeterminado del formulario
 
@@ -19,6 +20,57 @@ document.getElementById("form-movimientos").addEventListener("submit", function 
         fecha: fecha,
     };
 
+    // Validar formulario antes de enviarlo
+    const alerta = document.getElementById("alerta");
+    alerta.style.display = "none"; // Ocultar mensaje de alerta por defecto
+    alerta.textContent = ""; // Limpiar mensaje de alerta
+
+    let isValid = true;
+    let messages = [];
+
+    // Validar concepto
+    if (!concepto || concepto.length < 3 || !/^[A-Za-z\s]+$/.test(concepto)) {
+        isValid = false;
+        messages.push("El concepto debe tener al menos 3 caracteres y solo puede contener letras y espacios.");
+    }
+
+    // Validar cantidad
+    if (!cantidad || !/^\d+(\.\d{1,2})?$/.test(cantidad)) {
+        isValid = false;
+        messages.push("La cantidad debe ser un número positivo con hasta dos decimales (e.g., 9.17 o 199).");
+    }
+
+    // Validar categoría
+    if (!id_categoria) {
+        isValid = false;
+        messages.push("Seleccione una categoría.");
+    }
+
+    // Validar tipo de pago
+    if (!id_tipo) {
+        isValid = false;
+        messages.push("Seleccione un tipo de pago.");
+    }
+
+    // Validar tarjeta
+    if (!id_tarjeta) {
+        isValid = false;
+        messages.push("Seleccione una tarjeta.");
+    }
+
+    // Validar fecha
+    if (!fecha) {
+        isValid = false;
+        messages.push("Seleccione una fecha.");
+    }
+
+    // Mostrar errores si hay
+    if (!isValid) {
+        alerta.style.display = "block"; // Mostrar el contenedor de alerta
+        alerta.innerHTML = messages.join("<br>"); // Mostrar mensajes de error con salto de línea
+        return;
+    }
+
     // Enviar los datos a la API con `POST`
     fetch("/api/movimientos", {
         method: "POST",
@@ -33,9 +85,9 @@ document.getElementById("form-movimientos").addEventListener("submit", function 
             }
             return response.json();
         })
-        .then((result) => {
-            alert("Operación exitosa");
-            window.location.href = "/movimientos.html"; // Redirigir después del éxito
+        .then(() => {
+            // Redirigir después del éxito
+            window.location.href = "/movimientos.html";
         })
         .catch((error) => {
             console.error("Error:", error);
@@ -45,14 +97,14 @@ document.getElementById("form-movimientos").addEventListener("submit", function 
 
 // Función para volver a la página de inicio
 function goBackToHome() {
-    // Reiniciar el formulario
-    const formulario = document.getElementById('form-movimientos');
-    formulario.reset(); // Limpia todos los campos del formulario
+    const formulario = document.getElementById("form-movimientos");
+    formulario.reset(); // Limpiar todos los campos del formulario
     window.location.href = "movimientos.html";
 }
 
-window.onload = function() {
-    const fechaInput = document.getElementById('fecha');
+// Configuración de rango de fechas
+window.onload = function () {
+    const fechaInput = document.getElementById("fecha");
     const today = new Date();
 
     // Calcular la fecha de dos semanas atrás
@@ -66,111 +118,53 @@ window.onload = function() {
     // Formatear las fechas en formato YYYY-MM-DD
     const formatDate = (date) => {
         const year = date.getFullYear();
-        const month = String(date.getMonth() + 1).padStart(2, '0');
-        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, "0");
+        const day = String(date.getDate()).padStart(2, "0");
         return `${year}-${month}-${day}`;
     };
 
-    fechaInput.setAttribute('min', formatDate(pastDate)); // Dos semanas atrás
-    fechaInput.setAttribute('max', formatDate(futureDate)); // Dos semanas adelante
+    fechaInput.setAttribute("min", formatDate(pastDate)); // Dos semanas atrás
+    fechaInput.setAttribute("max", formatDate(futureDate)); // Dos semanas adelante
+
+    // Cargar las categorías desde la API
+    fetch("/categorias")
+        .then((response) => response.json())
+        .then((data) => {
+            const select = document.getElementById("id_categoria");
+            data.forEach((categoria) => {
+                const option = document.createElement("option");
+                option.value = categoria.id; // ID de la categoría
+                option.textContent = categoria.nombre; // Nombre de la categoría
+                select.appendChild(option);
+            });
+        })
+        .catch((error) => console.error("Error al cargar las categorías:", error));
+
+    // Cargar los tipos de pago desde la API
+    fetch("/tipo_de_pago")
+        .then((response) => response.json())
+        .then((data) => {
+            const select = document.getElementById("id_tipo");
+            data.forEach((tipo) => {
+                const option = document.createElement("option");
+                option.value = tipo.id; // ID del tipo de pago
+                option.textContent = tipo.nombre; // Nombre del tipo de pago
+                select.appendChild(option);
+            });
+        })
+        .catch((error) => console.error("Error al cargar los tipos de pago:", error));
+
+    // Cargar las tarjetas desde la API
+    fetch("/tarjetas")
+        .then((response) => response.json())
+        .then((data) => {
+            const select = document.getElementById("id_tarjeta");
+            data.forEach((tarjeta) => {
+                const option = document.createElement("option");
+                option.value = tarjeta.id; // ID de la tarjeta
+                option.textContent = tarjeta.nombre; // Nombre de la tarjeta
+                select.appendChild(option);
+            });
+        })
+        .catch((error) => console.error("Error al cargar las tarjetas:", error));
 };
-
-// Llenar el select de categorías con datos de la API
-fetch('/categorias')
-    .then(response => response.json())
-    .then(data => {
-        const select = document.getElementById('id_categoria');
-        data.forEach(categoria => {
-            const option = document.createElement('option');
-            option.value = categoria.id; // ID de la categoría
-            option.textContent = categoria.nombre; // Nombre de la categoría
-            select.appendChild(option);
-        });
-}).catch(error => console.error('Error al cargar las categorías:', error));
-
-// Llenar el select de tipos de pago con datos de la API
-fetch('/tipo_de_pago')
-    .then(response => response.json())
-    .then(data => {
-        const select = document.getElementById('id_tipo');
-        data.forEach(tipo => {
-            const option = document.createElement('option');
-            option.value = tipo.id; // ID del tipo de pago
-            option.textContent = tipo.nombre; // Nombre del tipo de pago
-            select.appendChild(option);
-        });
-}).catch(error => console.error('Error al cargar los tipos de pago:', error));
-
-// Llenar el select de tarjetas con datos de la API
-fetch('/tarjetas')
-    .then(response => response.json())
-    .then(data => {
-        const select = document.getElementById('id_tarjeta');
-        data.forEach(tarjeta => {
-            const option = document.createElement('option');
-            option.value = tarjeta.id; // ID de la tarjeta
-            option.textContent = tarjeta.nombre; // Nombre de la tarjeta
-            select.appendChild(option);
-        });
-}).catch(error => console.error('Error al cargar las tarjetas:', error));
-
-// Validar formulario antes de enviarlo
-const form = document.getElementById('form-movimientos');
-form.addEventListener('submit', function (event) {
-    const alerta = document.getElementById('alerta');
-    alerta.style.display = 'none';  // Ocultar mensaje de alerta por defecto
-    alerta.textContent = '';       // Limpiar mensaje de alerta
-
-    const concepto = document.getElementById('concepto');
-    const cantidad = document.getElementById('cantidad');
-    const categoria = document.getElementById('id_categoria');
-    const tipo = document.getElementById('id_tipo');
-    const tarjeta = document.getElementById('id_tarjeta');
-    const fecha = document.getElementById('fecha');
-
-    let isValid = true;
-    let messages = [];
-
-    // Validar concepto
-    if (!concepto.value || concepto.value.length < 3 || !/^[A-Za-z\s]+$/.test(concepto.value)) {
-        isValid = false;
-        messages.push('El concepto debe tener al menos 3 caracteres y solo puede contener letras y espacios.\n');
-    }
-
-    // Validar cantidad
-    if (!cantidad.value || !/^\d+(\.\d{1,2})?$/.test(cantidad.value)) {
-        isValid = false;
-        messages.push('La cantidad debe ser un número positivo con hasta dos decimales (e.g., 9.17 o 199).\n');
-    }
-
-    // Validar categoría
-    if (!categoria.value) {
-        isValid = false;
-        messages.push('Seleccione una categoría.\n');
-    }
-
-    // Validar tipo de pago
-    if (!tipo.value) {
-        isValid = false;
-        messages.push('Seleccione un tipo de pago.\n');
-    }
-
-    // Validar tarjeta
-    if (!tarjeta.value) {
-        isValid = false;
-        messages.push('Seleccione una tarjeta.\n');
-    }
-
-    // Validar fecha
-    if (!fecha.value) {
-        isValid = false;
-        messages.push('Seleccione una fecha.\n');
-    }
-
-    // Mostrar errores si hay
-    if (!isValid) {
-        event.preventDefault();  // Evitar el envío del formulario
-        alerta.style.display = 'block';  // Mostrar el contenedor de alerta
-        alerta.innerHTML = messages.join('<br>'); // Mostrar mensajes de error con salto de línea
-    }
-});
