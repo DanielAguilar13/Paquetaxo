@@ -30,21 +30,30 @@ document.addEventListener('DOMContentLoaded', function() {
         tabla.innerHTML = '';  // Limpiamos la tabla antes de agregar los nuevos datos
 
         pageRecords.forEach(item => {
+            // Validación para reemplazar valores null por "N/A"
+            const nombre = item.nombre || "N/A";
+            const ultimosDigitos = item.ultimos_digitos || "N/A";
+            const limiteCredito = item.limite_credito != null ? item.limite_credito : "N/A";
+            const diaCorte = item.dia_corte != null ? item.dia_corte : "N/A";
+            const saldo = item.saldo != null ? item.saldo : "N/A";
+            const mesVencimiento = item.mes_vencimiento || "N/A";
+            const anioVencimiento = item.anio_vencimiento || "N/A";
+
             const fila = document.createElement('tr');
-                fila.innerHTML = `
-                    <td>${item.nombre}</td>
-                    <td>${item.ultimos_digitos}</td>
-                    <td>${item.limite_credito}</td>
-                    <td>${item.dia_corte}</td>
-                    <td>${item.saldo}</td>
-                    <td>${item.mes_vencimiento}</td>
-                    <td>${item.anio_vencimiento}</td>
-                    <td class="actions">
-                        <button class="btn btn-edit" onclick="editarTarjeta(${item.id})">✏️</button>
-                        <button class="btn btn-delete" onclick="eliminarTarjeta(${item.id})">🗑️</button>
-                    </td>
-                `;
-                tabla.appendChild(fila);
+            fila.innerHTML = `
+                <td>${nombre}</td>
+                <td>${ultimosDigitos}</td>
+                <td>${limiteCredito}</td>
+                <td>${diaCorte}</td>
+                <td>${saldo}</td>
+                <td>${mesVencimiento}</td>
+                <td>${anioVencimiento}</td>
+                <td class="actions">
+                    <button class="btn btn-edit" onclick="editarTarjeta(${item.id})">✏️</button>
+                    <button class="btn btn-delete" onclick="eliminarTarjeta(${item.id})">🗑️</button>
+                </td>
+            `;
+            tabla.appendChild(fila);
         });
     }
 
