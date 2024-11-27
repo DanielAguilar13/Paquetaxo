@@ -44,6 +44,14 @@ body {
   justify-content: center;
   text-align: center;
 }
+
+.balance-user-icon img {
+  max-width: 60%; /* Ajusta el tamaño máximo al 80% del ancho del contenedor */
+  height: auto; /* Mantén las proporciones */
+  display: block; /* Centra la imagen */
+  margin: 0 auto; /* Centra horizontalmente */
+}
+
   
 /* Header */
 .header {
@@ -300,5 +308,9 @@ body {
 
   .sidebar-name {
     font-size: 1.3rem; /* Tamaño de fuente */
+  }
+
+  .balance-user-icon img {
+    max-width: 60%; /* Reduce el tamaño en pantallas más pequeñas */
   }
 }

@@ -63,6 +63,7 @@ body {
   padding: 20px;
 }
 .container {
+  margin-top: 5px;
   width: 48%;
 }
 
@@ -71,8 +72,9 @@ body {
   display: flex;
   justify-content: space-between;
   gap: 20px;
-  padding: 20px;
+  padding: 10px;
 }
+
 .balance-container {
   display: flex;
   flex-direction: column;
@@ -124,7 +126,7 @@ body {
   display: flex;
   align-items: center;
   color: var(--color-white);
-  margin-bottom: 50px;
+  margin-bottom: 10px;
   animation: slideIn 0.6s ease-out forwards;
   flex-wrap: wrap;
   transition: background-color 0.3s ease, transform 0.3s ease;
