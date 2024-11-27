@@ -1,45 +1,74 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const recordsPerPage = 8;  // Número de elementos por página
     let currentPage = 1;  // Página actual
     let totalPages = 0;  // Total de páginas
     let allRecords = [];  // Almacenará todos los recordatorios
+    let categoriasMap = {};  // Mapa de categorías
 
-    // Función para cargar los recordatorios
-    fetch('/recordatorios')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Error al obtener los datos: ' + response.statusText);
-            }
-            return response.json();
+    // Cargar las categorías y los recordatorios
+    obtenerCategoriasYMapear()
+        .then(map => {
+            categoriasMap = map;
+            console.log('Categorías mapeadas:', categoriasMap);
+            cargarRecordatorios();  // Cargar recordatorios después de obtener las categorías
         })
-        .then(data => {
-            allRecords = data;  // Guardamos los recordatorios
-            totalPages = Math.ceil(allRecords.length / recordsPerPage);  // Calculamos el total de páginas
-            renderPagination();  // Renderizamos los botones de paginación
-            renderTable();  // Renderizamos la primera página de la tabla
-        })
-        .catch(error => console.error('Error al obtener los datos:', error));
+        .catch(error => console.error('Error al obtener las categorías:', error));
+
+    // Función para obtener y mapear las categorías
+    function obtenerCategoriasYMapear() {
+        return fetch('/categorias')
+            .then(response => response.json())
+            .then(data => {
+                const categoriasMap = data.reduce((map, categoria) => {
+                    map[categoria.id] = categoria.nombre; // Guardamos el nombre de la categoría con su id
+                    return map;
+                }, {});
+                return categoriasMap;
+            })
+            .catch(error => {
+                console.error('Error al cargar las categorías:', error);
+                throw error;
+            });
+    }
+
+    // Función para cargar y mostrar los recordatorios
+    function cargarRecordatorios() {
+        fetch('/recordatorios')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error al obtener los datos: ' + response.statusText);
+                }
+                return response.json();
+            })
+            .then(data => {
+                allRecords = data;  // Guardamos los recordatorios
+                totalPages = Math.ceil(allRecords.length / recordsPerPage);  // Calculamos el total de páginas
+                renderPagination();  // Renderizamos los botones de paginación
+                renderTable();  // Renderizamos la primera página de la tabla
+            })
+            .catch(error => console.error('Error al obtener los recordatorios:', error));
+    }
 
     // Función para mostrar la tabla con los recordatorios
     function renderTable() {
         const start = (currentPage - 1) * recordsPerPage;
         const end = start + recordsPerPage;
-        const pageRecords = allRecords.slice(start, end);  // Filtramos los recordatorios para la página actual
+        const pageRecords = allRecords.slice(start, end);
 
         const tabla = document.getElementById('tabla-datos');
         tabla.innerHTML = '';  // Limpiamos la tabla antes de agregar los nuevos datos
 
         pageRecords.forEach(item => {
             const fecha = new Date(item.fecha);
-            const fechaFormateada = `${fecha.getDate().toString().padStart(2, '0')}/${(fecha.getMonth() + 1).toString().padStart(2, '0')}/${fecha.getFullYear()}`;           
+            const fechaFormateada = `${fecha.getDate().toString().padStart(2, '0')}/${(fecha.getMonth() + 1).toString().padStart(2, '0')}/${fecha.getFullYear()}`;
             const fila = document.createElement('tr');
             fila.innerHTML = `
                 <td>${item.concepto}</td>
-                <td>${item.id_categoria}</td>
+                <td>${categoriasMap[item.id_categoria] || 'Categoría no encontrada'}</td>  <!-- Mostrar el nombre de la categoría -->
                 <td>${fechaFormateada}</td>
                 <td class="actions">
-                    <button class="btn btn-edit" onclick="editarRecordatorio(${item.id})">✏️</button>
-                    <button class="btn btn-delete" onclick="eliminarRecordatorio(${item.id})">🗑️</button>
+                    <button class="btn btn-edit" onclick="editarRecordatorio(${item.id})">✏</button>
+                    <button class="btn btn-delete" onclick="eliminarRecordatorio(${item.id})">🗑</button>
                 </td>
             `;
             tabla.appendChild(fila);

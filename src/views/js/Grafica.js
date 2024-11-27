@@ -7,6 +7,18 @@ fetch('/movimiento')
         return response.json();
     })
     .then(movimientos => {
+        // Filtrar movimientos del mes actual
+        const fechaActual = new Date();
+        const mesActual = fechaActual.getMonth();
+        const anioActual = fechaActual.getFullYear();
+        const movimientosMesActual = movimientos.filter(mov => {
+            const fecha = new Date(mov.fecha);
+            return fecha.getMonth() === mesActual && fecha.getFullYear() === anioActual;
+        });
+
+        // Tomar los últimos 5 movimientos del mes
+        const movimientosRecientesMes = movimientosMesActual.slice(-5);
+
         // Obtener categorías y hacer el mapeo
         fetch('/categorias')
             .then(response => response.json())
@@ -17,10 +29,10 @@ fetch('/movimiento')
                     return map;
                 }, {});
 
-                // Actualizar la tabla con los nombres de categorías
+                // Actualizar la tabla debajo de la gráfica
                 const tabla = document.getElementById('tabla-datos');
-                tabla.innerHTML = '';
-                movimientos.forEach(item => {
+                tabla.innerHTML = ''; // Limpiar contenido anterior
+                movimientosRecientesMes.forEach(item => {
                     const fecha = new Date(item.fecha);
                     const fechaFormateada = `${fecha.getDate().toString().padStart(2, '0')}/${(fecha.getMonth() + 1).toString().padStart(2, '0')}/${fecha.getFullYear()}`;
                     const fila = document.createElement('tr');
@@ -28,19 +40,19 @@ fetch('/movimiento')
                         <td>${fechaFormateada}</td>
                         <td>${item.concepto}</td>
                         <td>${categoriasMap[item.id_categoria] || 'Sin categoría'}</td>
-                        <td>${item.cantidad}</td>
+                        <td>${item.cantidad.toFixed(2)}</td>
                     `;
                     tabla.appendChild(fila);
                 });
 
-                // Configurar gráfica con los movimientos
-                configurarGrafica(movimientos.map(mov => ({
+                // Configurar gráfica con los últimos 5 movimientos del mes
+                configurarGrafica(movimientosRecientesMes.map(mov => ({
                     ...mov,
                     categoria: categoriasMap[mov.id_categoria] || 'Sin categoría'
                 })));
 
-                // Hacer los datos accesibles globalmente
-                window.gastos = movimientos.map(mov => ({
+                // Hacer los movimientos del mes accesibles globalmente
+                window.movimientosMesActual = movimientosMesActual.map(mov => ({
                     ...mov,
                     categoria: categoriasMap[mov.id_categoria] || 'Sin categoría'
                 }));
@@ -54,9 +66,9 @@ fetch('/movimiento')
 
 function configurarGrafica(gastos) {
     const chartData = {
-        labels: gastos.map(gasto => gasto.categoria), // Mostrar las categorías en lugar de conceptos
+        labels: gastos.map(gasto => gasto.categoria),
         datasets: [{
-            label: 'Gastos Mensuales',
+            label: 'Últimos 5 Movimientos del Mes',
             data: gastos.map(gasto => gasto.cantidad),
             backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF'],
             hoverOffset: 4
@@ -98,47 +110,63 @@ function configurarGrafica(gastos) {
     new Chart(ctx, chartConfig);
 }
 
-// Generación del PDF con la gráfica y tabla
+// Generación del PDF con bordes en la tabla
 function generatePDF() {
-    const chartElement = document.getElementById('expenseChart');
-    html2canvas(chartElement, { scale: 2 }).then(canvas => {
-        const { jsPDF } = window.jspdf;
-        const pdf = new jsPDF();
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF();
 
-        // Reducir el tamaño de la gráfica en el PDF
-        const imgData = canvas.toDataURL('image/png');
-        const imgWidth = 100;
-        const imgHeight = canvas.height * imgWidth / canvas.width;
+    // Título del reporte
+    pdf.setFontSize(18);
+    pdf.setFont("helvetica", "bold");
+    pdf.setTextColor(40, 40, 40);
+    pdf.text("Reporte de Movimientos del Mes Actual", 15, 20);
 
-        pdf.addImage(imgData, 'PNG', 20, 15, imgWidth, imgHeight);
+    // Generar la tabla con estilo mejorado
+    if (window.movimientosMesActual && window.movimientosMesActual.length > 0) {
+        pdf.autoTable({
+            startY: 30,
+            head: [['Fecha', 'Concepto', 'Categoría', 'Monto']],
+            body: window.movimientosMesActual.map(gasto => [
+                formatDate(gasto.fecha),
+                gasto.concepto,
+                gasto.categoria,
+                `$${gasto.cantidad.toFixed(2)}`
+            ]),
+            theme: 'striped', // Tema básico, luego se ajustan los estilos
+            headStyles: {
+                fillColor: [0, 123, 255], // Azul moderno
+                textColor: [255, 255, 255], // Texto blanco
+                fontSize: 12,
+                fontStyle: 'bold',
+                halign: 'center'
+            },
+            bodyStyles: {
+                fontSize: 10,
+                lineColor: [200, 200, 200], // Bordes grises suaves
+                lineWidth: 0.5
+            },
+            alternateRowStyles: { fillColor: [245, 245, 245] }, // Color claro para filas alternas
+            columnStyles: {
+                0: { halign: 'center' }, // Fecha alineada al centro
+                1: { halign: 'left' },   // Concepto alineado a la izquierda
+                2: { halign: 'left' },   // Categoría alineada a la izquierda
+                3: { halign: 'right' }   // Monto alineado a la derecha
+            },
+            margin: { top: 25, left: 15, right: 15 },
+            styles: { overflow: 'linebreak', cellPadding: 6 } // Mejor espaciado
+        });
+    } else {
+        pdf.setFontSize(14);
+        pdf.text("No hay datos disponibles para mostrar.", 15, 40);
+    }
 
-        // Establecer el título en el PDF
-        pdf.setFontSize(16);
-        pdf.text("Movimientos de Gastos:", 15, imgHeight + 20);
-
-        // Generar la tabla de gastos en el PDF
-        if (window.gastos && window.gastos.length > 0) {
-            pdf.autoTable({
-                startY: imgHeight + 30,
-                head: [['Fecha', 'Concepto', 'Categoría', 'Monto']],
-                body: window.gastos.map(gasto => [
-                    gasto.fecha, 
-                    gasto.concepto, 
-                    gasto.categoria, 
-                    `$${gasto.cantidad}`
-                ]),
-                theme: 'grid',
-                headStyles: { fillColor: [63, 81, 181], textColor: [255, 255, 255] },
-                styles: { fontSize: 12, cellPadding: 3 }
-            });
-        } else {
-            pdf.text("No hay datos disponibles para mostrar.", 15, imgHeight + 40);
-        }
-
-        // Descargar el PDF
-        pdf.save("reporte_gastos.pdf");
-    }).catch(error => {
-        console.error('Error al generar el PDF:', error);
-        alert('No se pudo generar el PDF.');
-    });
+    // Descargar el PDF
+    pdf.save("reporte_movimientos_mes_actual.pdf");
 }
+
+// Función para formatear la fecha
+function formatDate(date) {
+    const d = new Date(date);
+    return `${d.getDate().toString().padStart(2, '0')}/${(d.getMonth() + 1).toString().padStart(2, '0')}/${d.getFullYear()}`;
+}
+
