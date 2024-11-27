@@ -1,0 +1,53 @@
+.modal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro más opaco */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: #ffffff;
+    border-radius: 20px; /* Bordes redondeados */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Sombra más pronunciada */
+    padding: 30px; /* Espaciado interno */
+    text-align: center;
+    max-width: 450px;
+    width: 90%;
+    font-family: 'Arial', sans-serif;
+}
+
+.modal-content h2 {
+    font-size: 28px; /* Título más grande */
+    color: #333; /* Color oscuro para el texto */
+    margin-bottom: 15px;
+}
+
+.modal-content p {
+    font-size: 20px; /* Texto más grande */
+    color: #555; /* Texto más claro */
+    margin: 10px 0;
+    line-height: 1.6; /* Espaciado entre líneas */
+}
+
+.modal-close {
+    background-color: #8e44ad; /* Botón morado */
+    color: #fff; /* Texto blanco */
+    border: none;
+    border-radius: 8px; /* Bordes redondeados */
+    padding: 14px 30px; /* Tamaño del botón */
+    font-size: 20px; /* Texto más grande */
+    font-weight: bold; /* Texto en negrita */
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s ease; /* Animación suave en hover */
+}
+
+.modal-close:hover {
+    background-color: #732d91; /* Morado más oscuro al pasar el ratón */
+}
