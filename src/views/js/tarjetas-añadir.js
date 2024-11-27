@@ -1,3 +1,12 @@
+// Configurar la fecha mínima y máxima para el input de fecha
+function goBackToHome() {
+    // Reiniciar el formulario
+    const formulario = document.getElementById('form-tarjetas');
+    formulario.reset(); // Limpia todos los campos del formulario
+
+    window.location.href = "tarjetas.html";
+}
+
 document.addEventListener("DOMContentLoaded", function () {
     // Referencias a los elementos del DOM
     const form = document.getElementById("form-tarjetas");
