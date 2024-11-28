@@ -96,9 +96,9 @@ CREATE TABLE `movimientos` (
 --
 
 INSERT INTO `movimientos` (`id`, `concepto`, `cantidad`, `id_categoria`, `id_tipo`, `id_tarjeta`, `fecha`) VALUES
-(1, 'Comida', 100, 1, 1, 1, '2024-12-16'),
-(2, 'Gasolina', 50, 2, 1, 2, '2024-12-16'),
-(3, 'Cine', 200, 3, 2, 3, '2024-12-16'),
+(1, 'Comida', 100, 1, 1, 1, '2024-12-26'),
+(2, 'Gasolina', 50, 2, 1, 2, '2024-12-25'),
+(3, 'Cine', 200, 3, 2, 3, '2024-12-26');
 
 
 -- --------------------------------------------------------
@@ -271,10 +271,7 @@ ALTER TABLE `tarjeta`
 --
 -- Filtros para la tabla `movimientos`
 --
-ALTER TABLE `movimientos`
-  ADD CONSTRAINT `movimientos_ibfk_1` FOREIGN KEY (`id_categoria`) REFERENCES `categorias` (`id`),
-  ADD CONSTRAINT `movimientos_ibfk_2` FOREIGN KEY (`id_tipo`) REFERENCES `tipo_de_pago` (`id`),
-  ADD CONSTRAINT `movimientos_ibfk_3` FOREIGN KEY (`id_tarjeta`) REFERENCES `tarjeta` (`id`);
+
 
 --
 -- Filtros para la tabla `recordatorios`
